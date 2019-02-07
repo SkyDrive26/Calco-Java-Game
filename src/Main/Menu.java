@@ -22,6 +22,7 @@ public class Menu{
 
         mainFrame.add(fxPanel);
         mainFrame.setSize(1000, 563);
+        mainFrame.setLocationRelativeTo(null);
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
