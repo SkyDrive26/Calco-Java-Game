@@ -8,6 +8,11 @@ public class menuController {
     @FXML
     protected Label lblAction;
 
+    /**
+     * This method is used to start the game.
+     * @return Nothing.
+     */
+
     @FXML
     protected void doNewGame() {
         new CalcoJavaGame();
