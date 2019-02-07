@@ -1,4 +1,5 @@
 package Main;
+
 import java.awt.Canvas;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
@@ -87,11 +88,4 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		
 		bs.show();
 	}
-	
-    public static void main(String[] args){
-    	new CalcoJavaGame();
-        
-    }
 }
-
-

@@ -1,0 +1,23 @@
+.root{
+    -fx-background-color: #ffeaa7;
+}
+
+.label {
+    -fx-text-fill: #636e72;
+    -fx-text-size: 16px;
+    -fx-font-weight: bold;
+    -fx-font-family: "Helvetica Neue";
+}
+
+.button {
+    -fx-background-color: rgb(40, 167, 69);
+    -fx-background-radius: 4,4,4,4;
+    -fx-padding: 12 12 12 12;
+    -fx-text-fill: white;
+    -fx-font-size: 12px;
+    -fx-font-weight: bold;
+    -fx-max-width: 900;
+}
+.button:hover{
+    -fx-background-color:#218838;
+}
