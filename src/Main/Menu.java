@@ -1,8 +1,11 @@
 package Main;
 
 import javax.swing.*;
+import javax.swing.event.ChangeEvent;
+import javax.swing.event.ChangeListener;
 import java.io.IOException;
 
+import Main.guiController.menuController;
 import javafx.application.Platform;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXMLLoader;
@@ -22,7 +25,9 @@ import javafx.scene.Scene;
 public class Menu{
 
     /* Fields */
-    public JFrame mainFrame;
+    private JFrame mainFrame;
+    private menuController menuController;
+    private ChangeListener changeListener;
 
     /**
      * This is the constructor for the Menu class.
@@ -41,6 +46,10 @@ public class Menu{
         mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
 
+        /**
+         * This method is used to run initFX after the JFrame has been loaded
+         * @see Platform
+         */
         Platform.runLater(new Runnable() {
             @Override
             public void run() {
@@ -48,8 +57,28 @@ public class Menu{
                     initFX(fxPanel);
                 }catch(IOException e){System.out.println("ERROR");}
             }
-
         });
+
+        changeListener = new ChangeListener() {
+
+            /**
+             * This method is used to remove the menu from
+             * the mainFrame when a new game is started.
+             * This also loads the game into the mainFrame.
+             * @param e
+             * @see ChangeListener
+             */
+
+            @Override
+            public void stateChanged(ChangeEvent e) {
+                CalcoJavaGame game = new CalcoJavaGame();
+
+                mainFrame.remove(fxPanel);
+                mainFrame.add(game);
+                mainFrame.validate();
+                game.start();
+            }
+        };
     }
 
     /* Initialize JavaFX */
@@ -65,7 +94,11 @@ public class Menu{
      */
 
     private void initFX(JFXPanel fxPanel) throws IOException {
-        Parent root = FXMLLoader.load(getClass().getResource("/Main/fxml/menu.fxml"));
+        menuController = new menuController();
+        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Main/fxml/menu.fxml"));
+        loader.setController(menuController);
+        menuController.addChangeListener(changeListener);
+        Parent root = loader.load();
         Scene scene = new Scene(root, 400, 400);
         fxPanel.setScene(scene);
     }
