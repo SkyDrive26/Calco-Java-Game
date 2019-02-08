@@ -1,6 +1,6 @@
 package Main;
 
-import java.awt.Canvas;
+import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
@@ -17,8 +17,10 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private BufferedImage sprite_sheet = null;
 	
 	public CalcoJavaGame() {
-		new Window(1000, 563, "Hello World", this);
-		start();
+
+		//new Window(1000, 563, "Hello World", this);
+		this.setBackground(Color.CYAN);
+		//start();
 		
 		handler = new Handler();
 		camera = new Camera(0, 0);
@@ -26,7 +28,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		this.addMouseListener(new MouseInput(handler, camera, this));
 		
 	}
-	private void start() {
+	public void start() {
 		isRunning = true;
 		thread = new Thread(this);
 		thread.start();
