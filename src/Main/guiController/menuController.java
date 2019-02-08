@@ -44,7 +44,7 @@ public class menuController {
      * This method is used to set the value of
      * the boolean done. This method also notices
      * any ChangeListeners.
-     * @param b
+     * @param b Takes an Boolean as parameter.
      * @return Nothing.
      * @see ChangeListener
      */
@@ -58,7 +58,7 @@ public class menuController {
     /**
      * This method is used to add a ChangeListener
      * to listen on Boolean done.
-     * @param cl
+     * @param cl Takes a ChangeListener as parameter.
      * @return Nothing.
      * @see ChangeListener
      */
