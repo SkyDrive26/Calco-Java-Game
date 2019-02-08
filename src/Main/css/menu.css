@@ -1,4 +1,4 @@
-.root{
+.root {
     -fx-background-color: #ffeaa7;
 }
 
@@ -7,6 +7,10 @@
     -fx-text-size: 16px;
     -fx-font-weight: bold;
     -fx-font-family: "Helvetica Neue";
+}
+
+#title {
+    -fx-text-size: 32px;
 }
 
 .button {
