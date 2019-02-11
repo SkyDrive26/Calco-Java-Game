@@ -1,12 +1,9 @@
 package Main;
 
-import Actions.newGameAction;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
-import java.awt.event.ActionListener;
-import java.io.IOException;
+import java.awt.*;
 
 /**
  * <h1>Calco Java Game</h1>
@@ -21,9 +18,24 @@ public class Menu{
 
     /* Fields */
     private JFrame mainFrame;
-    private JButton startNewButton;
+    private JPanel panel;
+    private JButton btnNewGame;
+    private JButton btnLevelSelect;
+    private JButton btnOptions;
 
-    private ChangeListener changeListener;
+    private ChangeListener changeListener = new ChangeListener() {
+        /**
+         * This method is used to remove the menu from
+         * the mainFrame when a new game is started.
+         * This also loads the game into the mainFrame.
+         * @param e
+         * @see ChangeListener
+         */
+        @Override
+        public void stateChanged (ChangeEvent e){
+            startNewGame();
+        }
+    };
     private Actions.newGameAction newGameAction = new Actions.newGameAction();
     /**
      * This is the constructor for the Menu class.
@@ -57,24 +69,24 @@ public class Menu{
      * This method is used to load the menu into the window.
      */
     private void initMenu(){
-        changeListener = new ChangeListener() {
-            /**
-             * This method is used to remove the menu from
-             * the mainFrame when a new game is started.
-             * This also loads the game into the mainFrame.
-             * @param e
-             * @see ChangeListener
-             */
-            @Override
-            public void stateChanged (ChangeEvent e){
-                startNewGame();
-            }
-        };
+        panel = new JPanel();
+        newGameAction.addChangeListener(changeListener);
 
-        this.newGameAction.addChangeListener(changeListener);
-        startNewButton = new JButton("New Game");
-        startNewButton.addActionListener(this.newGameAction);
-        mainFrame.add(startNewButton);
+        btnNewGame = new JButton("New Game");
+        btnLevelSelect = new JButton("Select Level");
+        btnOptions = new JButton("Options");
+
+        btnNewGame.addActionListener(this.newGameAction);
+        btnNewGame.setPreferredSize(new Dimension(400, 40));
+        btnNewGame.setBounds(800, 543, 400, 40);
+
+        btnLevelSelect.setBounds(800, 543, 400, 40);
+
+        panel.add(btnNewGame);
+        panel.add(btnLevelSelect);
+        panel.add(btnOptions);
+
+        mainFrame.add(panel, BorderLayout.CENTER);
     }
 
     /**
@@ -82,13 +94,11 @@ public class Menu{
      */
     private void startNewGame(){
         CalcoJavaGame game = new CalcoJavaGame();
-        mainFrame.remove(startNewButton);
+        mainFrame.remove(panel);
         mainFrame.add(game);
         mainFrame.validate();
         game.start();
     }
-    /* ActionListeners */
-    //this.startNewGame = new ActionListener() {};
 
     /**
      * This is the main method which makes use of the game.
