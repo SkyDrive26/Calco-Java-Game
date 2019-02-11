@@ -1,17 +1,12 @@
 package Main;
 
+import Actions.newGameAction;
+
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.event.ActionListener;
 import java.io.IOException;
-
-import Main.guiController.menuController;
-import javafx.application.Platform;
-import javafx.event.ActionEvent;
-import javafx.fxml.FXMLLoader;
-import javafx.embed.swing.JFXPanel;
-import javafx.scene.Parent;
-import javafx.scene.Scene;
 
 /**
  * <h1>Calco Java Game</h1>
@@ -26,9 +21,10 @@ public class Menu{
 
     /* Fields */
     private JFrame mainFrame;
-    private menuController menuController;
-    private ChangeListener changeListener;
+    private JButton startNewButton;
 
+    private ChangeListener changeListener;
+    private Actions.newGameAction newGameAction = new Actions.newGameAction();
     /**
      * This is the constructor for the Menu class.
      * This is the part of the code that's being
@@ -37,30 +33,31 @@ public class Menu{
      */
 
     public Menu(){
-        mainFrame = new JFrame("Home");
-        final JFXPanel fxPanel = new JFXPanel();
+        initMainFrame();
+    }
 
-        mainFrame.add(fxPanel);
-        mainFrame.setSize(1000, 563);
+    /* Initialize mainFrame */
+
+    /**
+     * This method is used to initialize and launch the
+     * mainFrame.
+     */
+    private void initMainFrame(){
+        mainFrame = new JFrame("Menu - Calco Jave Game");
+        mainFrame.setSize(1000,563);
         mainFrame.setLocationRelativeTo(null);
-        mainFrame.setVisible(true);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        initMenu();
+        mainFrame.setVisible(true);
+    }
 
-        /**
-         * This method is used to run initFX after the JFrame has been loaded
-         * @see Platform
-         */
-        Platform.runLater(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    initFX(fxPanel);
-                }catch(IOException e){System.out.println("ERROR");}
-            }
-        });
+    /* Initialize Menu */
 
+    /**
+     * This method is used to load the menu into the window.
+     */
+    private void initMenu(){
         changeListener = new ChangeListener() {
-
             /**
              * This method is used to remove the menu from
              * the mainFrame when a new game is started.
@@ -68,42 +65,31 @@ public class Menu{
              * @param e
              * @see ChangeListener
              */
-
             @Override
-            public void stateChanged(ChangeEvent e) {
-                CalcoJavaGame game = new CalcoJavaGame();
-
-                mainFrame.remove(fxPanel);
-                mainFrame.add(game);
-                mainFrame.validate();
-                game.start();
+            public void stateChanged (ChangeEvent e){
+                startNewGame();
             }
         };
-    }
 
-    /* Initialize JavaFX */
+        this.newGameAction.addChangeListener(changeListener);
+        startNewButton = new JButton("New Game");
+        startNewButton.setBounds(800, 523, 400, 80);
+        startNewButton.addActionListener(this.newGameAction);
+        mainFrame.add(startNewButton);
+    }
 
     /**
-     * This method is used to load a fxml-file into an
-     * JFXPanel. This is also used to load the JFXPanel into
-     * the JFrame.
-     * @param fxPanel
-     * @return Nothing.
-     * @throws IOException On load error.
-     * @see    IOException
+     * This method is used to load a new game into the window.
      */
-
-    private void initFX(JFXPanel fxPanel) throws IOException {
-        menuController = new menuController();
-        FXMLLoader loader = new FXMLLoader(getClass().getResource("/Main/fxml/menu.fxml"));
-        loader.setController(menuController);
-        menuController.addChangeListener(changeListener);
-        Parent root = loader.load();
-        Scene scene = new Scene(root, 400, 400);
-        fxPanel.setScene(scene);
+    private void startNewGame(){
+        CalcoJavaGame game = new CalcoJavaGame();
+        mainFrame.remove(startNewButton);
+        mainFrame.add(game);
+        mainFrame.validate();
+        game.start();
     }
-
-    /* Methods */
+    /* ActionListeners */
+    //this.startNewGame = new ActionListener() {};
 
     /**
      * This is the main method which makes use of the game.
