@@ -1,54 +1,40 @@
-package Main.guiController;
+package Actions;
 
-import javafx.fxml.FXML;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-/**
- * The menuController is used to add functionality
- * to the menu GUI.
- *
- * @author Daan van Bennekom
- * @since 07-02-2019
- */
+public class newGameAction implements ActionListener {
 
-public class menuController {
-
+    /* Fields */
     private final List<ChangeListener> listeners =
             new CopyOnWriteArrayList<ChangeListener>();
-    protected boolean done = false;
+    private boolean done = false;
+
+
+    /* Methods */
 
     /**
-     * This method is used to start the game.
-     * @return Nothing.
+     * This method is used to perform actions
+     * when the butten "New Game" is pressed.
+     * @param e ActionEvent
+     * @see ActionEvent
      */
-
-    @FXML
-    protected void doNewGame() {
+    @Override
+    public void actionPerformed(ActionEvent e){
         this.setDone(true);
     }
 
     /**
-     * This method is used to return the value
-     * of the boolean done.
-     * @return Boolean done.
-     */
-
-    public boolean getDone(){
-        return this.done;
-    }
-
-    /**
-     * This method is used to set the value of
-     * the boolean done. This method also notices
-     * any ChangeListeners.
-     * @param b Takes an Boolean as parameter.
-     * @return Nothing.
+     * This method is used to change the value of the
+     * boolean done. This method also notifies the
+     * ChangeListener in the Menu class
+     * @param b boolean b.
      * @see ChangeListener
      */
-
     public synchronized void setDone(boolean b){
         this.done = b;
         for (ChangeListener cl: listeners)
