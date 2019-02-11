@@ -29,6 +29,8 @@ public class KeyInput extends KeyAdapter {
 				if(key == KeyEvent.VK_2) handler.setTwo(true);
 				if(key == KeyEvent.VK_3) handler.setThree(true);
 				if(key == KeyEvent.VK_4) handler.setFour(true);
+				if(key == KeyEvent.VK_I) handler.setInventory(true);
+				if(key == KeyEvent.VK_ESCAPE) handler.setEscape(true);
 			}
 		}
 		
@@ -49,6 +51,8 @@ public class KeyInput extends KeyAdapter {
 				if(key == KeyEvent.VK_2) handler.setTwo(false);
 				if(key == KeyEvent.VK_3) handler.setThree(false);
 				if(key == KeyEvent.VK_4) handler.setFour(false);
+				if(key == KeyEvent.VK_I) handler.setInventory(false);
+				if(key == KeyEvent.VK_ESCAPE) handler.setEscape(false);
 			}
 		}
 	}
