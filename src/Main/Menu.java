@@ -75,6 +75,7 @@ public class Menu{
         startNewButton = new JButton("New Game");
         startNewButton.setBounds(800, 523, 400, 80);
         startNewButton.addActionListener(this.newGameAction);
+        mainFrame.setLayout(null);S
         mainFrame.add(startNewButton);
     }
 
