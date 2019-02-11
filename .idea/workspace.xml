@@ -22,7 +22,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/CalcoJavaGame.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
+            <state relative-caret-position="510">
               <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
               <folding>
                 <element signature="imports" expanded="true" />
@@ -34,8 +34,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/KeyInput.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="476">
-              <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
+            <state relative-caret-position="34">
+              <caret line="2" column="31" lean-forward="true" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
             </state>
           </provider>
         </entry>
@@ -43,14 +43,10 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/src/Main/Menu.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="42">
-              <caret line="49" column="19" selection-start-line="49" selection-start-column="19" selection-end-line="49" selection-end-column="19" />
+            <state relative-caret-position="229">
+              <caret line="77" column="34" lean-forward="true" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#1680#1681#0" expanded="true" />
-                <element signature="e#1726#1727#0" expanded="true" />
-                <element signature="e#2516#2517#0" expanded="true" />
-                <element signature="e#2542#2543#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -59,17 +55,10 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Actions/newGameAction.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="-485">
+            <state relative-caret-position="306">
               <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
               <folding>
                 <element signature="imports" expanded="true" />
-                <element signature="e#293#309#0" expanded="true" />
-                <element signature="e#579#580#0" expanded="true" />
-                <element signature="e#613#614#0" expanded="true" />
-                <element signature="e#989#990#0" expanded="true" />
-                <element signature="e#1022#1023#0" expanded="true" />
-                <element signature="e#1266#1267#0" expanded="true" />
-                <element signature="e#1302#1303#0" expanded="true" />
               </folding>
             </state>
           </provider>
@@ -149,7 +138,7 @@
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="950" />
-    <option name="width" value="979" />
+    <option name="width" value="980" />
     <option name="height" value="1040" />
   </component>
   <component name="ProjectView">
@@ -157,6 +146,8 @@
       <foldersAlwaysOnTop value="true" />
     </navigator>
     <panes>
+      <pane id="Scope" />
+      <pane id="PackagesPane" />
       <pane id="ProjectPane">
         <subPane>
           <expand>
@@ -179,8 +170,6 @@
           <select />
         </subPane>
       </pane>
-      <pane id="PackagesPane" />
-      <pane id="Scope" />
     </panes>
   </component>
   <component name="PropertiesComponent">
@@ -229,7 +218,7 @@
     <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
     <editor active="true" />
     <layout>
-      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.1147651" />
+      <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11610738" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
       <window_info id="Image Layers" order="2" />
       <window_info id="Designer" order="3" />
@@ -281,20 +270,13 @@
     <entry file="file://$PROJECT_DIR$/src/Main/fxml/menu.fxml" />
     <entry file="file://$PROJECT_DIR$/src/Main/css/menu.css" />
     <entry file="file://$PROJECT_DIR$/src/Main/guiController/newGameAction.java" />
-    <entry file="file://$PROJECT_DIR$/src/Main/CalcoJavaGame.java">
+    <entry file="file://$PROJECT_DIR$/src/Actions/newGameAction.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
+        <state relative-caret-position="306">
+          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
           <folding>
             <element signature="imports" expanded="true" />
           </folding>
-        </state>
-      </provider>
-    </entry>
-    <entry file="file://$PROJECT_DIR$/src/Main/KeyInput.java">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="476">
-          <caret line="33" column="8" selection-start-line="33" selection-start-column="8" selection-end-line="33" selection-end-column="8" />
         </state>
       </provider>
     </entry>
@@ -305,33 +287,29 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/Actions/newGameAction.java">
+    <entry file="file://$PROJECT_DIR$/src/Main/CalcoJavaGame.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="-485">
-          <caret line="23" column="23" selection-start-line="23" selection-start-column="23" selection-end-line="23" selection-end-column="23" />
+        <state relative-caret-position="510">
+          <caret line="30" column="25" selection-start-line="30" selection-start-column="25" selection-end-line="30" selection-end-column="25" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#293#309#0" expanded="true" />
-            <element signature="e#579#580#0" expanded="true" />
-            <element signature="e#613#614#0" expanded="true" />
-            <element signature="e#989#990#0" expanded="true" />
-            <element signature="e#1022#1023#0" expanded="true" />
-            <element signature="e#1266#1267#0" expanded="true" />
-            <element signature="e#1302#1303#0" expanded="true" />
           </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/Main/KeyInput.java">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="2" column="31" lean-forward="true" selection-start-line="2" selection-start-column="31" selection-end-line="2" selection-end-column="31" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Menu.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="42">
-          <caret line="49" column="19" selection-start-line="49" selection-start-column="19" selection-end-line="49" selection-end-column="19" />
+        <state relative-caret-position="229">
+          <caret line="77" column="34" lean-forward="true" selection-start-line="77" selection-start-column="34" selection-end-line="77" selection-end-column="34" />
           <folding>
             <element signature="imports" expanded="true" />
-            <element signature="e#1680#1681#0" expanded="true" />
-            <element signature="e#1726#1727#0" expanded="true" />
-            <element signature="e#2516#2517#0" expanded="true" />
-            <element signature="e#2542#2543#0" expanded="true" />
           </folding>
         </state>
       </provider>
