@@ -32,7 +32,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		//handler.addObject(new Player(100, 100, ID.Player, handler, this));
 		
 		BufferedImageLoader loader = new BufferedImageLoader();
-		level = loader.LoadImage("/Pngs/level_1.png");
+		level = loader.LoadImage("../Pngs/level_1.png");
 		//sprite_sheet = loader.LoadImage("/Sprite_sheet_objects.png");
 		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
 		
