@@ -28,3 +28,4 @@ workspace.xml
 out/
 .classpath
 .project
+.idea/workspace.xml
