@@ -1,12 +1,10 @@
 package Main;
 
-import Actions.newGameAction;
-
 import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
+import java.awt.*;
 import java.awt.event.ActionListener;
-import java.io.IOException;
 
 /**
  * <h1>Calco Java Game</h1>
@@ -21,9 +19,24 @@ public class Menu{
 
     /* Fields */
     private JFrame mainFrame;
-    private JButton startNewButton;
+    private JPanel panel;
+    private JButton btnNewGame;
+    private JButton btnLevelSelect;
+    private JButton btnOptions;
 
-    private ChangeListener changeListener;
+    private ChangeListener changeListener = new ChangeListener() {
+        /**
+         * This method is used to remove the menu from
+         * the mainFrame when a new game is started.
+         * This also loads the game into the mainFrame.
+         * @param e
+         * @see ChangeListener
+         */
+        @Override
+        public void stateChanged (ChangeEvent e){
+            startNewGame();
+        }
+    };
     private Actions.newGameAction newGameAction = new Actions.newGameAction();
     /**
      * This is the constructor for the Menu class.
@@ -57,25 +70,38 @@ public class Menu{
      * This method is used to load the menu into the window.
      */
     private void initMenu(){
-        changeListener = new ChangeListener() {
-            /**
-             * This method is used to remove the menu from
-             * the mainFrame when a new game is started.
-             * This also loads the game into the mainFrame.
-             * @param e
-             * @see ChangeListener
-             */
-            @Override
-            public void stateChanged (ChangeEvent e){
-                startNewGame();
-            }
-        };
+        panel = new JPanel();
+        panel.setBounds(0,0,1000,563);
+        panel.setLayout(new GridBagLayout());
+        panel.setBackground(Color.decode("#303f9f"));
 
-        this.newGameAction.addChangeListener(changeListener);
-        startNewButton = new JButton("New Game");
-        startNewButton.setBounds(800, 523, 400, 80);
-        startNewButton.addActionListener(this.newGameAction);
-        mainFrame.add(startNewButton);
+        /**
+         * GridBagConstraints is used for positioning sizing of the buttons.
+         */
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.insets = new Insets(0,0,10,0);
+        constraints.ipadx = 100;
+        constraints.ipady = 20;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridx = 0;
+
+        newGameAction.addChangeListener(changeListener);
+
+        btnNewGame = createButton("New Game", new JButton());
+        btnNewGame.addActionListener(this.newGameAction);
+        btnLevelSelect = createButton("Select Level", new JButton());
+        btnOptions = createButton("Options", new JButton());
+
+        constraints.gridy = 0;
+        panel.add(btnNewGame, constraints);
+
+        constraints.gridy = 1;
+        panel.add(btnLevelSelect, constraints);
+
+        constraints.gridy = 2;
+        panel.add(btnOptions, constraints);
+
+        mainFrame.add(panel);
     }
 
     /**
@@ -83,13 +109,27 @@ public class Menu{
      */
     private void startNewGame(){
         CalcoJavaGame game = new CalcoJavaGame();
-        mainFrame.remove(startNewButton);
+        mainFrame.remove(panel);
         mainFrame.add(game);
         mainFrame.validate();
         game.start();
     }
-    /* ActionListeners */
-    //this.startNewGame = new ActionListener() {};
+
+    /**
+     * This method is used to create buttons with predetermined
+     * style and settings.
+     * @param title This String represents the text in the button.
+     * @param button This JButton represents the JButton object.
+     * @return The method returns the configured JButton object.
+     */
+    private JButton createButton(String title, JButton button){
+        button.setText(title);
+        button.setFocusPainted(false);
+        button.setRolloverEnabled(false);
+        button.setBackground(Color.decode("#001970"));
+        button.setForeground(Color.WHITE);
+        return button;
+    }
 
     /**
      * This is the main method which makes use of the game.
