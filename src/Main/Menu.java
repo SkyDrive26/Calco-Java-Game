@@ -4,6 +4,7 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionListener;
 
 /**
  * <h1>Calco Java Game</h1>
@@ -72,6 +73,7 @@ public class Menu{
         panel = new JPanel();
         panel.setBounds(0,0,1000,563);
         panel.setLayout(new GridBagLayout());
+        panel.setBackground(Color.decode("#303f9f"));
 
         /**
          * GridBagConstraints is used for positioning sizing of the buttons.
@@ -80,30 +82,17 @@ public class Menu{
         constraints.insets = new Insets(0,0,10,0);
         constraints.ipadx = 100;
         constraints.ipady = 20;
-
         constraints.fill = GridBagConstraints.HORIZONTAL;
         constraints.gridx = 0;
-        constraints.gridy = 0;
 
         newGameAction.addChangeListener(changeListener);
 
-        btnNewGame = new JButton("New Game");
-        btnLevelSelect = new JButton("Select Level");
-        btnOptions = new JButton("Options");
-
+        btnNewGame = createButton("New Game", new JButton());
         btnNewGame.addActionListener(this.newGameAction);
-        btnNewGame.setFocusPainted(false);
-        btnNewGame.setBackground(Color.decode("#009688"));
-        btnNewGame.setForeground(Color.WHITE);
+        btnLevelSelect = createButton("Select Level", new JButton());
+        btnOptions = createButton("Options", new JButton());
 
-        btnLevelSelect.setFocusPainted(false);
-        btnLevelSelect.setBackground(Color.decode("#009688"));
-        btnLevelSelect.setForeground(Color.WHITE);
-
-        btnOptions.setFocusPainted(false);
-        btnOptions.setBackground(Color.decode("#009688"));
-        btnOptions.setForeground(Color.WHITE);
-
+        constraints.gridy = 0;
         panel.add(btnNewGame, constraints);
 
         constraints.gridy = 1;
@@ -126,10 +115,18 @@ public class Menu{
         game.start();
     }
 
-    private JButton createButton(String name, JButton button){
-        button.setText(name);
+    /**
+     * This method is used to create buttons with predetermined
+     * style and settings.
+     * @param title This String represents the text in the button.
+     * @param button This JButton represents the JButton object.
+     * @return The method returns the configured JButton object.
+     */
+    private JButton createButton(String title, JButton button){
+        button.setText(title);
         button.setFocusPainted(false);
-        button.setBackground(Color.decode("#009688"));
+        button.setRolloverEnabled(false);
+        button.setBackground(Color.decode("#001970"));
         button.setForeground(Color.WHITE);
         return button;
     }

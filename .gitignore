@@ -24,7 +24,7 @@ hs_err_pid*
 /bin/
 
 # Project files
-.idea/*
+workspace.xml
 out/
 .classpath
 .project
