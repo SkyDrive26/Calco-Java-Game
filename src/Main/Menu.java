@@ -71,7 +71,19 @@ public class Menu{
     private void initMenu(){
         panel = new JPanel();
         panel.setBounds(0,0,1000,563);
-        panel.setLayout(new GridLayout(3,3,10,10));
+        panel.setLayout(new GridBagLayout());
+
+        /**
+         * GridBagConstraints is used for positioning sizing of the buttons.
+         */
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.insets = new Insets(0,0,10,0);
+        constraints.ipadx = 100;
+        constraints.ipady = 20;
+
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridx = 0;
+        constraints.gridy = 0;
 
         newGameAction.addChangeListener(changeListener);
 
@@ -80,18 +92,25 @@ public class Menu{
         btnOptions = new JButton("Options");
 
         btnNewGame.addActionListener(this.newGameAction);
-        btnNewGame.setPreferredSize(new Dimension(500, 80));
+        btnNewGame.setFocusPainted(false);
+        btnNewGame.setBackground(Color.decode("#009688"));
+        btnNewGame.setForeground(Color.WHITE);
 
-        btnLevelSelect.setSize(500,80);
+        btnLevelSelect.setFocusPainted(false);
+        btnLevelSelect.setBackground(Color.decode("#009688"));
+        btnLevelSelect.setForeground(Color.WHITE);
 
-        btnOptions.setSize(500,80);
-        //btnNewGame.setBounds(800, 543, 400, 40);
+        btnOptions.setFocusPainted(false);
+        btnOptions.setBackground(Color.decode("#009688"));
+        btnOptions.setForeground(Color.WHITE);
 
-        //btnLevelSelect.setBounds(800, 543, 400, 40);
+        panel.add(btnNewGame, constraints);
 
-        panel.add(btnNewGame);
-        panel.add(btnLevelSelect);
-        panel.add(btnOptions);
+        constraints.gridy = 1;
+        panel.add(btnLevelSelect, constraints);
+
+        constraints.gridy = 2;
+        panel.add(btnOptions, constraints);
 
         mainFrame.add(panel);
     }
@@ -105,6 +124,14 @@ public class Menu{
         mainFrame.add(game);
         mainFrame.validate();
         game.start();
+    }
+
+    private JButton createButton(String name, JButton button){
+        button.setText(name);
+        button.setFocusPainted(false);
+        button.setBackground(Color.decode("#009688"));
+        button.setForeground(Color.WHITE);
+        return button;
     }
 
     /**
