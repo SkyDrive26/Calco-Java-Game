@@ -70,6 +70,9 @@ public class Menu{
      */
     private void initMenu(){
         panel = new JPanel();
+        panel.setBounds(0,0,1000,563);
+        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+
         newGameAction.addChangeListener(changeListener);
 
         btnNewGame = new JButton("New Game");
@@ -77,16 +80,20 @@ public class Menu{
         btnOptions = new JButton("Options");
 
         btnNewGame.addActionListener(this.newGameAction);
-        btnNewGame.setPreferredSize(new Dimension(400, 40));
-        btnNewGame.setBounds(800, 543, 400, 40);
+        btnNewGame.setPreferredSize(new Dimension(500, 80));
 
-        btnLevelSelect.setBounds(800, 543, 400, 40);
+        btnLevelSelect.setSize(500,80);
+
+        btnOptions.setSize(500,80);
+        //btnNewGame.setBounds(800, 543, 400, 40);
+
+        //btnLevelSelect.setBounds(800, 543, 400, 40);
 
         panel.add(btnNewGame);
         panel.add(btnLevelSelect);
         panel.add(btnOptions);
 
-        mainFrame.add(panel, BorderLayout.CENTER);
+        mainFrame.setContentPane(panel);
     }
 
     /**
