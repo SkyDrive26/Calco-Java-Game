@@ -88,7 +88,19 @@ public class Player extends GameObjects.GameObject {
 	}
 
 	public Rectangle getBounds() {
-		return null;
+		return new Rectangle(x, y, 32, 32);
+	}
+	public Rectangle getBoundsUp() {
+		return new Rectangle((x + 1), (y -3), 30, 3);
+	}
+	public Rectangle getBoundsDown() {
+		return new Rectangle((x + 1), (y + 32), 30, 3);
+	}
+	public Rectangle getBoundsLeft() {
+		return new Rectangle((x - 3), (y + 1), 3, 30);
+	}
+	public Rectangle getBoundsRight() {
+		return new Rectangle((x + 32), (y + 1), 3, 30);
 	}
 	
 
