@@ -7,7 +7,7 @@ import Main.ID;
 
 public abstract class GameObject {
 
-	 protected int x, y;
+	 protected int x, y; 						/** asdf **/
 	 protected float velX = 0, velY = 0;
 	 protected ID id;
 	 
