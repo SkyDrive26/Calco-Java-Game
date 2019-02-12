@@ -7,7 +7,7 @@ import GameObjects.GameObject;
 
 public class Handler {
 
-	LinkedList<GameObject> object = new LinkedList<GameObject>();
+	public LinkedList<GameObject> object = new LinkedList<GameObject>();
 	
 	private boolean 
 			up = false,

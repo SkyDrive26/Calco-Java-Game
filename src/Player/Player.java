@@ -45,6 +45,7 @@ public class Player extends GameObjects.GameObject {
 	}
 
 	public void tick() {
+		this.collision();
 		x += velX;
 		y += velY;
 		
@@ -85,6 +86,29 @@ public class Player extends GameObjects.GameObject {
 	public void render(Graphics g) {
 		g.setColor(Color.red);
 		g.fillRect(x, y, 32, 32);
+	}
+
+	private void collision() {
+		for (int i = 0; i < this.handler.object.size(); ++i) {
+			GameObjects.GameObject tempObject = (GameObjects.GameObject) this.handler.object.get(i);
+			if (tempObject.getId() == ID.Wall) {
+				if (this.getBoundsUp().intersects(tempObject.getBounds()) && this.velY < 0.0F) {
+					this.y = (int) ((float) this.y + this.velY * -1.0F);
+				}
+
+				if (this.getBoundsDown().intersects(tempObject.getBounds()) && this.velY > 0.0F) {
+					this.y = (int) ((float) this.y + this.velY * -1.0F);
+				}
+
+				if (this.getBoundsLeft().intersects(tempObject.getBounds()) && this.velX < 0.0F) {
+					this.x = (int) ((float) this.x + this.velX * -1.0F);
+				}
+
+				if (this.getBoundsRight().intersects(tempObject.getBounds()) && this.velX > 0.0F) {
+					this.x = (int) ((float) this.x + this.velX * -1.0F);
+				}
+			}
+		}
 	}
 
 	public Rectangle getBounds() {
