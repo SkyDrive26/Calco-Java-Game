@@ -3,9 +3,11 @@ package Player;
 import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
+import java.awt.image.BufferedImage;
 
 import Main.Handler;
 import Main.ID;
+import Main.Animation;
 import Main.CalcoJavaGame;
 
 
@@ -15,13 +17,13 @@ public class Player extends GameObjects.GameObject {
 	Handler handler;
 	CalcoJavaGame game;
 	
-	/*
+	
 	 //animation images
-	private BufferedImage[] walkingLeft = {};
-	private BufferedImage[] walkingRight = {};
-	private BufferedImage[] walkingUp = {};
-	private BufferedImage[] walkingDown = {};
-	private BufferedImage[] standing = {};
+	private BufferedImage[] walkingLeft = {Sprite.getSprite(1,0), Sprite.getSprite(1,1), Sprite.getSprite(1,2), Sprite.getSprite(1,1)};
+	private BufferedImage[] walkingRight = {Sprite.getSprite(2,0), Sprite.getSprite(2,1), Sprite.getSprite(2,2), Sprite.getSprite(2,1)};
+	private BufferedImage[] walkingUp = {Sprite.getSprite(3,0), Sprite.getSprite(3,1), Sprite.getSprite(3,2), Sprite.getSprite(3,1)};
+	private BufferedImage[] walkingDown = {Sprite.getSprite(0,0), Sprite.getSprite(0,1), Sprite.getSprite(0,2), Sprite.getSprite(0,1)};
+	private BufferedImage[] standing = {Sprite.getSprite(0,1)};
 	
 	
 	//animation states
@@ -34,7 +36,7 @@ public class Player extends GameObjects.GameObject {
 	
 	//actual animation
 	private Animation animation = stand;
-	*/
+	
 	
 	public Player(int x, int y, ID id, Handler handler, CalcoJavaGame game) {
 		super(x, y, id);

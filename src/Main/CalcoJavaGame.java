@@ -29,6 +29,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		this.addKeyListener(new KeyInput(handler));
 		this.addMouseListener(new MouseInput(handler, camera, this));
 
+
 		this.setBackground(Color.CYAN);
 				
 		BufferedImageLoader loader = new BufferedImageLoader();
