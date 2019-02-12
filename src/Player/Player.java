@@ -17,7 +17,7 @@ public class Player extends GameObjects.GameObject {
 	Handler handler;
 	CalcoJavaGame game;
 	
-	
+	/*
 	 //animation images
 	private BufferedImage[] walkingLeft = {Sprite.getSprite(1,0), Sprite.getSprite(1,1), Sprite.getSprite(1,2), Sprite.getSprite(1,1)};
 	private BufferedImage[] walkingRight = {Sprite.getSprite(2,0), Sprite.getSprite(2,1), Sprite.getSprite(2,2), Sprite.getSprite(2,1)};
@@ -35,7 +35,7 @@ public class Player extends GameObjects.GameObject {
 	
 	
 	//actual animation
-	private Animation animation = stand;
+	private Animation animation = stand;*/
 	
 	
 	public Player(int x, int y, ID id, Handler handler, CalcoJavaGame game) {
@@ -77,7 +77,7 @@ public class Player extends GameObjects.GameObject {
 		else if (!handler.isRight()) {
 			velX = 0;
 		}
-		
+
 		
 			
 	}
