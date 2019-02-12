@@ -20,23 +20,23 @@ public class Player extends GameObjects.GameObject {
 	
 	
 	 //animation images
-	private BufferedImage[] walkingLeft = {Sprite.getSprite(1,0), Sprite.getSprite(1,1), Sprite.getSprite(1,2), Sprite.getSprite(1,1)};
-	//private BufferedImage[] walkingRight = {Sprite.getSprite(2,0), Sprite.getSprite(2,1), Sprite.getSprite(2,2), Sprite.getSprite(2,1)};
-	//private BufferedImage[] walkingUp = {Sprite.getSprite(3,0), Sprite.getSprite(3,1), Sprite.getSprite(3,2), Sprite.getSprite(3,1)};
-	//private BufferedImage[] walkingDown = {Sprite.getSprite(0,0), Sprite.getSprite(0,1), Sprite.getSprite(0,2), Sprite.getSprite(0,1)};
-	//private BufferedImage[] standing = {Sprite.getSprite(0,1)};
+	private BufferedImage[] walkingLeft = {Sprite.getSprite(0,1), Sprite.getSprite(1,1), Sprite.getSprite(2,1), Sprite.getSprite(1,1)};
+	private BufferedImage[] walkingRight = {Sprite.getSprite(0,2), Sprite.getSprite(1,2), Sprite.getSprite(2,2), Sprite.getSprite(1,2)};
+	private BufferedImage[] walkingUp = {Sprite.getSprite(0,3), Sprite.getSprite(1,3), Sprite.getSprite(2,3), Sprite.getSprite(1,3)};
+	private BufferedImage[] walkingDown = {Sprite.getSprite(0,0), Sprite.getSprite(1,0), Sprite.getSprite(2,0), Sprite.getSprite(1,0)};
+	private BufferedImage[] standing = {Sprite.getSprite(1,0)};
 	
 	
 	//animation states
 	private Animation walkLeft = new Animation(walkingLeft, 10);
-	//private Animation walkRight = new Animation(walkingRight, 10);
-	//private Animation walkUp = new Animation(walkingUp, 10);
-	//private Animation walkDown = new Animation(walkingDown, 10);
-	//private Animation stand = new Animation(standing, 10);
+	private Animation walkRight = new Animation(walkingRight, 10);
+	private Animation walkUp = new Animation(walkingUp, 10);
+	private Animation walkDown = new Animation(walkingDown, 10);
+	private Animation stand = new Animation(standing, 10);
 	
 	
 	//actual animation
-	private Animation animation = walkLeft;
+	private Animation animation = stand;
 	
 	
 	public Player(int x, int y, ID id, Handler handler, CalcoJavaGame game) {
@@ -51,7 +51,7 @@ public class Player extends GameObjects.GameObject {
 		
 		if(handler.isUp()) {
 			velY = -5;						//Movement itself
-			animation = walkLeft;			//What animation is needed
+			animation = walkUp;			//What animation is needed
 		    animation.start();			// The animation itself
 		}
 		else if(!handler.isDown()) {
@@ -60,6 +60,8 @@ public class Player extends GameObjects.GameObject {
 		
 		if (handler.isDown ()) {
 			velY = 5;
+			animation = walkDown;
+			animation.start();
 		}
 		else if (!handler.isUp()) {
 			velY = 0;
@@ -67,6 +69,8 @@ public class Player extends GameObjects.GameObject {
 		
 		if (handler.isRight()) {
 			velX = 5;
+			animation = walkRight;
+			animation.start();
 		}
 		else if (!handler.isLeft()) { 
 			velX = 0;
@@ -74,10 +78,17 @@ public class Player extends GameObjects.GameObject {
 		
 		if (handler.isLeft()) {
 			velX = -5;
+			animation = walkLeft;
+			animation.start();
 		}
 		else if (!handler.isRight()) {
 			velX = 0;
 		}
+		
+		if (velX == 0 && velY ==0) {
+			animation.stop();
+		}
+		
 		
 		animation.update();
 			
