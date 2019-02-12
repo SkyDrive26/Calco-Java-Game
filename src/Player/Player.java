@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 
 import Main.Handler;
 import Main.ID;
+import inventory.Inventory;
 import Main.CalcoJavaGame;
 
 
@@ -14,6 +15,7 @@ public class Player extends GameObjects.GameObject {
 	
 	Handler handler;
 	CalcoJavaGame game;
+	Color kleur = Color.RED; 
 	
 	
 	public Player(int x, int y, ID id, Handler handler, CalcoJavaGame game) {
@@ -21,7 +23,9 @@ public class Player extends GameObjects.GameObject {
 		this.handler = handler;
 		this.game = game;
 	}
-
+	
+		
+	
 	public void tick() {
 		x += velX;
 		y += velY;
@@ -55,13 +59,22 @@ public class Player extends GameObjects.GameObject {
 		else if (!handler.isRight()) {
 			velX = 0;
 		}
+		/*if (handler.isInventory()) {
+			Inventory.openInventory();
+			return;}
+		else{
+			Inventory.closeInventory();
+			return;
+		}*/
+		}
+			
 		
 		
 			
-	}
+	
 
 	public void render(Graphics g) {
-		g.setColor(Color.red);
+		g.setColor(kleur);
 		g.fillRect(x, y, 32, 32);
 	}
 

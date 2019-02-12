@@ -12,8 +12,15 @@ public class KeyInput extends KeyAdapter {
 		this.handler = handler;
 	}
 	
+	private boolean toggle;
+	
+	public boolean toggle(){
+	if(toggle == true) {toggle = false;}
+	else{toggle = true;}
+	return toggle;}
 	
 	
+		
 	public void keyPressed (KeyEvent e) {
 		int key = e.getKeyCode();
 		
@@ -29,15 +36,18 @@ public class KeyInput extends KeyAdapter {
 				if(key == KeyEvent.VK_2) handler.setTwo(true);
 				if(key == KeyEvent.VK_3) handler.setThree(true);
 				if(key == KeyEvent.VK_4) handler.setFour(true);
-				if(key == KeyEvent.VK_I) handler.setInventory(true);
+				if(key == KeyEvent.VK_I){toggle();					
+				handler.setInventory(toggle);}
 				if(key == KeyEvent.VK_ESCAPE) handler.setEscape(true);
 			}
 		}
+		}
 		
-	}
+
 	
 	public void keyReleased (KeyEvent e) {
 		int key = e.getKeyCode();
+			
 		
 		for(int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = handler.object.get(i);
@@ -51,7 +61,8 @@ public class KeyInput extends KeyAdapter {
 				if(key == KeyEvent.VK_2) handler.setTwo(false);
 				if(key == KeyEvent.VK_3) handler.setThree(false);
 				if(key == KeyEvent.VK_4) handler.setFour(false);
-				if(key == KeyEvent.VK_I) handler.setInventory(false);
+				if(key == KeyEvent.VK_I) toggle();					
+				handler.setInventory(toggle);
 				if(key == KeyEvent.VK_ESCAPE) handler.setEscape(false);
 			}
 		}
