@@ -15,6 +15,26 @@ public class Player extends GameObjects.GameObject {
 	Handler handler;
 	CalcoJavaGame game;
 	
+	/*
+	 //animation images
+	private BufferedImage[] walkingLeft = {};
+	private BufferedImage[] walkingRight = {};
+	private BufferedImage[] walkingUp = {};
+	private BufferedImage[] walkingDown = {};
+	private BufferedImage[] standing = {};
+	
+	
+	//animation states
+	private Animation walkLeft = new Animation(walkingLeft, 10);
+	private Animation walkRight = new Animation(walkingRight, 10);
+	private Animation walkUp = new Animation(walkingUp, 10);
+	private Animation walkDown = new Animation(walkingDown, 10);
+	private Animation stand = new Animation(standing, 10);
+	
+	
+	//actual animation
+	private Animation animation = stand;
+	*/
 	
 	public Player(int x, int y, ID id, Handler handler, CalcoJavaGame game) {
 		super(x, y, id);
