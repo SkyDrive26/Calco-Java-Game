@@ -22,9 +22,6 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private SpriteSheet ObjectSpriteSheet;
 	
 	public CalcoJavaGame() {
-
-		//new Window(1000, 563, "Hello World", this);
-		this.setBackground(Color.CYAN);
 		//start();
 		
 		handler = new Handler();
@@ -32,12 +29,14 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		this.addKeyListener(new KeyInput(handler));
 		this.addMouseListener(new MouseInput(handler, camera, this));
 		
+		//handler.addObject(new Player(100, 100, ID.Player, handler, this));
+		
 		BufferedImageLoader loader = new BufferedImageLoader();
-		level = loader.LoadImage("/level_1.png");
-		sprite_sheet = loader.LoadImage("/Sprite_sheet_objects.png");
-		ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
+		level = loader.LoadImage("/Pngs/level_1.png");
+		//sprite_sheet = loader.LoadImage("/Sprite_sheet_objects.png");
+		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
 		
-		
+		loadLevel(level);
 	}
 	public void start() {
 		isRunning = true;
@@ -99,10 +98,16 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 			return;
 		}
 		
+		
+		
 		Graphics g = bs.getDrawGraphics();
 		Graphics2D g2d = (Graphics2D) g;
+		handler.render(g);
+		
 		///////////////////////////////            
 		
+		
+		/*
 		g2d.translate(-camera.getX(), -camera.getY());
 				
 		for(int xx = 0; xx < 30*72; xx+=32) {
@@ -138,12 +143,17 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		///////////////////////////////
 		g.dispose();
 		
+		*/
+		
 		bs.show();
 	}
 	//loading the level
 		private void loadLevel(BufferedImage image){
 			int w = image.getWidth();
 			int h = image.getHeight();
+
+
+			
 			
 			for(int xx = 0; xx < w; xx++) {
 				for(int yy = 0;yy<h; yy++) {
@@ -152,27 +162,10 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 					int green = (pixel >> 8) & 0xff;
 					int blue = (pixel) &0xff;
 				
-					
-					/*
 					if(red == 255 && green == 0 && blue == 0)
-						handler.addObject(new Block(xx*32, yy*32, ID.Block, ss));
+						handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));
 					
-					else if(red == 0 && green == 0 && blue == 255)
-						handler.addObject(new Wizard(xx*32, yy*32, ID.Player, handler, this, ss));
 					
-					else if(red == 0 && green == 255 && blue == 0)
-						handler.addObject(new Enemy(xx*32, yy*32, ID.Enemy, handler, ss));
-							
-					else if(red == 0 && green == 255 && blue == 255)
-						handler.addObject(new Crate(xx*32, yy*32, ID.Crate, ss));
-					
-					else if(red == 255 && green == 0 && blue == 255)
-						handler.addObject(new MedKit(xx*32, yy*32, ID.MedKit, ss));
-					
-					else if(red == 255 && green == 255 && blue == 255)
-						handler.addObject(new TestSprite(xx*32, yy*32, ID.TestSprite, ss));
-						
-						*/
 				}
 			}
 		}
