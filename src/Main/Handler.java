@@ -17,7 +17,13 @@ public class Handler {
 			one = false,
 			two = false,
 			three = false,
-			four = false;
+			four = false,
+			escape = false;
+
+	private static boolean 
+			inventory = false;
+
+	
 	
 	public void tick(){
 		for(int i = 0; i < object.size(); i++) {
@@ -124,6 +130,27 @@ public class Handler {
 		this.four = four;
 	}
 	
+	public static boolean isInventory() {
+		return inventory;
+		
+	}
+
+
+	public void setInventory(boolean inventory) {
+		Handler.inventory = inventory;
+		
+	}
+	
+	public boolean isEscape() {
+		return escape;
+		
+	}
+	
+	public void setEscape(boolean escape) {
+		this.escape = escape;
+		
+	}
+
 	
 		
 }

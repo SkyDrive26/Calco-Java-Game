@@ -1,16 +1,9 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="ce67790d-df45-48eb-80fa-0517a0592188" name="Default Changelist" comment="Fixed menu. Menu does now load the game in the same window after &quot;New Game&quot; has been pressed.&#10;&#10;Updated JavaDoc.">
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Calco-Java-Game/Main/css/menu.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/out/production/Calco-Java-Game/Main/fxml/menu.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/Menu.java" beforeDir="false" afterPath="$PROJECT_DIR$/src/Main/Menu.java" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/css/menu.css" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/fxml/menu.fxml" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/Main/guiController/menuController.java" beforeDir="false" />
-    </list>
+    <list default="true" id="8291b0c6-1fc5-4fb4-9e15-baf29eb1aaa1" name="Default Changelist" comment="" />
     <ignored path="$PROJECT_DIR$/out/" />
+    <ignored path="$PROJECT_DIR$/bin/" />
     <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -80,74 +73,16 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/Main/Window.java">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="204">
-              <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+            <state relative-caret-position="51">
+              <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
             </state>
           </provider>
         </entry>
       </file>
     </leaf>
   </component>
-  <component name="FileTemplateManagerImpl">
-    <option name="RECENT_TEMPLATES">
-      <list>
-        <option value="FxmlFile" />
-        <option value="Class" />
-      </list>
-    </option>
-  </component>
-  <component name="FindInProjectRecents">
-    <findStrings>
-      <find>menuFrame</find>
-    </findStrings>
-    <replaceStrings>
-      <replace>mainFrame</replace>
-    </replaceStrings>
-  </component>
   <component name="Git.Settings">
-    <option name="PREVIOUS_COMMIT_AUTHORS">
-      <list>
-        <option value="DvBennet &lt;skydrive26@users.noreply.github.com&gt;" />
-      </list>
-    </option>
-    <option name="ROOT_SYNC" value="DONT_SYNC" />
     <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
-    <option name="RECENT_BRANCH_BY_REPOSITORY">
-      <map>
-        <entry key="$PROJECT_DIR$" value="Dev-Daan" />
-      </map>
-    </option>
-    <favorite-branches>
-      <branch-storage>
-        <map>
-          <entry type="LOCAL">
-            <value>
-              <list>
-                <branch-info repo="$PROJECT_DIR$" source="Dev-Daan" />
-              </list>
-            </value>
-          </entry>
-        </map>
-      </branch-storage>
-    </favorite-branches>
-  </component>
-  <component name="IdeDocumentHistory">
-    <option name="CHANGED_PATHS">
-      <list>
-        <option value="$PROJECT_DIR$/src/CalcoJavaGame.java" />
-        <option value="$PROJECT_DIR$/src/css/menu.css" />
-        <option value="$PROJECT_DIR$/src/fxml/menu.fxml" />
-        <option value="$PROJECT_DIR$/src/guiController/menuController.java" />
-        <option value="$PROJECT_DIR$/src/Menu.java" />
-        <option value="$PROJECT_DIR$/src/Main/Window.java" />
-        <option value="$PROJECT_DIR$/src/Main/CalcoJavaGame.java" />
-        <option value="$PROJECT_DIR$/src/Main/fxml/menu.fxml" />
-        <option value="$PROJECT_DIR$/src/Main/guiController/menuController.java" />
-        <option value="$PROJECT_DIR$/src/Main/guiController/newGameAction.java" />
-        <option value="$PROJECT_DIR$/src/Actions/newGameAction.java" />
-        <option value="$PROJECT_DIR$/src/Main/Menu.java" />
-      </list>
-    </option>
   </component>
   <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="952" />
@@ -177,6 +112,12 @@
               <item name="Calco-Java-Game" type="b2602c69:ProjectViewProjectNode" />
               <item name="Calco-Java-Game" type="462c0819:PsiDirectoryNode" />
               <item name="src" type="462c0819:PsiDirectoryNode" />
+              <item name="GameObjects" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="Calco-Java-Game" type="b2602c69:ProjectViewProjectNode" />
+              <item name="Calco-Java-Game" type="462c0819:PsiDirectoryNode" />
+              <item name="src" type="462c0819:PsiDirectoryNode" />
               <item name="Main" type="462c0819:PsiDirectoryNode" />
             </path>
           </expand>
@@ -184,14 +125,6 @@
         </subPane>
       </pane>
     </panes>
-  </component>
-  <component name="PropertiesComponent">
-    <property name="com.android.tools.idea.instantapp.provision.ProvisionBeforeRunTaskProvider.myTimeStamp" value="1549968932708" />
-    <property name="last_opened_file_path" value="$USER_HOME$/AppData/Local/GitHubDesktop/app-1.6.1/resources/app/git/cmd/git.exe" />
-    <property name="project.structure.last.edited" value="Libraries" />
-    <property name="project.structure.proportion" value="0.15" />
-    <property name="project.structure.side.proportion" value="0.0" />
-    <property name="settings.editor.selected.configurable" value="preferences.pluginManager" />
   </component>
   <component name="RunDashboard">
     <option name="ruleStates">
@@ -205,31 +138,21 @@
       </list>
     </option>
   </component>
-  <component name="RunManager">
-    <configuration name="Menu" type="Application" factoryName="Application" nameIsGenerated="true">
-      <option name="MAIN_CLASS_NAME" value="Main.Menu" />
-      <module name="Calco-Java-Game" />
-      <method v="2">
-        <option name="Make" enabled="true" />
-      </method>
-    </configuration>
-  </component>
   <component name="SvnConfiguration">
     <configuration />
   </component>
   <component name="TaskManager">
     <task active="true" id="Default" summary="Default task">
-      <changelist id="ce67790d-df45-48eb-80fa-0517a0592188" name="Default Changelist" comment="" />
-      <created>1549534529684</created>
+      <changelist id="8291b0c6-1fc5-4fb4-9e15-baf29eb1aaa1" name="Default Changelist" comment="" />
+      <created>1549886136750</created>
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
-      <updated>1549534529684</updated>
+      <updated>1549886136750</updated>
     </task>
     <servers />
   </component>
   <component name="ToolWindowManager">
-    <frame x="-7" y="-7" width="1550" height="838" extended-state="6" />
-    <editor active="true" />
+    <frame x="68" y="20" width="1400" height="784" extended-state="0" />
     <layout>
       <window_info content_ui="combo" id="Project" order="0" visible="true" weight="0.11610738" />
       <window_info id="Structure" order="1" side_tool="true" weight="0.25" />
@@ -246,9 +169,8 @@
       <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
       <window_info anchor="bottom" id="TODO" order="6" />
       <window_info anchor="bottom" id="Terminal" order="7" />
-      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" weight="0.3286119" />
-      <window_info anchor="bottom" id="Version Control" order="9" weight="0.3286119" />
-      <window_info anchor="bottom" id="Messages" order="10" weight="0.32719547" />
+      <window_info anchor="bottom" id="Event Log" order="8" side_tool="true" />
+      <window_info anchor="bottom" id="Version Control" order="9" />
       <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
       <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
       <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
@@ -258,26 +180,6 @@
       <window_info anchor="right" id="Capture Analysis" order="6" />
       <window_info anchor="right" id="Palette&#9;" order="7" />
     </layout>
-  </component>
-  <component name="Vcs.Log.Tabs.Properties">
-    <option name="RECENT_FILTERS">
-      <map>
-        <entry key="Branch">
-          <value>
-            <list />
-          </value>
-        </entry>
-        <entry key="User">
-          <value>
-            <list />
-          </value>
-        </entry>
-      </map>
-    </option>
-  </component>
-  <component name="VcsManagerConfiguration">
-    <MESSAGE value="Fixed menu. Menu does now load the game in the same window after &quot;New Game&quot; has been pressed.&#10;&#10;Updated JavaDoc." />
-    <option name="LAST_COMMIT_MESSAGE" value="Fixed menu. Menu does now load the game in the same window after &quot;New Game&quot; has been pressed.&#10;&#10;Updated JavaDoc." />
   </component>
   <component name="editorHistoryManager">
     <entry file="file://$PROJECT_DIR$/src/Main/fxml/menu.fxml" />
@@ -295,8 +197,8 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/src/Main/Window.java">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="204">
-          <caret line="14" column="25" selection-start-line="14" selection-start-column="25" selection-end-line="14" selection-end-column="25" />
+        <state relative-caret-position="51">
+          <caret line="5" column="13" selection-start-line="5" selection-start-column="13" selection-end-line="5" selection-end-column="13" />
         </state>
       </provider>
     </entry>
