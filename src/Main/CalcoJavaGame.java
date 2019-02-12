@@ -28,12 +28,10 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		camera = new Camera(0, 0);
 		this.addKeyListener(new KeyInput(handler));
 		this.addMouseListener(new MouseInput(handler, camera, this));
-		
-		//handler.addObject(new Player(100, 100, ID.Player, handler, this));
-		
+				
 		BufferedImageLoader loader = new BufferedImageLoader();
 		level = loader.LoadImage("/Pngs/level_1.png");
-		//sprite_sheet = loader.LoadImage("/Sprite_sheet_objects.png");
+		//sprite_sheet = loader.LoadImage("/Sprite_Sheet_Objects.png");
 		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
 		
 		loadLevel(level);
