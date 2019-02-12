@@ -71,7 +71,7 @@ public class Menu{
     private void initMenu(){
         panel = new JPanel();
         panel.setBounds(0,0,1000,563);
-        panel.setLayout(new BoxLayout(panel, BoxLayout.Y_AXIS));
+        panel.setLayout(new GridLayout(3,3,10,10));
 
         newGameAction.addChangeListener(changeListener);
 
@@ -93,7 +93,7 @@ public class Menu{
         panel.add(btnLevelSelect);
         panel.add(btnOptions);
 
-        mainFrame.setContentPane(panel);
+        mainFrame.add(panel);
     }
 
     /**
