@@ -15,11 +15,8 @@ import Main.CalcoJavaGame;
 
 public class Player extends GameObjects.GameObject {
 
-
 	Handler handler;
 	CalcoJavaGame game;
-	Color kleur = Color.RED;
-
 
 	//animation images
 	private BufferedImage[] walkingLeft = {Sprite.getSprite(0, 1), Sprite.getSprite(1, 1), Sprite.getSprite(2, 1), Sprite.getSprite(1, 1)};
@@ -107,8 +104,6 @@ public class Player extends GameObjects.GameObject {
 	
 
 	public void render(Graphics g) {
-		g.setColor(kleur);
-		g.fillRect(x, y, 32, 32);
 		g.drawImage(animation.getSprite(), x, y, null);
 	}
 
