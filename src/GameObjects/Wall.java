@@ -10,7 +10,7 @@ import Main.ID;
 import Main.Animation;
 import Main.CalcoJavaGame;
 
-public class Wall extends GameObjects.GameObject {
+public class Wall extends GameObject {
 
     public Wall(int x, int y, ID id){
         super(x, y, id);
