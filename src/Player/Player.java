@@ -1,6 +1,7 @@
 package Player;
 
 import java.awt.Color;
+
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -11,6 +12,7 @@ import inventory.Inventory;
 import Main.Sprite;
 import Main.Animation;
 import Main.CalcoJavaGame;
+import GameObjects.GameObject;
 
 
 public class Player extends GameObjects.GameObject {
@@ -109,8 +111,10 @@ public class Player extends GameObjects.GameObject {
 
 	private void collision() {
 		for (int i = 0; i < this.handler.object.size(); ++i) {
-			GameObjects.GameObject tempObject = (GameObjects.GameObject) this.handler.object.get(i);
+			GameObject tempObject = this.handler.object.get(i);
 			if (tempObject.getId() == ID.Wall) {
+				
+				/*
 				if (this.getBoundsUp().intersects(tempObject.getBounds()) && this.velY < 0.0F) {
 					this.y = (int) ((float) this.y + this.velY * -1.0F);
 				}
@@ -126,6 +130,30 @@ public class Player extends GameObjects.GameObject {
 				if (this.getBoundsRight().intersects(tempObject.getBounds()) && this.velX > 0.0F) {
 					this.x = (int) ((float) this.x + this.velX * -1.0F);
 				}
+				*/
+				
+				if(getBoundsUp().intersects(tempObject.getBounds())) {
+					if(velY < 0) {
+						y += velY * -1;
+						System.out.println("ik loop boven ergens tegenaan maat");
+					}
+				}
+				if(getBoundsDown().intersects(tempObject.getBounds())) {
+					if(velY > 0) {
+						y += velY * -1;
+					}
+				}
+				if(getBoundsLeft().intersects(tempObject.getBounds())) {
+					if(velX < 0) {
+						x += velX * -1;
+					}
+				}
+				if(getBoundsRight().intersects(tempObject.getBounds())) {
+					if(velX > 0) {
+						x += velX * -1;
+					}
+				}
+				
 			}
 		}
 	}
@@ -134,10 +162,10 @@ public class Player extends GameObjects.GameObject {
 		return new Rectangle(x, y, 32, 32);
 	}
 	public Rectangle getBoundsUp() {
-		return new Rectangle((x + 1), (y -3), 30, 3);
+		return new Rectangle((x + 2), (y -3), 28, 3);
 	}
 	public Rectangle getBoundsDown() {
-		return new Rectangle((x + 1), (y + 32), 30, 3);
+		return new Rectangle((x + 2), (y + 32), 28, 3);
 	}
 	public Rectangle getBoundsLeft() {
 		return new Rectangle((x - 3), (y + 1), 3, 30);
