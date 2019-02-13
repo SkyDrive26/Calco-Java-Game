@@ -88,22 +88,22 @@ public class Player extends GameObjects.GameObject {
 		else if (!handler.isRight()) {
 			velX = 0;
 		}
-		/*if (handler.isInventory()) {
+		if (handler.isInventory()) {
 			Inventory.openInventory();
 			return;}
 		else{
 			Inventory.closeInventory();
-			return;
-		}*/
+			return; }
 		}
+		
 			
 		
-		if (velX == 0 && velY ==0) {
-			animation.stop();
-		}
+		//if (velX == 0 && velY ==0) {
+		//	animation.stop(); }
+		//}
 		
 		
-		animation.update();
+		//animation.update() {
 			
 	
 
