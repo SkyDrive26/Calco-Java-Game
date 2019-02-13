@@ -152,28 +152,30 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		bs.show();
 	}
 	//loading the level
-		private void loadLevel(BufferedImage image){
-			int w = image.getWidth();
-			int h = image.getHeight();
+	private void loadLevel(BufferedImage image){
+		int w = image.getWidth();
+		int h = image.getHeight();
 
 
 			
 			
-			for(int xx = 0; xx < w; xx++) {
-				for(int yy = 0;yy<h; yy++) {
-					int pixel = image.getRGB (xx, yy);
-					int red = (pixel >> 16) & 0xff;
-					int green = (pixel >> 8) & 0xff;
-					int blue = (pixel) &0xff;
+		for(int xx = 0; xx < w; xx++) {
+			for(int yy = 0;yy<h; yy++) {
+				int pixel = image.getRGB (xx, yy);
+				int red = (pixel >> 16) & 0xff;
+				int green = (pixel >> 8) & 0xff;
+				int blue = (pixel) &0xff;
 				
-					if(red == 255 && green == 0 && blue == 0)
-						handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));
+				if(red == 255 && green == 0 && blue == 0)
+					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));
 
-					if(red == 0 && green == 255 && blue == 0)
-						handler.addObject(new Wall(xx*32, yy*32, ID.Wall));
-					
-					
-				}
+				if(red == 0 && green == 255 && blue == 0)
+					handler.addObject(new Wall(xx*32, yy*32, ID.Wall));
 			}
 		}
+	}
+
+	public void setIsRunning(boolean isRunning){
+		this.isRunning = isRunning;
+	}
 }

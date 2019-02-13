@@ -47,7 +47,7 @@ public class Player extends GameObjects.GameObject {
 		this.handler = handler;
 		this.game = game;
 		this.inventory = new Inventory();
-		this.inGameMenu = new InGameMenu(game);
+		this.inGameMenu = new InGameMenu(game, handler);
 		inventoryIsOpen = false;
 		inGameMenuIsOpen = false;
 	}

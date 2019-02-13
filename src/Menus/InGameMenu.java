@@ -1,6 +1,8 @@
 package Menus;
 
 import Main.CalcoJavaGame;
+import Main.Handler;
+import Player.Player;
 
 import javax.swing.*;
 import java.awt.*;
@@ -13,9 +15,11 @@ import java.awt.event.ActionListener;
  */
 public class InGameMenu extends JPanel {
     private CalcoJavaGame game;
+    private Handler handler;
 
-    public InGameMenu(CalcoJavaGame game){
+    public InGameMenu(CalcoJavaGame game, Handler handler){
         this.game = game;
+        this.handler = handler;
         this.setLayout(new GridBagLayout());
         this.setBackground(Color.decode("#303f9f"));
 
@@ -32,16 +36,17 @@ public class InGameMenu extends JPanel {
         JLabel lblTitle = createLabel("Menu", new JLabel());
 
         JButton btnOptions = createButton("Options", new JButton());
+        btnOptions.setEnabled(false); // Disable button
+
         JButton btnQuit = createButton("Quit to Menu", new JButton());
-        btnQuit.addActionListener(new ActionListener() {
-            @Override
-            public void actionPerformed(ActionEvent e) {
-                game.mainFrame.returnFromGame();
-            }
-        });
+        btnQuit.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { game.mainFrame.returnFromGame(); }});
 
         JButton btnExit = createButton("Exit", new JButton());
         btnExit.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { System.exit(0); }});
+
+        JButton btnReturn = createButton("Return to Game", new JButton());
+        btnReturn.setEnabled(false); // Disable button
+        btnReturn.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { handler.setEscape(true); }});
 
         constraints.gridwidth = 2;
         constraints.gridy = 0;
@@ -56,6 +61,11 @@ public class InGameMenu extends JPanel {
 
         constraints.gridx = 1;
         add(btnExit, constraints);
+
+        constraints.gridy = 3;
+        constraints.gridx = 0;
+        constraints.gridwidth = 2;
+        add(btnReturn, constraints);
     }
 
     /**

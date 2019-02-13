@@ -99,7 +99,9 @@ public class Menu extends JFrame{
         btnNewGame = createButton("New Game", new JButton());
         btnNewGame.addActionListener(this.newGameAction);
         btnLevelSelect = createButton("Select Level", new JButton());
+        btnLevelSelect.setEnabled(false); // Disable button
         btnOptions = createButton("Options", new JButton());
+        btnOptions.setEnabled(false); // Disable button
         btnExit = createButton("Exit", new JButton());
         btnExit.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { System.exit(0); }});
 
@@ -141,6 +143,7 @@ public class Menu extends JFrame{
     }
 
     public void returnFromGame(){
+        game.setIsRunning(false);
         this.remove(gamePanel);
         game = null;
         this.add(panel);
