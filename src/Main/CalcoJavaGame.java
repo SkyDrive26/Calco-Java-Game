@@ -109,25 +109,18 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		
 		
 		Graphics g = bs.getDrawGraphics();
-		Graphics2D g2d = (Graphics2D) g;
-		
-		
+		Graphics2D g2d = (Graphics2D) g;	
 		///////////////////////////////            
 		
-		
-		
 		g2d.translate(-camera.getX(), -camera.getY());
-		
 		
 		for(int xx = 0; xx < 30*72; xx+=32) {
 			for(int yy = 0; yy < 30*72; yy+=32) {
 				g.drawImage(floor, xx, yy, null);
 			}
 		}	
-		
+    
 		handler.render(g);
-		
-		
 		g2d.translate(camera.getX(), camera.getY());
 		
 		g.setColor(Color.black);
