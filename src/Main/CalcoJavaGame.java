@@ -13,6 +13,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	
 	private boolean isRunning = false;
 	private Thread thread;
+	public Menu mainFrame;
 	private Handler handler;
 	private Camera camera;
 	int PlayerHp = 5;
@@ -24,9 +25,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private SpriteSheet ObjectSpriteSheet;
 	private SpriteSheet floorss;
 	
-	public CalcoJavaGame() {
+	public CalcoJavaGame(Menu mainFrame) {
 		//start();
-		
+		this.mainFrame = mainFrame;
 		handler = new Handler();
 		camera = new Camera(0, 0);
 		this.addKeyListener(new KeyInput(handler));

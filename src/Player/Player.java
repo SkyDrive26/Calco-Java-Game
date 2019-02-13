@@ -1,8 +1,6 @@
 package Player;
 
-import java.awt.Color;
-import java.awt.Graphics;
-import java.awt.Rectangle;
+import java.awt.*;
 import java.awt.image.BufferedImage;
 
 import Main.Handler;
@@ -17,6 +15,9 @@ public class Player extends GameObjects.GameObject {
 
 	Handler handler;
 	CalcoJavaGame game;
+	Inventory inventory;
+
+	private boolean inventoryIsOpen;
 
 	//animation images
 	private BufferedImage[] walkingLeft = {Sprite.getSprite(0, 1), Sprite.getSprite(1, 1), Sprite.getSprite(2, 1), Sprite.getSprite(1, 1)};
@@ -42,6 +43,8 @@ public class Player extends GameObjects.GameObject {
 		super(x, y, id);
 		this.handler = handler;
 		this.game = game;
+		this.inventory = new Inventory();
+		inventoryIsOpen = false;
 	}
 
 
@@ -82,14 +85,19 @@ public class Player extends GameObjects.GameObject {
 			velX = 0;
 		}
 
-		/*if (handler.isInventory()) {
-			Inventory.openInventory();
-			return;}
-		else{
-			Inventory.closeInventory();
-			return;
-		}*/
-
+		if (handler.isInventory() && !inventoryIsOpen) {
+			inventoryIsOpen = true;
+			handler.setInventory(false);
+			game.mainFrame.gamePanel.add(inventory, BorderLayout.CENTER, 0);
+			game.mainFrame.gamePanel.revalidate();
+			game.mainFrame.gamePanel.repaint();
+		}else if(handler.isInventory() && inventoryIsOpen){
+			inventoryIsOpen = false;
+			handler.setInventory(false);
+			game.mainFrame.gamePanel.remove(inventory);
+			game.mainFrame.gamePanel.revalidate();
+			game.mainFrame.gamePanel.repaint();
+		}
 
 		if (velX == 0 && velY == 0) {
 			animation.stop();

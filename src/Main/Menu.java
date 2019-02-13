@@ -18,11 +18,12 @@ import java.io.IOException;
  * @version 0.0.1
  * @since   07-02-2019
  */
-public class Menu{
+public class Menu extends JFrame{
 
     /* Fields */
-    private JFrame mainFrame;
+    //private JFrame mainFrame;
     private JPanel panel;
+    public JLayeredPane gamePanel;
     private JButton btnNewGame;
     private JButton btnLevelSelect;
     private JButton btnOptions;
@@ -60,12 +61,13 @@ public class Menu{
      * mainFrame.
      */
     private void initMainFrame(){
-        mainFrame = new JFrame("Menu - Calco Jave Game");
-        mainFrame.setSize(1000,563);
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //mainFrame = new JFrame("Menu - Calco Jave Game");
+        this.setTitle("Menu - Calco Java Game:");
+        this.setSize(1000,563);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initMenu();
-        mainFrame.setVisible(true);
+        this.setVisible(true);
     }
 
     /* Initialize Menu */
@@ -115,17 +117,23 @@ public class Menu{
         constraints.gridy = 4;
         panel.add(btnExit, constraints);
 
-        mainFrame.add(panel);
+        this.add(panel);
     }
 
     /**
      * This method is used to load a new game into the window.
      */
     private void startNewGame(){
-        CalcoJavaGame game = new CalcoJavaGame();
-        mainFrame.remove(panel);
-        mainFrame.add(game);
-        mainFrame.validate();
+        CalcoJavaGame game = new CalcoJavaGame(this);
+
+        gamePanel = new JLayeredPane();
+        gamePanel.setSize(1000,563);
+        gamePanel.setLayout(new BorderLayout());
+        gamePanel.add(game, BorderLayout.CENTER, 1);
+
+        this.remove(panel);
+        this.add(gamePanel);
+        this.validate();
         game.start();
     }
 
