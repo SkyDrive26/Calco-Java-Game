@@ -1,18 +1,14 @@
 package inventory;
 
-
 import javax.swing.*;
 
-import Main.CalcoJavaGame;
-import Main.Handler;
-
+/**
+ * This class is used to popup the ingame inventory
+ * @see javax.swing.JPanel
+ */
 public class Inventory extends JPanel {
 
-	/* Fields */
-
 	public Inventory(){
-		setSize(100,100);
-		setLocation(0,0);
-		add(new JLabel("JOE"));
+		add(new JLabel("Inventory"));
 	}
 }

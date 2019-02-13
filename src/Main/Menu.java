@@ -28,6 +28,7 @@ public class Menu extends JFrame{
     private JButton btnLevelSelect;
     private JButton btnOptions;
     private JButton btnExit;
+    private CalcoJavaGame game;
 
     private ChangeListener changeListener = new ChangeListener() {
         /**
@@ -85,7 +86,7 @@ public class Menu extends JFrame{
          * GridBagConstraints is used for positioning sizing of the buttons.
          */
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(0,0,10,0);
+        constraints.insets = new Insets(0,0,50,0);
         constraints.ipadx = 100;
         constraints.ipady = 20;
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -103,8 +104,9 @@ public class Menu extends JFrame{
         btnExit.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { System.exit(0); }});
 
         constraints.gridy = 0;
-        panel.add(lblTitle);
+        panel.add(lblTitle, constraints);
 
+        constraints.insets = new Insets(0,0,5,0);
         constraints.gridy = 1;
         panel.add(btnNewGame, constraints);
 
@@ -124,7 +126,7 @@ public class Menu extends JFrame{
      * This method is used to load a new game into the window.
      */
     private void startNewGame(){
-        CalcoJavaGame game = new CalcoJavaGame(this);
+        game = new CalcoJavaGame(this);
 
         gamePanel = new JLayeredPane();
         gamePanel.setSize(1000,563);
@@ -134,8 +136,17 @@ public class Menu extends JFrame{
         this.remove(panel);
         this.add(gamePanel);
         this.validate();
+        this.repaint();
         game.start();
     }
+
+    /*public void returnFromGame(){
+        this.removeAll();
+        game = null;
+        initMenu();
+        this.validate();
+        this.repaint();
+    }*/
 
     /**
      * This method is used to create buttons with predetermined
@@ -153,10 +164,18 @@ public class Menu extends JFrame{
         return button;
     }
 
+    /**
+     * This method is used to create labels with predetermined
+     * style and settings.
+     * @param title This String represents the text in the label.
+     * @param label This JLabel represents the JLabel object.
+     * @return The methods returns the configured JLabel object.
+     */
     private JLabel createLabel(String title, JLabel label){
         label = new JLabel(title);
         label.setFont(new Font("Calibri", Font.PLAIN, 64));
         label.setForeground(Color.WHITE);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         return label;
     }
 

@@ -5,6 +5,7 @@ import java.awt.image.BufferedImage;
 
 import Main.Handler;
 import Main.ID;
+import Menus.InGameMenu;
 import inventory.Inventory;
 import Main.Sprite;
 import Main.Animation;
@@ -16,8 +17,10 @@ public class Player extends GameObjects.GameObject {
 	Handler handler;
 	CalcoJavaGame game;
 	Inventory inventory;
+	InGameMenu inGameMenu;
 
 	private boolean inventoryIsOpen;
+	private boolean inGameMenuIsOpen;
 
 	//animation images
 	private BufferedImage[] walkingLeft = {Sprite.getSprite(0, 1), Sprite.getSprite(1, 1), Sprite.getSprite(2, 1), Sprite.getSprite(1, 1)};
@@ -44,7 +47,9 @@ public class Player extends GameObjects.GameObject {
 		this.handler = handler;
 		this.game = game;
 		this.inventory = new Inventory();
+		this.inGameMenu = new InGameMenu(game);
 		inventoryIsOpen = false;
+		inGameMenuIsOpen = false;
 	}
 
 
@@ -53,39 +58,40 @@ public class Player extends GameObjects.GameObject {
 		x += velX;
 		y += velY;
 
-		if (handler.isUp()) {
+		if (handler.isUp() && !inventoryIsOpen) {
 			velY = -5;                        //Movement itself
 			animation = walkUp;            //What animation is needed
 			animation.start();            // The animation itself
-		} else if (!handler.isDown()) {
+		} else if (!handler.isDown() && !inventoryIsOpen) {
 			velY = 0;
 		}
 
-		if (handler.isDown()) {
+		if (handler.isDown() && !inventoryIsOpen) {
 			velY = 5;
 			animation = walkDown;
 			animation.start();
-		} else if (!handler.isUp()) {
+		} else if (!handler.isUp() && !inventoryIsOpen) {
 			velY = 0;
 		}
 
-		if (handler.isRight()) {
+		if (handler.isRight() && !inventoryIsOpen) {
 			velX = 5;
 			animation = walkRight;
 			animation.start();
-		} else if (!handler.isLeft()) {
+		} else if (!handler.isLeft() && !inventoryIsOpen) {
 			velX = 0;
 		}
 
-		if (handler.isLeft()) {
+		if (handler.isLeft() && !inventoryIsOpen) {
 			velX = -5;
 			animation = walkLeft;
 			animation.start();
-		} else if (!handler.isRight()) {
+		} else if (!handler.isRight() && !inventoryIsOpen) {
 			velX = 0;
 		}
 
-		if (handler.isInventory() && !inventoryIsOpen) {
+		/* Open inventory when I is pressed and the inventory is not already open */
+		if(handler.isInventory() && !inventoryIsOpen && !inGameMenuIsOpen){
 			inventoryIsOpen = true;
 			handler.setInventory(false);
 			game.mainFrame.gamePanel.add(inventory, BorderLayout.CENTER, 0);
@@ -97,19 +103,30 @@ public class Player extends GameObjects.GameObject {
 			game.mainFrame.gamePanel.remove(inventory);
 			game.mainFrame.gamePanel.revalidate();
 			game.mainFrame.gamePanel.repaint();
+		}else if(handler.isInventory() && inGameMenuIsOpen){
+			handler.setInventory(false);
+		}
+
+		/* Open in-game menu when escape is pressed */
+		if(handler.isEscape() && !inGameMenuIsOpen){
+			inGameMenuIsOpen = true;
+			handler.setEscape(false);
+			game.mainFrame.gamePanel.add(inGameMenu, BorderLayout.CENTER, 0);
+			game.mainFrame.gamePanel.revalidate();
+			game.mainFrame.gamePanel.repaint();
+		}else if(handler.isEscape() && inGameMenuIsOpen){
+			inGameMenuIsOpen = false;
+			handler.setEscape(false);
+			game.mainFrame.gamePanel.remove(inGameMenu);
+			game.mainFrame.gamePanel.revalidate();
+			game.mainFrame.gamePanel.repaint();
 		}
 
 		if (velX == 0 && velY == 0) {
 			animation.stop();
 		}
-
-
 		animation.update();
-
 	}
-
-			
-	
 
 	public void render(Graphics g) {
 		g.drawImage(animation.getSprite(), x, y, null);
