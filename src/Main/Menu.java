@@ -60,7 +60,7 @@ public class Menu{
      * mainFrame.
      */
     private void initMainFrame(){
-        mainFrame = new JFrame("Menu - Calco Jave Game");
+        mainFrame = new JFrame("Menu - Calco Java Game");
         mainFrame.setSize(1000,563);
         mainFrame.setLocationRelativeTo(null);
         mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
