@@ -20,7 +20,7 @@ public class Player extends GameObjects.GameObject {
 	CalcoJavaGame game;
 	Color kleur = Color.RED; 
 	
-	
+	/*
 	 //animation images
 	private BufferedImage[] walkingLeft = {Sprite.getSprite(0,1), Sprite.getSprite(1,1), Sprite.getSprite(2,1), Sprite.getSprite(1,1)};
 	private BufferedImage[] walkingRight = {Sprite.getSprite(0,2), Sprite.getSprite(1,2), Sprite.getSprite(2,2), Sprite.getSprite(1,2)};
@@ -38,7 +38,7 @@ public class Player extends GameObjects.GameObject {
 	
 	
 	//actual animation
-	private Animation animation = stand;
+	private Animation animation = stand;*/
 	
 	
 	public Player(int x, int y, ID id, Handler handler, CalcoJavaGame game) {
@@ -50,6 +50,7 @@ public class Player extends GameObjects.GameObject {
 		
 	
 	public void tick() {
+		this.collision();
 		x += velX;
 		y += velY;
 		
@@ -88,6 +89,7 @@ public class Player extends GameObjects.GameObject {
 		else if (!handler.isRight()) {
 			velX = 0;
 		}
+
 		/*if (handler.isInventory()) {
 			Inventory.openInventory();
 			return;}
@@ -111,6 +113,29 @@ public class Player extends GameObjects.GameObject {
 		g.setColor(kleur);
 		g.fillRect(x, y, 32, 32);
 		g.drawImage(animation.getSprite(), x, y, null);
+	}
+
+	private void collision() {
+		for (int i = 0; i < this.handler.object.size(); ++i) {
+			GameObjects.GameObject tempObject = (GameObjects.GameObject) this.handler.object.get(i);
+			if (tempObject.getId() == ID.Wall) {
+				if (this.getBoundsUp().intersects(tempObject.getBounds()) && this.velY < 0.0F) {
+					this.y = (int) ((float) this.y + this.velY * -1.0F);
+				}
+
+				if (this.getBoundsDown().intersects(tempObject.getBounds()) && this.velY > 0.0F) {
+					this.y = (int) ((float) this.y + this.velY * -1.0F);
+				}
+
+				if (this.getBoundsLeft().intersects(tempObject.getBounds()) && this.velX < 0.0F) {
+					this.x = (int) ((float) this.x + this.velX * -1.0F);
+				}
+
+				if (this.getBoundsRight().intersects(tempObject.getBounds()) && this.velX > 0.0F) {
+					this.x = (int) ((float) this.x + this.velX * -1.0F);
+				}
+			}
+		}
 	}
 
 	public Rectangle getBounds() {
