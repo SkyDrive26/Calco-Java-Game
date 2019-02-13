@@ -18,10 +18,11 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	int PlayerHp = 5;
 	
 	private BufferedImage level = null;
-	private BufferedImage sprite_sheet = null;
+	private BufferedImage floor_sprite_sheet = null;
 	private BufferedImage floor = null;
 	
 	private SpriteSheet ObjectSpriteSheet;
+	private SpriteSheet floorss;
 	
 	public CalcoJavaGame() {
 		//start();
@@ -35,10 +36,12 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		this.setBackground(Color.CYAN);
 				
 		BufferedImageLoader loader = new BufferedImageLoader();
-
+		
 		level = loader.LoadImage("/Pngs/level_1.png");
-		//sprite_sheet = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
-
+		floor_sprite_sheet = loader.LoadImage("/Pngs/Sprite_Sheet.png");
+		
+		floorss = new SpriteSheet(floor_sprite_sheet);
+		floor = floorss.grabImage(4, 2, 32, 32);
 		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
 		
 		loadLevel(level);
@@ -106,23 +109,18 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		
 		
 		Graphics g = bs.getDrawGraphics();
-		Graphics2D g2d = (Graphics2D) g;
-		handler.render(g);
-		
+		Graphics2D g2d = (Graphics2D) g;	
 		///////////////////////////////            
 		
-		
-		/*
 		g2d.translate(-camera.getX(), -camera.getY());
-				
+		
 		for(int xx = 0; xx < 30*72; xx+=32) {
 			for(int yy = 0; yy < 30*72; yy+=32) {
 				g.drawImage(floor, xx, yy, null);
 			}
 		}	
-		
+    
 		handler.render(g);
-		
 		g2d.translate(camera.getX(), camera.getY());
 		
 		g.setColor(Color.black);
@@ -148,7 +146,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		///////////////////////////////
 		g.dispose();
 		
-		*/
+		
 		
 		bs.show();
 	}
