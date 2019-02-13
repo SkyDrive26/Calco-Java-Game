@@ -33,12 +33,12 @@ public class InGameMenu extends JPanel {
 
         JButton btnOptions = createButton("Options", new JButton());
         JButton btnQuit = createButton("Quit to Menu", new JButton());
-        /*btnQuit.addActionListener(new ActionListener() {
+        btnQuit.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
                 game.mainFrame.returnFromGame();
             }
-        });*/
+        });
 
         JButton btnExit = createButton("Exit", new JButton());
         btnExit.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { System.exit(0); }});

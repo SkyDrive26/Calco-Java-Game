@@ -140,13 +140,13 @@ public class Menu extends JFrame{
         game.start();
     }
 
-    /*public void returnFromGame(){
-        this.removeAll();
+    public void returnFromGame(){
+        this.remove(gamePanel);
         game = null;
-        initMenu();
+        this.add(panel);
         this.validate();
         this.repaint();
-    }*/
+    }
 
     /**
      * This method is used to create buttons with predetermined
