@@ -168,9 +168,12 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				
 				if(red == 255 && green == 0 && blue == 0)
 					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));
-
-				if(red == 0 && green == 255 && blue == 0)
-					handler.addObject(new Wall(xx*32, yy*32, ID.Wall));
+					
+        else if(red == 0 && green == 255 && blue == 0)
+						handler.addObject(new Wall(xx*32, yy*32, ID.Wall));
+					
+					
+				}
 			}
 		}
 	}
