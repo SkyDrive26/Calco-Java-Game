@@ -4,7 +4,10 @@ import javax.swing.*;
 import javax.swing.event.ChangeEvent;
 import javax.swing.event.ChangeListener;
 import java.awt.*;
+import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.File;
+import java.io.IOException;
 
 /**
  * <h1>Calco Java Game</h1>
@@ -23,6 +26,7 @@ public class Menu{
     private JButton btnNewGame;
     private JButton btnLevelSelect;
     private JButton btnOptions;
+    private JButton btnExit;
 
     private ChangeListener changeListener = new ChangeListener() {
         /**
@@ -87,19 +91,29 @@ public class Menu{
 
         newGameAction.addChangeListener(changeListener);
 
+        JLabel lblTitle = createLabel("Calco Java Game", new JLabel());
+
         btnNewGame = createButton("New Game", new JButton());
         btnNewGame.addActionListener(this.newGameAction);
         btnLevelSelect = createButton("Select Level", new JButton());
         btnOptions = createButton("Options", new JButton());
+        btnExit = createButton("Exit", new JButton());
+        btnExit.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { System.exit(0); }});
 
         constraints.gridy = 0;
-        panel.add(btnNewGame, constraints);
+        panel.add(lblTitle);
 
         constraints.gridy = 1;
-        panel.add(btnLevelSelect, constraints);
+        panel.add(btnNewGame, constraints);
 
         constraints.gridy = 2;
+        panel.add(btnLevelSelect, constraints);
+
+        constraints.gridy = 3;
         panel.add(btnOptions, constraints);
+
+        constraints.gridy = 4;
+        panel.add(btnExit, constraints);
 
         mainFrame.add(panel);
     }
@@ -129,6 +143,13 @@ public class Menu{
         button.setBackground(Color.decode("#001970"));
         button.setForeground(Color.WHITE);
         return button;
+    }
+
+    private JLabel createLabel(String title, JLabel label){
+        label = new JLabel(title);
+        label.setFont(new Font("Calibri", Font.PLAIN, 64));
+        label.setForeground(Color.WHITE);
+        return label;
     }
 
     /**

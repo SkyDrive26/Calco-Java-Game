@@ -130,7 +130,7 @@ public class Handler {
 		this.four = four;
 	}
 	
-	public static boolean isInventory() {
+	public boolean isInventory() {
 		return inventory;
 		
 	}
