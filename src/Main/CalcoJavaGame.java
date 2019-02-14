@@ -5,6 +5,7 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import GameObjects.Wall;
+import GameObjects.Bush;
 import Player.Player;
 
 public class CalcoJavaGame extends Canvas implements Runnable {
@@ -177,6 +178,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 					
         else if(red == 0 && green == 255 && blue == 0)
 						handler.addObject(new Wall(xx*32, yy*32, ID.Wall, this.wall));
+				
+        else if(red == 0 && green == 0 && blue == 255)
+			handler.addObject(new Bush(xx*32, yy*32, ID.Bush));
 					
 					
 				}
