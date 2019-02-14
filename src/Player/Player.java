@@ -100,6 +100,7 @@ public class Player extends GameObjects.GameObject {
 			inventoryIsOpen = true;
 			handler.setInventory(false);
 			game.mainFrame.gamePanel.add(inventory, BorderLayout.CENTER, 0);
+			game.mainFrame.gamePanel.setSize(450, 400);
 			game.mainFrame.gamePanel.revalidate();
 			game.mainFrame.gamePanel.repaint();
 		}else if(handler.isInventory() && inventoryIsOpen){
