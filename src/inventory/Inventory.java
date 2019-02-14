@@ -10,5 +10,6 @@ public class Inventory extends JPanel {
 
 	public Inventory(){
 		add(new JLabel("Inventory"));
+		this.setSize(500,500);
 	}
 }

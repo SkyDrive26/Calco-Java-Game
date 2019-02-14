@@ -176,7 +176,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				}
 			}
 		}
-	}
+	
 
 	public void setIsRunning(boolean isRunning){
 		this.isRunning = isRunning;
