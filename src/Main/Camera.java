@@ -20,9 +20,6 @@ public class Camera {
 		if(x >= 1064) x = 1064;
 		if(y <= 0) y = 0;
 		if(y >= 1517) y = 1517;
-
-		System.out.println(x);
-		
 	}
 
 	public float getX() {

@@ -48,7 +48,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		floor = floorss.grabImage(4, 2, 32, 32);
 
 		wallss = new SpriteSheet(ObjectSpriteSheet);
-		wall = wallss.grabImage(1, 8, 32, 32);
+		wall = wallss.grabImage(2, 8, 32, 32);
 		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
 		
 		loadLevel(level);
