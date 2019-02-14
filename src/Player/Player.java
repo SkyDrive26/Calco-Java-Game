@@ -162,7 +162,7 @@ public class Player extends GameObjects.GameObject {
 	private void collision() {
 		for (int i = 0; i < this.handler.object.size(); ++i) {
 			GameObject tempObject = this.handler.object.get(i);
-			if (tempObject.getId() == ID.Wall) {
+			if (tempObject.getSolid() == true) {
 				
 				/*
 				if (this.getBoundsUp().intersects(tempObject.getBounds()) && this.velY < 0.0F) {
