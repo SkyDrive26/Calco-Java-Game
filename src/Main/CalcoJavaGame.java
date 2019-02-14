@@ -161,9 +161,6 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private void loadLevel(BufferedImage image){
 		int w = image.getWidth();
 		int h = image.getHeight();
-
-
-			
 			
 		for(int xx = 0; xx < w; xx++) {
 			for(int yy = 0;yy<h; yy++) {
