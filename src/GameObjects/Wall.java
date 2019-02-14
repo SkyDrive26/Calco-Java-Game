@@ -5,24 +5,32 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import Main.Handler;
-import Main.ID;
-import Main.Animation;
-import Main.CalcoJavaGame;
+import Main.*;
 
+/**
+ * This class is used to place the wall on each green line in the level
+ * @see GameObject
+ */
 public class Wall extends GameObject {
 
-    public Wall(int x, int y, ID id){
+    private BufferedImage wall;
+
+    public Wall(int x, int y, ID id, BufferedImage wall){
         super(x, y, id);
+        this.wall = wall;
     }
 
     public void tick() {
 
     }
 
+    /**
+     * Used to place the wall.
+     * @param g Graphics
+     * @see Graphics
+     */
     public void render(Graphics g) {
-        g.setColor(Color.blue);
-        g.fillRect(x, y, 32, 32);
+        g.drawImage(this.wall, x, y, null);
     }
 
     public Rectangle getBounds() {

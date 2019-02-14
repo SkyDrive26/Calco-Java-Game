@@ -21,8 +21,10 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private BufferedImage level = null;
 	private BufferedImage floor_sprite_sheet = null;
 	private BufferedImage floor = null;
+	private BufferedImage ObjectSpriteSheet = null;
+	private BufferedImage wall = null;
 	
-	private SpriteSheet ObjectSpriteSheet;
+	private SpriteSheet wallss;
 	private SpriteSheet floorss;
 	
 	public CalcoJavaGame(Menu mainFrame) {
@@ -40,9 +42,13 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		
 		level = loader.LoadImage("/Pngs/level_1.png");
 		floor_sprite_sheet = loader.LoadImage("/Pngs/Sprite_Sheet.png");
+		ObjectSpriteSheet = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
 		
 		floorss = new SpriteSheet(floor_sprite_sheet);
 		floor = floorss.grabImage(4, 2, 32, 32);
+
+		wallss = new SpriteSheet(ObjectSpriteSheet);
+		wall = wallss.grabImage(1, 8, 32, 32);
 		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
 		
 		loadLevel(level);
@@ -170,7 +176,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));
 					
         else if(red == 0 && green == 255 && blue == 0)
-						handler.addObject(new Wall(xx*32, yy*32, ID.Wall));
+						handler.addObject(new Wall(xx*32, yy*32, ID.Wall, this.wall));
 					
 					
 				}
