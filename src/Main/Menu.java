@@ -18,15 +18,17 @@ import java.io.IOException;
  * @version 0.0.1
  * @since   07-02-2019
  */
-public class Menu{
+public class Menu extends JFrame{
 
     /* Fields */
-    private JFrame mainFrame;
+    //private JFrame mainFrame;
     private JPanel panel;
+    public JLayeredPane gamePanel;
     private JButton btnNewGame;
     private JButton btnLevelSelect;
     private JButton btnOptions;
     private JButton btnExit;
+    private CalcoJavaGame game;
 
     private ChangeListener changeListener = new ChangeListener() {
         /**
@@ -60,12 +62,13 @@ public class Menu{
      * mainFrame.
      */
     private void initMainFrame(){
-        mainFrame = new JFrame("Menu - Calco Jave Game");
-        mainFrame.setSize(1000,563);
-        mainFrame.setLocationRelativeTo(null);
-        mainFrame.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        //mainFrame = new JFrame("Menu - Calco Jave Game");
+        this.setTitle("Menu - Calco Java Game:");
+        this.setSize(1000,563);
+        this.setLocationRelativeTo(null);
+        this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initMenu();
-        mainFrame.setVisible(true);
+        this.setVisible(true);
     }
 
     /* Initialize Menu */
@@ -83,7 +86,7 @@ public class Menu{
          * GridBagConstraints is used for positioning sizing of the buttons.
          */
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(0,0,10,0);
+        constraints.insets = new Insets(0,0,50,0);
         constraints.ipadx = 100;
         constraints.ipady = 20;
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -96,13 +99,16 @@ public class Menu{
         btnNewGame = createButton("New Game", new JButton());
         btnNewGame.addActionListener(this.newGameAction);
         btnLevelSelect = createButton("Select Level", new JButton());
+        btnLevelSelect.setEnabled(false); // Disable button
         btnOptions = createButton("Options", new JButton());
+        btnOptions.setEnabled(false); // Disable button
         btnExit = createButton("Exit", new JButton());
         btnExit.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { System.exit(0); }});
 
         constraints.gridy = 0;
-        panel.add(lblTitle);
+        panel.add(lblTitle, constraints);
 
+        constraints.insets = new Insets(0,0,5,0);
         constraints.gridy = 1;
         panel.add(btnNewGame, constraints);
 
@@ -115,18 +121,34 @@ public class Menu{
         constraints.gridy = 4;
         panel.add(btnExit, constraints);
 
-        mainFrame.add(panel);
+        this.add(panel);
     }
 
     /**
      * This method is used to load a new game into the window.
      */
     private void startNewGame(){
-        CalcoJavaGame game = new CalcoJavaGame();
-        mainFrame.remove(panel);
-        mainFrame.add(game);
-        mainFrame.validate();
+        game = new CalcoJavaGame(this);
+
+        gamePanel = new JLayeredPane();
+        gamePanel.setSize(1000,563);
+        gamePanel.setLayout(new BorderLayout());
+        gamePanel.add(game, BorderLayout.CENTER, 1);
+
+        this.remove(panel);
+        this.add(gamePanel);
+        this.validate();
+        this.repaint();
         game.start();
+    }
+
+    public void returnFromGame(){
+        game.setIsRunning(false);
+        this.remove(gamePanel);
+        game = null;
+        this.add(panel);
+        this.validate();
+        this.repaint();
     }
 
     /**
@@ -145,10 +167,18 @@ public class Menu{
         return button;
     }
 
+    /**
+     * This method is used to create labels with predetermined
+     * style and settings.
+     * @param title This String represents the text in the label.
+     * @param label This JLabel represents the JLabel object.
+     * @return The methods returns the configured JLabel object.
+     */
     private JLabel createLabel(String title, JLabel label){
         label = new JLabel(title);
         label.setFont(new Font("Calibri", Font.PLAIN, 64));
         label.setForeground(Color.WHITE);
+        label.setHorizontalAlignment(SwingConstants.CENTER);
         return label;
     }
 
