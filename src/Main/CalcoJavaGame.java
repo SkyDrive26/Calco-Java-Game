@@ -17,6 +17,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private Handler handler;
 	private Camera camera;
 	int PlayerHp = 5;
+	public static Font myFont;
 	
 	private BufferedImage level = null;
 	private BufferedImage floor_sprite_sheet = null;
@@ -142,6 +143,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	    if(PlayerHp >= 5) {
 			g.fillRect(120, 20, 20, 20);
 			}
+	    g.setFont (myFont);
 	   
 		
 		///////////////////////////////
@@ -155,6 +157,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private void loadLevel(BufferedImage image){
 		int w = image.getWidth();
 		int h = image.getHeight();
+		myFont = new Font ("Serif", Font.BOLD, 20);
 
 
 			

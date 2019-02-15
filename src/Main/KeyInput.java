@@ -3,6 +3,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import GameObjects.GameObject;
+import inventory.Inventory;
 
 public class KeyInput extends KeyAdapter {
 	
@@ -49,7 +50,14 @@ public class KeyInput extends KeyAdapter {
 				if(key == KeyEvent.VK_2) handler.setTwo(false);
 				if(key == KeyEvent.VK_3) handler.setThree(false);
 				if(key == KeyEvent.VK_4) handler.setFour(false);
-				if(key == KeyEvent.VK_I) handler.setInventory(true);
+				//if(key == KeyEvent.VK_I) /*handler.setInventory(true)*/ {
+				if (e.getKeyCode()== KeyEvent.VK_I) {
+					if (!Inventory.isOpen) {
+						Inventory.isOpen = true;
+					} else {
+						Inventory.isOpen = false;
+					}
+				}
 				if(key == KeyEvent.VK_ESCAPE) handler.setEscape(true);
 			}
 		}
