@@ -41,8 +41,6 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private SpriteSheet floorss;
 	private Animation hpHearts = new Animation(hpAnimation, 10);
 	
-	
-	
 	public CalcoJavaGame(Menu mainFrame) {
 		//start();
 		this.mainFrame = mainFrame;
@@ -251,7 +249,7 @@ LATEN STAAN BITTE*/
 				int blue = (pixel) &0xff;
 			
 				if(red == 255 && green == 0 && blue == 0)
-					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));
+					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this, camera));
 				
 				}
 			}
