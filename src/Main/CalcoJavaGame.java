@@ -8,6 +8,7 @@ import GameObjects.Wall;
 import GameObjects.Bush;
 import GameObjects.Grass;
 import GameObjects.Sand;
+import GameObjects.Water;
 import Player.Player;
 import Main.Animation;
 
@@ -36,6 +37,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private BufferedImage bush = null;
 	private BufferedImage sand = null;
 	private BufferedImage grass = null;
+	private BufferedImage water = null;
 	
 	private SpriteSheet ObjectSpriteSheet;
 	private SpriteSheet wallss;
@@ -71,6 +73,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		bush = wallss.grabImage(2, 9, 32, 32);
 		grass = wallss.grabImage(3, 9, 32, 32);
 		sand = wallss.grabImage(2, 10, 32, 32);
+		water = wallss.grabImage(3, 10, 32, 32);
 /*
 		level = loader.LoadImage("/Pngs/level_2.png");
 		ObjectSpriteSheetImage = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
@@ -210,6 +213,9 @@ LATEN STAAN BITTE*/
 				
 				else if(red == 255 && green == 255 && blue == 0)
 					handler.addObject(new Sand(xx*32, yy*32, ID.Sand, this.sand));
+				
+				else if(red == 0 && green == 0 && blue == 200)
+					handler.addObject(new Water(xx*32, yy*32, ID.Water, this.water));
 									
 				}
 			}

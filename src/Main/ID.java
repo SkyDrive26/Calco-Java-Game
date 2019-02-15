@@ -7,5 +7,6 @@ public enum ID {
 	Wall(),
 	Bush(),
 	Sand(),
-	Grass();
+	Grass(),
+	Water();
 }

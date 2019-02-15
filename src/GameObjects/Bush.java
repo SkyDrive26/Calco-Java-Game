@@ -17,7 +17,7 @@ public class Bush extends GameObject {
 
     public Bush(int x, int y, ID id, BufferedImage bush){
         super(x, y, id);
-        solid = false;
+        solid = true;
         this.bush = bush;
     }
 
@@ -35,7 +35,7 @@ public class Bush extends GameObject {
     }
 
     public Rectangle getBounds() {
-        return new Rectangle(x, y, 32, 32);
+        return new Rectangle(x, y, 32, 16);
     }
 
 }
