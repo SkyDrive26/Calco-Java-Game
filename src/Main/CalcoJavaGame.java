@@ -19,7 +19,10 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private Camera camera;
 	int PlayerHp = 5;
 	
-	private BufferedImage level = null;
+	private BufferedImage layerOne = null;
+	private BufferedImage layerTwo = null;
+	private BufferedImage layerThree = null;	
+	
 	private BufferedImage floor_sprite_sheet = null;
 	private BufferedImage floor = null;
 	private BufferedImage ObjectSpriteSheet = null;
@@ -42,7 +45,11 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				
 		BufferedImageLoader loader = new BufferedImageLoader();
 		
-		level = loader.LoadImage("/Pngs/level_1.png");
+		layerOne = loader.LoadImage("/Pngs/level_1.png");
+		layerTwo = loader.LoadImage("/Pngs/level_1.png");
+		layerThree = loader.LoadImage("/Pngs/level_1.png");
+		
+		
 		floor_sprite_sheet = loader.LoadImage("/Pngs/Sprite_Sheet.png");
 		ObjectSpriteSheet = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
 		
@@ -54,7 +61,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		bush = wallss.grabImage(2, 9, 32, 32);
 		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
 		
-		loadLevel(level);
+		loadLayerThree(layerThree);
+		loadLayerTwo(layerTwo);
+		loadLayerOne(layerOne);
 	}
 	public void start() {
 		isRunning = true;
@@ -161,7 +170,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		bs.show();
 	}
 	//loading the level
-	private void loadLevel(BufferedImage image){
+	private void loadLayerOne(BufferedImage image){
 		int w = image.getWidth();
 		int h = image.getHeight();
 			
@@ -174,14 +183,47 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				
 				if(red == 255 && green == 0 && blue == 0)
 					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));
+									
+				}
+			}
+		}
+	
+	private void loadLayerTwo(BufferedImage image){
+		int w = image.getWidth();
+		int h = image.getHeight();
+			
+		for(int xx = 0; xx < w; xx++) {
+			for(int yy = 0;yy<h; yy++) {
+				int pixel = image.getRGB (xx, yy);
+				int red = (pixel >> 16) & 0xff;
+				int green = (pixel >> 8) & 0xff;
+				int blue = (pixel) &0xff;
+				
+				/*if(red == 255 && green == 0 && blue == 0)
+					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));*/
 					
-				else if(red == 0 && green == 255 && blue == 0)
+				if(red == 0 && green == 255 && blue == 0)
 					handler.addObject(new Wall(xx*32, yy*32, ID.Wall, this.wall));
 				
 				else if(red == 0 && green == 0 && blue == 255)
 					handler.addObject(new Bush(xx*32, yy*32, ID.Bush, this.bush));
 					
 					
+				}
+			}
+		}
+	
+	private void loadLayerThree(BufferedImage image){
+		int w = image.getWidth();
+		int h = image.getHeight();
+			
+		for(int xx = 0; xx < w; xx++) {
+			for(int yy = 0;yy<h; yy++) {
+				int pixel = image.getRGB (xx, yy);
+				int red = (pixel >> 16) & 0xff;
+				int green = (pixel >> 8) & 0xff;
+				int blue = (pixel) &0xff;
+			
 				}
 			}
 		}
