@@ -12,10 +12,13 @@ import Main.*;
  * @see GameObject
  */
 public class Bush extends GameObject {
+	
+	private BufferedImage bush;
 
-    public Bush(int x, int y, ID id){
+    public Bush(int x, int y, ID id, BufferedImage bush){
         super(x, y, id);
-        solid = false; 
+        solid = false;
+        this.bush = bush;
     }
 
     public void tick() {
@@ -28,8 +31,7 @@ public class Bush extends GameObject {
      * @see Graphics
      */
     public void render(Graphics g) {
-    	g.setColor(Color.green);
-        g.fillRect(this.x, this.y, 32, 32);
+        g.drawImage(this.bush, x, y, null);
     }
 
     public Rectangle getBounds() {
