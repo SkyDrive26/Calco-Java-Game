@@ -65,7 +65,7 @@ public class Inventory {
 
 				Rectangle temp2 = new Rectangle(is.getX(), is.getY(), ItemSlot.SLOTSIZE, ItemSlot.SLOTSIZE);
 
-				if(MouseInput.mouseClicked() && !hasBeenPressed) {
+				/*if(MouseInput.mouseClicked() && !hasBeenPressed) {
 
 
 					if(temp2.contains(temp)&& !hasBeenPressed) {
@@ -91,8 +91,8 @@ public class Inventory {
 				if (hasBeenPressed && MouseInput.mouseClicked()) {
 					hasBeenPressed = false;
 				}
-			}
-		}
+			}*/
+		}}
 
 	}
 
