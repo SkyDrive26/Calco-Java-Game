@@ -76,8 +76,8 @@ public class Player extends GameObjects.GameObject {
 			velY = -5;                        //Movement itself
 			animation = walkUp;            //What animation is needed
 			animation.start();            // The animation itself
+		    lastMovement= Direction.UP;
 		} else if (!handler.isDown()) {// && !inventoryIsOpen) {
-      lastMovement= Direction.UP;
 			velY = 0;
 		}
 
@@ -85,8 +85,8 @@ public class Player extends GameObjects.GameObject {
 			velY = 5;
 			animation = walkDown;
 			animation.start();
-		} else if (!handler.isUp()) {// && !inventoryIsOpen) {
 			lastMovement= Direction.DOWN;
+		} else if (!handler.isUp()) {// && !inventoryIsOpen) {
 			velY = 0;
 		}
 
