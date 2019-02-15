@@ -5,21 +5,16 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
-import Main.*;
+import Main.ID;
 
-/**
- * This class is used to place the wall on each green line in the level
- * @see GameObject
- */
-public class Bush extends GameObject {
+public class Sand extends GameObject {
 	
-	private BufferedImage bush;
+    private BufferedImage sand;
 
-    public Bush(int x, int y, ID id, BufferedImage bush){
-        super(x, y, id);
-        solid = false;
-        this.bush = bush;
-    }
+	public Sand(int x, int y, ID id, BufferedImage sand) {
+		super(x, y, id);
+		this.sand = sand;
+	}
 
     public void tick() {
 
@@ -31,7 +26,7 @@ public class Bush extends GameObject {
      * @see Graphics
      */
     public void render(Graphics g) {
-        g.drawImage(this.bush, x, y, null);
+        g.drawImage(this.sand, x, y, null);
     }
 
     public Rectangle getBounds() {
