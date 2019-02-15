@@ -20,6 +20,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private Handler handler;
 	private Camera camera;
 	int PlayerHp = 5;
+	public static Font myFont;
 	
 	private BufferedImage layerOne = null;
 	private BufferedImage layerTwo = null;
@@ -27,13 +28,13 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	
 	private BufferedImage floor_sprite_sheet = null;
 	private BufferedImage floor = null;
-	private BufferedImage ObjectSpriteSheet = null;
+	private BufferedImage ObjectSpriteSheetImage = null;
 	private BufferedImage wall = null;
 	private BufferedImage bush = null;
 	private BufferedImage sand = null;
 	private BufferedImage grass = null;
 	
-	private SpriteSheet wallss;
+	private SpriteSheet ObjectSpriteSheet;
 	private SpriteSheet floorss;
 	
 	public CalcoJavaGame(Menu mainFrame) {
@@ -48,7 +49,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		this.setBackground(Color.CYAN);
 				
 		BufferedImageLoader loader = new BufferedImageLoader();
-		
+    
 		layerOne = loader.LoadImage("/Pngs/Layer_1.png");
 		layerTwo = loader.LoadImage("/Pngs/Layer_2.png");
 		layerThree = loader.LoadImage("/Pngs/Layer_3.png");
@@ -65,6 +66,15 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		bush = wallss.grabImage(2, 9, 32, 32);
 		grass = wallss.grabImage(3, 9, 32, 32);
 		sand = wallss.grabImage(2, 10, 32, 32);
+/*
+		level = loader.LoadImage("/Pngs/level_2.png");
+		ObjectSpriteSheetImage = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
+
+		ObjectSpriteSheet = new SpriteSheet(ObjectSpriteSheetImage);
+
+		floor = ObjectSpriteSheet.grabImage(3, 7, 32, 32);
+		wall = ObjectSpriteSheet.grabImage(1, 8, 32, 32);
+LATEN STAAN BITTE*/
 		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
 		
 		loadLayerOne(layerOne);
@@ -166,6 +176,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	    if(PlayerHp >= 5) {
 			g.fillRect(120, 20, 20, 20);
 			}
+	    g.setFont (myFont);
 	   
 		
 		///////////////////////////////
@@ -179,6 +190,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private void loadLayerOne(BufferedImage image){
 		int w = image.getWidth();
 		int h = image.getHeight();
+		myFont = new Font ("Serif", Font.BOLD, 20);
 			
 		for(int xx = 0; xx < w; xx++) {
 			for(int yy = 0;yy<h; yy++) {
@@ -217,6 +229,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 					
 				}
 			}
+		camera.setCameraBounds(w, h);
 		}
 	
 	private void loadLayerThree(BufferedImage image){
