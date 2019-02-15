@@ -9,6 +9,7 @@ import GameObjects.Bush;
 import GameObjects.Grass;
 import GameObjects.Sand;
 import Player.Player;
+import Main.Animation;
 
 public class CalcoJavaGame extends Canvas implements Runnable {
 	
@@ -30,12 +31,16 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private BufferedImage floor = null;
 	private BufferedImage ObjectSpriteSheetImage = null;
 	private BufferedImage wall = null;
+
+	private BufferedImage hpAnimation[] = {Sprite.getSprite(1, 7), Sprite.getSprite(2, 7), Sprite.getSprite(3,7)};
 	private BufferedImage bush = null;
 	private BufferedImage sand = null;
 	private BufferedImage grass = null;
 	
 	private SpriteSheet ObjectSpriteSheet;
+	private SpriteSheet wallss;
 	private SpriteSheet floorss;
+	private Animation hpHearts = new Animation(hpAnimation, 10);
 	
 	public CalcoJavaGame(Menu mainFrame) {
 		//start();
@@ -56,12 +61,12 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		
 		
 		floor_sprite_sheet = loader.LoadImage("/Pngs/Sprite_Sheet.png");
-		ObjectSpriteSheet = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
+		ObjectSpriteSheetImage = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
 		
 		floorss = new SpriteSheet(floor_sprite_sheet);
 		floor = floorss.grabImage(4, 2, 32, 32);
 
-		wallss = new SpriteSheet(ObjectSpriteSheet);
+		wallss = new SpriteSheet(ObjectSpriteSheetImage);
 		wall = wallss.grabImage(1, 8, 32, 32);
 		bush = wallss.grabImage(2, 9, 32, 32);
 		grass = wallss.grabImage(3, 9, 32, 32);
@@ -76,6 +81,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		wall = ObjectSpriteSheet.grabImage(1, 8, 32, 32);
 LATEN STAAN BITTE*/
 		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
+		hpAnimation= new BufferedImage[] {wallss.grabImage(2, 8, 32, 32),wallss.grabImage(3, 8, 32, 32),wallss.grabImage(4, 8, 32, 32), wallss.grabImage(3, 8, 32, 32)};
+		hpHearts = new Animation(hpAnimation,10);
+		
 		
 		loadLayerOne(layerOne);
 		loadLayerTwo(layerTwo);
@@ -158,23 +166,21 @@ LATEN STAAN BITTE*/
 		handler.render(g);
 		g2d.translate(camera.getX(), camera.getY());
 		
-		g.setColor(Color.black);
-	    g.fillRect(19, 19, 120, 22);
-	    g.setColor(Color.red);
 	    if(PlayerHp >= 1) {
-	    g.fillRect(20, 20, 20, 20);
+			g.drawImage(this.hpHearts.getSprite(), 15,15,null);
 	    }
 	    if(PlayerHp >= 2) {
-		g.fillRect(45, 20, 20, 20);
+			g.drawImage(this.hpHearts.getSprite(), 45,15,null);
+
 		}
 	    if(PlayerHp >= 3) {
-			g.fillRect(70, 20, 20, 20);
+	    	g.drawImage(this.hpHearts.getSprite(), 75,15,null);
 			}
 	    if(PlayerHp >= 4) {
-			g.fillRect(95, 20, 20, 20);
+	    	g.drawImage(this.hpHearts.getSprite(),105,15,null);
 			}
 	    if(PlayerHp >= 5) {
-			g.fillRect(120, 20, 20, 20);
+	    	g.drawImage(this.hpHearts.getSprite(), 135,15,null);
 			}
 	    g.setFont (myFont);
 	   
@@ -244,7 +250,7 @@ LATEN STAAN BITTE*/
 				int blue = (pixel) &0xff;
 			
 				if(red == 255 && green == 0 && blue == 0)
-					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));
+					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this, camera));
 				
 				}
 			}

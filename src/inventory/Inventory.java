@@ -38,6 +38,7 @@ public class Inventory {
 		
 		this.x = x;
 		this.y = y;
+
 		itemSlots = new CopyOnWriteArrayList<ItemSlot>();
 
 		for (int i = 0; i < numCols; i++) {
@@ -59,6 +60,30 @@ public class Inventory {
 		itemSlots.get(0).addItem(new ItemFlower(), 3);
 		itemSlots.get(1).addItem(new ItemFlower(), 10);
 	}
+
+	public void initInventory(){
+		itemSlots = new CopyOnWriteArrayList<ItemSlot>();
+
+		for (int i = 0; i < numCols; i++) {
+			for (int j = 0; j < numRows; j++) {
+				if (j == (numRows -1)) {
+					y += 35;
+				}
+				itemSlots.add(new ItemSlot (x + (i * (ItemSlot.SLOTSIZE + 10)),
+						y + (j * (ItemSlot.SLOTSIZE + 10)), null));
+				if (j == (numRows -1)) {
+					y -= 35;
+				}
+			}
+		}
+		width = numCols * (ItemSlot.SLOTSIZE + 10);
+		height = numRows * (ItemSlot.SLOTSIZE + 10) + 35;
+
+		//TODO: REMOVE THIS
+		itemSlots.get(0).addItem(new ItemFlower(), 3);
+		itemSlots.get(1).addItem(new ItemFlower(), 10);
+	}
+
 	public void tick() {
 		if(isOpen) {
 			Rectangle temp = new Rectangle(MouseInput.MouseX, MouseInput.MouseY, 1, 1);
@@ -116,5 +141,13 @@ public class Inventory {
 						MouseInput.MouseX + 27, MouseInput.MouseY + 33);
 			}
 		}
+	}
+
+	public void setX(int x){
+		this.x = x;
+	}
+
+	public void setY(int y){
+		this.y = y;
 	}
 }

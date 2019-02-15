@@ -20,7 +20,7 @@ public class Handler {
 			four = false,
 			escape = false;
 
-	private static boolean 
+	private boolean
 			inventory = false;
 
 	
@@ -137,7 +137,7 @@ public class Handler {
 
 
 	public void setInventory(boolean inventory) {
-		Handler.inventory = inventory;
+		this.inventory = inventory;
 		
 	}
 	
