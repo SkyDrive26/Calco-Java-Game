@@ -38,6 +38,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private BufferedImage grass = null;
 	
 	private SpriteSheet ObjectSpriteSheet;
+	private SpriteSheet wallss;
 	private SpriteSheet floorss;
 	private Animation hpHearts = new Animation(hpAnimation, 10);
 	
@@ -60,12 +61,12 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		
 		
 		floor_sprite_sheet = loader.LoadImage("/Pngs/Sprite_Sheet.png");
-		ObjectSpriteSheet = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
+		ObjectSpriteSheetImage = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
 		
 		floorss = new SpriteSheet(floor_sprite_sheet);
 		floor = floorss.grabImage(4, 2, 32, 32);
 
-		wallss = new SpriteSheet(ObjectSpriteSheet);
+		wallss = new SpriteSheet(ObjectSpriteSheetImage);
 		wall = wallss.grabImage(1, 8, 32, 32);
 		bush = wallss.grabImage(2, 9, 32, 32);
 		grass = wallss.grabImage(3, 9, 32, 32);
