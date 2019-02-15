@@ -5,5 +5,7 @@ public enum ID {
 	Player(),
 	Test(),
 	Wall(),
-	Bush();
+	Bush(),
+	Sand(),
+	Grass();
 }
