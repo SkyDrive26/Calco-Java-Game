@@ -6,6 +6,7 @@ import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
+import java.lang.reflect.Array;
 
 import Main.Handler;
 import Main.ID;
@@ -42,6 +43,8 @@ public class Player extends GameObjects.GameObject {
 	private Animation walkUp = new Animation(walkingUp, 10);
 	private Animation walkDown = new Animation(walkingDown, 10);
 	private Animation stand = new Animation(standing, 10);
+	
+	private Direction lastMovement = Direction.DOWN;
 
 
 	//actual animation
@@ -74,6 +77,7 @@ public class Player extends GameObjects.GameObject {
 			animation = walkUp;            //What animation is needed
 			animation.start();            // The animation itself
 		} else if (!handler.isDown()) {// && !inventoryIsOpen) {
+      lastMovement= Direction.UP;
 			velY = 0;
 		}
 
@@ -82,12 +86,14 @@ public class Player extends GameObjects.GameObject {
 			animation = walkDown;
 			animation.start();
 		} else if (!handler.isUp()) {// && !inventoryIsOpen) {
+			lastMovement= Direction.DOWN;
 			velY = 0;
 		}
 
 		if (handler.isRight()) {// && !inventoryIsOpen) {
 			velX = 5;
 			animation = walkRight;
+			lastMovement= Direction.RIGHT;
 			animation.start();
 		} else if (!handler.isLeft()) {// && !inventoryIsOpen) {
 			velX = 0;
@@ -96,6 +102,7 @@ public class Player extends GameObjects.GameObject {
 		if (handler.isLeft()) {// && !inventoryIsOpen) {
 			velX = -5;
 			animation = walkLeft;
+			lastMovement= Direction.LEFT;
 			animation.start();
 		} else if (!handler.isRight()) {// && !inventoryIsOpen) {
 			velX = 0;
@@ -131,10 +138,24 @@ public class Player extends GameObjects.GameObject {
 			game.mainFrame.gamePanel.revalidate();
 			game.mainFrame.gamePanel.repaint();
 		}
-
+    
 		if (velX == 0 && velY == 0) {
-			animation.stop();
+			switch(lastMovement) {
+			case RIGHT:
+				animation= new Animation(new BufferedImage[] {walkingRight[1]}, 10);
+				break;
+			case LEFT:
+				animation= new Animation(new BufferedImage[] {walkingLeft[1]}, 10);
+				break;
+			case UP:
+				animation= new Animation(new BufferedImage[] {walkingUp[1]}, 10);
+				break;
+			case DOWN:
+				animation= new Animation(new BufferedImage[] {walkingDown[1]}, 10);
+				break;
+			}
 		}
+
 		animation.update();
 		inventory.tick();
 	}
@@ -147,7 +168,7 @@ public class Player extends GameObjects.GameObject {
 	private void collision() {
 		for (int i = 0; i < this.handler.object.size(); ++i) {
 			GameObject tempObject = this.handler.object.get(i);
-			if (tempObject.getId() == ID.Wall) {
+			if (tempObject.getSolid() == true) {
 				
 				/*
 				if (this.getBoundsUp().intersects(tempObject.getBounds()) && this.velY < 0.0F) {
@@ -209,5 +230,8 @@ public class Player extends GameObjects.GameObject {
 		return new Rectangle((x + 32), (y + 1), 3, 30);
 	}
 	
+	enum Direction{
+		LEFT, RIGHT, UP, DOWN;
+	}
 
 }

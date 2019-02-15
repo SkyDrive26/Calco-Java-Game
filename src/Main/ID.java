@@ -4,5 +4,6 @@ public enum ID {
 	
 	Player(),
 	Test(),
-	Wall();
+	Wall(),
+	Bush();
 }

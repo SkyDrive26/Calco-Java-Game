@@ -11,14 +11,11 @@ import Main.*;
  * This class is used to place the wall on each green line in the level
  * @see GameObject
  */
-public class Wall extends GameObject {
+public class Bush extends GameObject {
 
-    private BufferedImage wall;
-
-    public Wall(int x, int y, ID id, BufferedImage wall){
+    public Bush(int x, int y, ID id){
         super(x, y, id);
-        solid = true; 
-        this.wall = wall;
+        solid = false; 
     }
 
     public void tick() {
@@ -26,12 +23,13 @@ public class Wall extends GameObject {
     }
 
     /**
-     * Used to place the wall.
+     * Used to place the bush.
      * @param g Graphics
      * @see Graphics
      */
     public void render(Graphics g) {
-        g.drawImage(this.wall, x, y, null);
+    	g.setColor(Color.green);
+        g.fillRect(this.x, this.y, 32, 32);
     }
 
     public Rectangle getBounds() {

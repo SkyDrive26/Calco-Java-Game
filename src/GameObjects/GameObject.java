@@ -10,6 +10,14 @@ public abstract class GameObject {
 	 protected int x, y; 						/** asdf **/
 	 protected float velX = 0, velY = 0;
 	 protected ID id;
+	 protected boolean solid = false;
+	 
+	 public GameObject (int x, int y, ID id, boolean solid) {
+		 this.x = x;
+		 this.y = y;
+		 this.id = id;
+		 this.solid = solid;
+	 }
 	 
 	 public GameObject (int x, int y, ID id) {
 		 this.x = x;
@@ -61,6 +69,12 @@ public abstract class GameObject {
 		this.velY = velY;
 	}
 	
+	public boolean getSolid() {
+		return solid;
+	}
 	
+	public void setSolid(boolean solid) {
+		this.solid = solid;
+	}
 	 
 }
