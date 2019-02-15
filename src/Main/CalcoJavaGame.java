@@ -9,6 +9,7 @@ import GameObjects.Bush;
 import GameObjects.Grass;
 import GameObjects.Sand;
 import Player.Player;
+import Main.Animation;
 
 public class CalcoJavaGame extends Canvas implements Runnable {
 	
@@ -30,12 +31,17 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private BufferedImage floor = null;
 	private BufferedImage ObjectSpriteSheetImage = null;
 	private BufferedImage wall = null;
+
+	private BufferedImage hpAnimation[] = {Sprite.getSprite(1, 7), Sprite.getSprite(2, 7), Sprite.getSprite(3,7)};
 	private BufferedImage bush = null;
 	private BufferedImage sand = null;
 	private BufferedImage grass = null;
 	
 	private SpriteSheet ObjectSpriteSheet;
 	private SpriteSheet floorss;
+	private Animation hpHearts = new Animation(hpAnimation, 10);
+	
+	
 	
 	public CalcoJavaGame(Menu mainFrame) {
 		//start();
@@ -76,6 +82,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		wall = ObjectSpriteSheet.grabImage(1, 8, 32, 32);
 LATEN STAAN BITTE*/
 		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
+		hpAnimation= new BufferedImage[] {wallss.grabImage(2, 8, 32, 32),wallss.grabImage(3, 8, 32, 32),wallss.grabImage(4, 8, 32, 32), wallss.grabImage(3, 8, 32, 32)};
+		hpHearts = new Animation(hpAnimation,10);
+		
 		
 		loadLayerOne(layerOne);
 		loadLayerTwo(layerTwo);
@@ -158,23 +167,21 @@ LATEN STAAN BITTE*/
 		handler.render(g);
 		g2d.translate(camera.getX(), camera.getY());
 		
-		g.setColor(Color.black);
-	    g.fillRect(19, 19, 120, 22);
-	    g.setColor(Color.red);
 	    if(PlayerHp >= 1) {
-	    g.fillRect(20, 20, 20, 20);
+			g.drawImage(this.hpHearts.getSprite(), 15,15,null);
 	    }
 	    if(PlayerHp >= 2) {
-		g.fillRect(45, 20, 20, 20);
+			g.drawImage(this.hpHearts.getSprite(), 45,15,null);
+
 		}
 	    if(PlayerHp >= 3) {
-			g.fillRect(70, 20, 20, 20);
+	    	g.drawImage(this.hpHearts.getSprite(), 75,15,null);
 			}
 	    if(PlayerHp >= 4) {
-			g.fillRect(95, 20, 20, 20);
+	    	g.drawImage(this.hpHearts.getSprite(),105,15,null);
 			}
 	    if(PlayerHp >= 5) {
-			g.fillRect(120, 20, 20, 20);
+	    	g.drawImage(this.hpHearts.getSprite(), 135,15,null);
 			}
 	    g.setFont (myFont);
 	   
