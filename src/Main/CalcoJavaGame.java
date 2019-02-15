@@ -6,6 +6,8 @@ import java.awt.image.BufferedImage;
 
 import GameObjects.Wall;
 import GameObjects.Bush;
+import GameObjects.Grass;
+import GameObjects.Sand;
 import Player.Player;
 
 public class CalcoJavaGame extends Canvas implements Runnable {
@@ -28,6 +30,8 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private BufferedImage ObjectSpriteSheet = null;
 	private BufferedImage wall = null;
 	private BufferedImage bush = null;
+	private BufferedImage sand = null;
+	private BufferedImage grass = null;
 	
 	private SpriteSheet wallss;
 	private SpriteSheet floorss;
@@ -45,9 +49,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				
 		BufferedImageLoader loader = new BufferedImageLoader();
 		
-		layerOne = loader.LoadImage("/Pngs/level_1.png");
-		layerTwo = loader.LoadImage("/Pngs/level_1.png");
-		layerThree = loader.LoadImage("/Pngs/level_1.png");
+		layerOne = loader.LoadImage("/Pngs/Layer_1.png");
+		layerTwo = loader.LoadImage("/Pngs/Layer_2.png");
+		layerThree = loader.LoadImage("/Pngs/Layer_3.png");
 		
 		
 		floor_sprite_sheet = loader.LoadImage("/Pngs/Sprite_Sheet.png");
@@ -57,13 +61,15 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		floor = floorss.grabImage(4, 2, 32, 32);
 
 		wallss = new SpriteSheet(ObjectSpriteSheet);
-		wall = wallss.grabImage(2, 8, 32, 32);
+		wall = wallss.grabImage(1, 8, 32, 32);
 		bush = wallss.grabImage(2, 9, 32, 32);
+		grass = wallss.grabImage(3, 9, 32, 32);
+		sand = wallss.grabImage(2, 10, 32, 32);
 		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
 		
-		loadLayerThree(layerThree);
-		loadLayerTwo(layerTwo);
 		loadLayerOne(layerOne);
+		loadLayerTwo(layerTwo);
+		loadLayerThree(layerThree);
 	}
 	public void start() {
 		isRunning = true;
@@ -135,7 +141,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		
 		for(int xx = 0; xx < 30*72; xx+=32) {
 			for(int yy = 0; yy < 30*72; yy+=32) {
-				g.drawImage(floor, xx, yy, null);
+				g.drawImage(grass, xx, yy, null);
 			}
 		}	
     
@@ -181,8 +187,11 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				int green = (pixel >> 8) & 0xff;
 				int blue = (pixel) &0xff;
 				
-				if(red == 255 && green == 0 && blue == 0)
-					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));
+				if(red == 0 && green == 100 && blue == 0)
+					handler.addObject(new Grass(xx*32, yy*32, ID.Grass, this.grass));
+				
+				else if(red == 255 && green == 255 && blue == 0)
+					handler.addObject(new Sand(xx*32, yy*32, ID.Sand, this.sand));
 									
 				}
 			}
@@ -198,10 +207,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				int red = (pixel >> 16) & 0xff;
 				int green = (pixel >> 8) & 0xff;
 				int blue = (pixel) &0xff;
-				
-				/*if(red == 255 && green == 0 && blue == 0)
-					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));*/
-					
+									
 				if(red == 0 && green == 255 && blue == 0)
 					handler.addObject(new Wall(xx*32, yy*32, ID.Wall, this.wall));
 				
@@ -224,6 +230,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				int green = (pixel >> 8) & 0xff;
 				int blue = (pixel) &0xff;
 			
+				if(red == 255 && green == 0 && blue == 0)
+					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));
+				
 				}
 			}
 		}
