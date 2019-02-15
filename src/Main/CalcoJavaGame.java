@@ -22,10 +22,10 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private BufferedImage level = null;
 	private BufferedImage floor_sprite_sheet = null;
 	private BufferedImage floor = null;
-	private BufferedImage ObjectSpriteSheet = null;
+	private BufferedImage ObjectSpriteSheetImage = null;
 	private BufferedImage wall = null;
 	
-	private SpriteSheet wallss;
+	private SpriteSheet ObjectSpriteSheet;
 	private SpriteSheet floorss;
 	
 	public CalcoJavaGame(Menu mainFrame) {
@@ -41,15 +41,13 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				
 		BufferedImageLoader loader = new BufferedImageLoader();
 		
-		level = loader.LoadImage("/Pngs/level_1.png");
-		floor_sprite_sheet = loader.LoadImage("/Pngs/Sprite_Sheet.png");
-		ObjectSpriteSheet = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
-		
-		floorss = new SpriteSheet(floor_sprite_sheet);
-		floor = floorss.grabImage(4, 2, 32, 32);
+		level = loader.LoadImage("/Pngs/level_2.png");
+		ObjectSpriteSheetImage = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
 
-		wallss = new SpriteSheet(ObjectSpriteSheet);
-		wall = wallss.grabImage(2, 8, 32, 32);
+		ObjectSpriteSheet = new SpriteSheet(ObjectSpriteSheetImage);
+
+		floor = ObjectSpriteSheet.grabImage(3, 7, 32, 32);
+		wall = ObjectSpriteSheet.grabImage(1, 8, 32, 32);
 		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
 		
 		loadLevel(level);
@@ -122,8 +120,8 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		
 		g2d.translate(-camera.getX(), -camera.getY());
 		
-		for(int xx = 0; xx < 30*72; xx+=32) {
-			for(int yy = 0; yy < 30*72; yy+=32) {
+		for(int xx = 0; xx < level.getWidth()*32; xx+=32) {
+			for(int yy = 0; yy < level.getHeight()*32; yy+=32) {
 				g.drawImage(floor, xx, yy, null);
 			}
 		}	
@@ -182,6 +180,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 					
 				}
 			}
+		camera.setCameraBounds(w, h);
 		}
 	
 
