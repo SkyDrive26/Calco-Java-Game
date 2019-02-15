@@ -5,6 +5,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import Items.ItemFlower;
 import Main.MouseInput;
 /*
  * Contains all the code for the initialization of the Inventory
@@ -34,6 +35,7 @@ public class Inventory {
 	}
 
 	public Inventory(int x, int y) {
+		
 		this.x = x;
 		this.y = y;
 		itemSlots = new CopyOnWriteArrayList<ItemSlot>();
@@ -54,8 +56,8 @@ public class Inventory {
 		height = numRows * (ItemSlot.SLOTSIZE + 10) + 35;
 
 		//TODO: REMOVE THIS
-		//itemSlots.get(0).addItem(new ItemStick(), 3);
-		//itemSlots.get(1).addItem(new ItemStick(), 10);
+		itemSlots.get(0).addItem(new ItemFlower(), 3);
+		itemSlots.get(1).addItem(new ItemFlower(), 10);
 	}
 	public void tick() {
 		if(isOpen) {
