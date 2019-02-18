@@ -4,32 +4,33 @@ import javax.sound.sampled.AudioInputStream;
 import javax.sound.sampled.AudioSystem;
 import javax.sound.sampled.Clip;
 
-public class Audio {
+public class Audio implements Runnable {
     private String fileName;
-    private boolean isRunning = true;
+    private boolean playing = false;
+    private Clip clip;
+    private volatile boolean isRunning = true;
 
     public Audio(String fileName){
         this.fileName = fileName;
     }
 
-    public synchronized void playSound(){
-        new Thread(new Runnable() {
-            @Override
-            public void run() {
-                try {
-                    Clip clip = AudioSystem.getClip();
+    @Override
+    public void run() {
+        while(isRunning) {
+            try {
+                if(!playing) {
+                    clip = AudioSystem.getClip();
                     AudioInputStream inputStream = AudioSystem.getAudioInputStream(Menu.class.getResourceAsStream("/Wavs/" + fileName));
                     clip.open(inputStream);
                     clip.start();
-                    while(!isRunning){
-                        clip.stop();
-                        break;
-                    }
-                }catch(Exception e){
-                    e.printStackTrace();
+                    playing = true;
                 }
+            } catch (Exception e) {
+                e.printStackTrace();
+                isRunning = false;
             }
-        }).start();
+        }
+        clip.stop();
     }
 
     public void stop(){
