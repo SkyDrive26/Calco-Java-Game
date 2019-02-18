@@ -9,7 +9,6 @@ import GameObjects.Bush;
 import GameObjects.Grass;
 import GameObjects.Sand;
 import Player.Player;
-import Main.Animation;
 
 public class CalcoJavaGame extends Canvas implements Runnable {
 	
@@ -22,24 +21,15 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private Camera camera;
 	int PlayerHp = 5;
 	public static Font myFont;
-	
-	private BufferedImage layerOne = null;
-	private BufferedImage layerTwo = null;
-	private BufferedImage layerThree = null;	
-	
-	private BufferedImage floor_sprite_sheet = null;
-	private BufferedImage floor = null;
-	private BufferedImage ObjectSpriteSheetImage = null;
-	private BufferedImage wall = null;
+	private Audio audio;
+
+	/* SpriteStuff */
+	private BufferedImage layerOne, layerTwo, layerThree,
+		ObjectSpriteSheetImage, wall, bush, sand, grass;
+
+	private SpriteSheet objectSpriteSheet;
 
 	private BufferedImage hpAnimation[] = {Sprite.getSprite(1, 7), Sprite.getSprite(2, 7), Sprite.getSprite(3,7)};
-	private BufferedImage bush = null;
-	private BufferedImage sand = null;
-	private BufferedImage grass = null;
-	
-	private SpriteSheet ObjectSpriteSheet;
-	private SpriteSheet wallss;
-	private SpriteSheet floorss;
 	private Animation hpHearts = new Animation(hpAnimation, 10);
 	
 	public CalcoJavaGame(Menu mainFrame) {
@@ -58,33 +48,17 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		layerOne = loader.LoadImage("/Pngs/Layer_1.png");
 		layerTwo = loader.LoadImage("/Pngs/Layer_2.png");
 		layerThree = loader.LoadImage("/Pngs/Layer_3.png");
-		
-		
-		floor_sprite_sheet = loader.LoadImage("/Pngs/Sprite_Sheet.png");
-		ObjectSpriteSheetImage = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
-		
-		floorss = new SpriteSheet(floor_sprite_sheet);
-		floor = floorss.grabImage(4, 2, 32, 32);
-
-		wallss = new SpriteSheet(ObjectSpriteSheetImage);
-		wall = wallss.grabImage(1, 8, 32, 32);
-		bush = wallss.grabImage(2, 9, 32, 32);
-		grass = wallss.grabImage(3, 9, 32, 32);
-		sand = wallss.grabImage(2, 10, 32, 32);
-/*
-		level = loader.LoadImage("/Pngs/level_2.png");
 		ObjectSpriteSheetImage = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
 
-		ObjectSpriteSheet = new SpriteSheet(ObjectSpriteSheetImage);
+		objectSpriteSheet = new SpriteSheet(ObjectSpriteSheetImage);
+		wall = objectSpriteSheet.grabImage(1, 8, 32, 32);
+		bush = objectSpriteSheet.grabImage(2, 9, 32, 32);
+		grass = objectSpriteSheet.grabImage(3, 9, 32, 32);
+		sand = objectSpriteSheet.grabImage(2, 10, 32, 32);
 
-		floor = ObjectSpriteSheet.grabImage(3, 7, 32, 32);
-		wall = ObjectSpriteSheet.grabImage(1, 8, 32, 32);
-LATEN STAAN BITTE*/
-		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
-		hpAnimation= new BufferedImage[] {wallss.grabImage(2, 8, 32, 32),wallss.grabImage(3, 8, 32, 32),wallss.grabImage(4, 8, 32, 32), wallss.grabImage(3, 8, 32, 32)};
+		hpAnimation= new BufferedImage[] {objectSpriteSheet.grabImage(2, 8, 32, 32), objectSpriteSheet.grabImage(3, 8, 32, 32), objectSpriteSheet.grabImage(4, 8, 32, 32), objectSpriteSheet.grabImage(3, 8, 32, 32)};
 		hpHearts = new Animation(hpAnimation,10);
-		
-		
+
 		loadLayerOne(layerOne);
 		loadLayerTwo(layerTwo);
 		loadLayerThree(layerThree);
@@ -112,6 +86,8 @@ LATEN STAAN BITTE*/
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
+		audio = new Audio("SuperMario.wav");
+		audio.playSound();
 		while(isRunning){
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
@@ -128,6 +104,7 @@ LATEN STAAN BITTE*/
 				frames = 0;
 			}
 		}
+		audio.stop();
 		stop();
 	}
 	
@@ -211,9 +188,9 @@ LATEN STAAN BITTE*/
 				else if(red == 255 && green == 255 && blue == 0)
 					handler.addObject(new Sand(xx*32, yy*32, ID.Sand, this.sand));
 									
-				}
 			}
 		}
+	}
 	
 	private void loadLayerTwo(BufferedImage image){
 		int w = image.getWidth();
@@ -233,10 +210,10 @@ LATEN STAAN BITTE*/
 					handler.addObject(new Bush(xx*32, yy*32, ID.Bush, this.bush));
 					
 					
-				}
 			}
-		camera.setCameraBounds(w, h);
 		}
+		camera.setCameraBounds(w, h);
+	}
 	
 	private void loadLayerThree(BufferedImage image){
 		int w = image.getWidth();
@@ -252,10 +229,9 @@ LATEN STAAN BITTE*/
 				if(red == 255 && green == 0 && blue == 0)
 					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this, camera));
 				
-				}
 			}
 		}
-	
+	}
 
 	public void setIsRunning(boolean isRunning){
 		this.isRunning = isRunning;
