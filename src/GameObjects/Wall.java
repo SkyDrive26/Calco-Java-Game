@@ -17,6 +17,7 @@ public class Wall extends GameObject {
 
     public Wall(int x, int y, ID id, BufferedImage wall){
         super(x, y, id);
+        solid = true; 
         this.wall = wall;
     }
 

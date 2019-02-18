@@ -3,6 +3,7 @@ import java.awt.event.KeyAdapter;
 import java.awt.event.KeyEvent;
 
 import GameObjects.GameObject;
+import inventory.Inventory;
 
 public class KeyInput extends KeyAdapter {
 	

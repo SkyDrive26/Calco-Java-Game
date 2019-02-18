@@ -8,21 +8,18 @@ import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 import java.lang.reflect.Array;
 
-import Main.Handler;
-import Main.ID;
+import Main.*;
 import Menus.InGameMenu;
 import inventory.Inventory;
-import Main.Sprite;
-import Main.Animation;
-import Main.CalcoJavaGame;
 import GameObjects.GameObject;
 
 
 public class Player extends GameObjects.GameObject {
 
+	private static final Graphics Graphics = null;
 	Handler handler;
 	CalcoJavaGame game;
-	Inventory inventory;
+	Camera camera;
 	InGameMenu inGameMenu;
 
 	private boolean inventoryIsOpen;
@@ -48,17 +45,22 @@ public class Player extends GameObjects.GameObject {
 
 	//actual animation
 	private Animation animation = stand;
+	
+	//New Inventory
+	public Inventory inventory;
 
 
-	public Player(int x, int y, ID id, Handler handler, CalcoJavaGame game) {
+	public Player(int x, int y, ID id, Handler handler, CalcoJavaGame game, Camera camera) {
 		super(x, y, id);
 		this.handler = handler;
 		this.game = game;
-		this.inventory = new Inventory();
+		this.camera = camera;
 		this.inGameMenu = new InGameMenu(game, handler);
 		inventoryIsOpen = false;
 		inGameMenuIsOpen = false;
+		inventory = new Inventory (290, 124, handler);
 	}
+	
 
 
 	public void tick() {
@@ -70,8 +72,8 @@ public class Player extends GameObjects.GameObject {
 			velY = -5;                        //Movement itself
 			animation = walkUp;            //What animation is needed
 			animation.start();            // The animation itself
-      lastMovement= Direction.UP;
 		} else if (!handler.isDown() && !inventoryIsOpen) {
+      lastMovement= Direction.UP;
 			velY = 0;
 		}
 
@@ -79,8 +81,8 @@ public class Player extends GameObjects.GameObject {
 			velY = 5;
 			animation = walkDown;
 			animation.start();
-			lastMovement= Direction.DOWN;
 		} else if (!handler.isUp() && !inventoryIsOpen) {
+			lastMovement= Direction.DOWN;
 			velY = 0;
 		}
 
@@ -104,21 +106,22 @@ public class Player extends GameObjects.GameObject {
 
 		/* Open inventory when I is pressed and the inventory is not already open */
 		if(handler.isInventory() && !inventoryIsOpen && !inGameMenuIsOpen){
+			//inventory.setX((int)camera.getX() + 290);
+			//inventory.setY((int) camera.getY() + 124);
+			inventory.initInventory((int)camera.getX() + 290, (int) camera.getY() + 124);
+			inventory.isOpen = true;
 			inventoryIsOpen = true;
 			handler.setInventory(false);
-			game.mainFrame.gamePanel.add(inventory, BorderLayout.CENTER, 0);
-			game.mainFrame.gamePanel.setSize(450, 400);
-			game.mainFrame.gamePanel.revalidate();
-			game.mainFrame.gamePanel.repaint();
 		}else if(handler.isInventory() && inventoryIsOpen){
 			inventoryIsOpen = false;
+			//inventory.copyItemSlots();
+			inventory.isOpen = false;
 			handler.setInventory(false);
-			game.mainFrame.gamePanel.remove(inventory);
-			game.mainFrame.gamePanel.revalidate();
-			game.mainFrame.gamePanel.repaint();
+			
 		}else if(handler.isInventory() && inGameMenuIsOpen){
 			handler.setInventory(false);
 		}
+		
 
 		/* Open in-game menu when escape is pressed */
 		if(handler.isEscape() && !inGameMenuIsOpen){
@@ -153,16 +156,18 @@ public class Player extends GameObjects.GameObject {
 		}
 
 		animation.update();
+		inventory.tick();
 	}
 
 	public void render(Graphics g) {
 		g.drawImage(animation.getSprite(), x, y, null);
+		inventory.render(g);
 	}
 
 	private void collision() {
 		for (int i = 0; i < this.handler.object.size(); ++i) {
 			GameObject tempObject = this.handler.object.get(i);
-			if (tempObject.getId() == ID.Wall) {
+			if (tempObject.getSolid() == true) {
 				
 				/*
 				if (this.getBoundsUp().intersects(tempObject.getBounds()) && this.velY < 0.0F) {

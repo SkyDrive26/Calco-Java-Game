@@ -5,6 +5,9 @@ import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
 import GameObjects.Wall;
+import GameObjects.Bush;
+import GameObjects.Grass;
+import GameObjects.Sand;
 import Player.Player;
 
 public class CalcoJavaGame extends Canvas implements Runnable {
@@ -12,20 +15,22 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
 	private boolean isRunning = false;
-	private Thread thread;
+	public Thread thread;
 	public Menu mainFrame;
 	private Handler handler;
 	private Camera camera;
 	int PlayerHp = 5;
-	
-	private BufferedImage level = null;
-	private BufferedImage floor_sprite_sheet = null;
-	private BufferedImage floor = null;
-	private BufferedImage ObjectSpriteSheet = null;
-	private BufferedImage wall = null;
-	
-	private SpriteSheet wallss;
-	private SpriteSheet floorss;
+	public static Font myFont;
+	private Audio audio;
+
+	/* SpriteStuff */
+	private BufferedImage layerOne, layerTwo, layerThree,
+		ObjectSpriteSheetImage, wall, bush, sand, grass;
+
+	private SpriteSheet objectSpriteSheet;
+
+	private BufferedImage hpAnimation[] = {Sprite.getSprite(1, 7), Sprite.getSprite(2, 7), Sprite.getSprite(3,7)};
+	private Animation hpHearts = new Animation(hpAnimation, 10);
 	
 	public CalcoJavaGame(Menu mainFrame) {
 		//start();
@@ -39,19 +44,24 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		this.setBackground(Color.CYAN);
 				
 		BufferedImageLoader loader = new BufferedImageLoader();
-		
-		level = loader.LoadImage("/Pngs/level_1.png");
-		floor_sprite_sheet = loader.LoadImage("/Pngs/Sprite_Sheet.png");
-		ObjectSpriteSheet = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
-		
-		floorss = new SpriteSheet(floor_sprite_sheet);
-		floor = floorss.grabImage(4, 2, 32, 32);
+    
+		layerOne = loader.LoadImage("/Pngs/Layer_1.png");
+		layerTwo = loader.LoadImage("/Pngs/Layer_2.png");
+		layerThree = loader.LoadImage("/Pngs/Layer_3.png");
+		ObjectSpriteSheetImage = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
 
-		wallss = new SpriteSheet(ObjectSpriteSheet);
-		wall = wallss.grabImage(1, 8, 32, 32);
-		//ObjectSpriteSheet = new SpriteSheet(sprite_sheet);
-		
-		loadLevel(level);
+		objectSpriteSheet = new SpriteSheet(ObjectSpriteSheetImage);
+		wall = objectSpriteSheet.grabImage(1, 8, 32, 32);
+		bush = objectSpriteSheet.grabImage(2, 9, 32, 32);
+		grass = objectSpriteSheet.grabImage(3, 9, 32, 32);
+		sand = objectSpriteSheet.grabImage(2, 10, 32, 32);
+
+		hpAnimation= new BufferedImage[] {objectSpriteSheet.grabImage(2, 8, 32, 32), objectSpriteSheet.grabImage(3, 8, 32, 32), objectSpriteSheet.grabImage(4, 8, 32, 32), objectSpriteSheet.grabImage(3, 8, 32, 32)};
+		hpHearts = new Animation(hpAnimation,10);
+
+		loadLayerOne(layerOne);
+		loadLayerTwo(layerTwo);
+		loadLayerThree(layerThree);
 	}
 	public void start() {
 		isRunning = true;
@@ -76,6 +86,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
+		audio = new Audio("SuperMario.wav");
+		Thread audioThread = new Thread(audio);
+		audioThread.start();
 		while(isRunning){
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
@@ -91,6 +104,12 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				timer += 1000;
 				frames = 0;
 			}
+		}
+		audio.stop();
+		try {
+			audioThread.join();
+		}catch(Exception e){
+			e.printStackTrace();
 		}
 		stop();
 	}
@@ -123,47 +142,42 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		
 		for(int xx = 0; xx < 30*72; xx+=32) {
 			for(int yy = 0; yy < 30*72; yy+=32) {
-				g.drawImage(floor, xx, yy, null);
+				g.drawImage(grass, xx, yy, null);
 			}
 		}	
     
 		handler.render(g);
 		g2d.translate(camera.getX(), camera.getY());
 		
-		g.setColor(Color.black);
-	    g.fillRect(19, 19, 120, 22);
-	    g.setColor(Color.red);
 	    if(PlayerHp >= 1) {
-	    g.fillRect(20, 20, 20, 20);
+			g.drawImage(this.hpHearts.getSprite(), 15,15,null);
 	    }
 	    if(PlayerHp >= 2) {
-		g.fillRect(45, 20, 20, 20);
+			g.drawImage(this.hpHearts.getSprite(), 45,15,null);
+
 		}
 	    if(PlayerHp >= 3) {
-			g.fillRect(70, 20, 20, 20);
+	    	g.drawImage(this.hpHearts.getSprite(), 75,15,null);
 			}
 	    if(PlayerHp >= 4) {
-			g.fillRect(95, 20, 20, 20);
+	    	g.drawImage(this.hpHearts.getSprite(),105,15,null);
 			}
 	    if(PlayerHp >= 5) {
-			g.fillRect(120, 20, 20, 20);
+	    	g.drawImage(this.hpHearts.getSprite(), 135,15,null);
 			}
+	    g.setFont (myFont);
 	   
 		
 		///////////////////////////////
 		g.dispose();
-		
-		
-		
+
 		bs.show();
 	}
 	//loading the level
-	private void loadLevel(BufferedImage image){
+	private void loadLayerOne(BufferedImage image){
 		int w = image.getWidth();
 		int h = image.getHeight();
-
-
-			
+		myFont = new Font ("Serif", Font.BOLD, 20);
 			
 		for(int xx = 0; xx < w; xx++) {
 			for(int yy = 0;yy<h; yy++) {
@@ -172,17 +186,56 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				int green = (pixel >> 8) & 0xff;
 				int blue = (pixel) &0xff;
 				
-				if(red == 255 && green == 0 && blue == 0)
-					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this));
-					
-        else if(red == 0 && green == 255 && blue == 0)
-						handler.addObject(new Wall(xx*32, yy*32, ID.Wall, this.wall));
-					
-					
-				}
+				if(red == 0 && green == 100 && blue == 0)
+					handler.addObject(new Grass(xx*32, yy*32, ID.Grass, this.grass));
+				
+				else if(red == 255 && green == 255 && blue == 0)
+					handler.addObject(new Sand(xx*32, yy*32, ID.Sand, this.sand));
+									
 			}
 		}
+	}
 	
+	private void loadLayerTwo(BufferedImage image){
+		int w = image.getWidth();
+		int h = image.getHeight();
+			
+		for(int xx = 0; xx < w; xx++) {
+			for(int yy = 0;yy<h; yy++) {
+				int pixel = image.getRGB (xx, yy);
+				int red = (pixel >> 16) & 0xff;
+				int green = (pixel >> 8) & 0xff;
+				int blue = (pixel) &0xff;
+									
+				if(red == 0 && green == 255 && blue == 0)
+					handler.addObject(new Wall(xx*32, yy*32, ID.Wall, this.wall));
+				
+				else if(red == 0 && green == 0 && blue == 255)
+					handler.addObject(new Bush(xx*32, yy*32, ID.Bush, this.bush));
+					
+					
+			}
+		}
+		camera.setCameraBounds(w, h);
+	}
+	
+	private void loadLayerThree(BufferedImage image){
+		int w = image.getWidth();
+		int h = image.getHeight();
+			
+		for(int xx = 0; xx < w; xx++) {
+			for(int yy = 0;yy<h; yy++) {
+				int pixel = image.getRGB (xx, yy);
+				int red = (pixel >> 16) & 0xff;
+				int green = (pixel >> 8) & 0xff;
+				int blue = (pixel) &0xff;
+			
+				if(red == 255 && green == 0 && blue == 0)
+					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this, camera));
+				
+			}
+		}
+	}
 
 	public void setIsRunning(boolean isRunning){
 		this.isRunning = isRunning;
