@@ -18,13 +18,14 @@ public class Handler {
 			two = false,
 			three = false,
 			four = false,
-			escape = false;
-
-	private boolean
+			escape = false,
+			mousePressed = false,
 			inventory = false;
 
-	
-	
+	private int
+			mouseX,
+			mouseY;
+
 	public void tick(){
 		for(int i = 0; i < object.size(); i++) {
 			GameObject tempObject = object.get(i);
@@ -151,7 +152,23 @@ public class Handler {
 		
 	}
 
-	
+	public void setMousePressed(boolean pressed, int x, int y){
+		this.mousePressed = pressed;
+		this.mouseX = x;
+		this.mouseY = y;
+	}
+
+	public boolean isMousePressed(){
+		return this.mousePressed;
+	}
+
+	public int getMouseX(){
+		return this.mouseX;
+	}
+
+	public int getMouseY(){
+		return this.mouseY;
+	}
 		
 }
 

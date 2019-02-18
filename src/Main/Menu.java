@@ -29,6 +29,8 @@ public class Menu extends JFrame{
     private JButton btnOptions;
     private JButton btnExit;
     private CalcoJavaGame game;
+    private Audio audio;
+    private Thread audioThread;
 
     private ChangeListener changeListener = new ChangeListener() {
         /**
@@ -70,6 +72,10 @@ public class Menu extends JFrame{
         this.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
         initMenu();
         this.setVisible(true);
+
+        audio = new Audio("Tetris.wav");
+        audioThread = new Thread(audio);
+        audioThread.start();
     }
 
     /* Initialize Menu */
@@ -136,6 +142,13 @@ public class Menu extends JFrame{
         gamePanel.setLayout(new BorderLayout());
         gamePanel.add(game, BorderLayout.CENTER, 1);
 
+        audio.stop();
+        try {
+            audioThread.join();
+        }catch(Exception e){
+            e.printStackTrace();
+        }
+
         this.remove(panel);
         this.add(gamePanel);
         this.validate();
@@ -150,6 +163,8 @@ public class Menu extends JFrame{
         this.add(panel);
         this.validate();
         this.repaint();
+        audioThread = new Thread(audio);
+        audioThread.start();
     }
 
     /**

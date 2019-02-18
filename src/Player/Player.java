@@ -58,7 +58,7 @@ public class Player extends GameObjects.GameObject {
 		this.inGameMenu = new InGameMenu(game, handler);
 		inventoryIsOpen = false;
 		inGameMenuIsOpen = false;
-		inventory = new Inventory (290, 124);
+		inventory = new Inventory (290, 124, handler);
 	}
 	
 
@@ -106,14 +106,15 @@ public class Player extends GameObjects.GameObject {
 
 		/* Open inventory when I is pressed and the inventory is not already open */
 		if(handler.isInventory() && !inventoryIsOpen && !inGameMenuIsOpen){
-			inventory.setX((int)camera.getX() + 290);
-			inventory.setY((int) camera.getY() + 124);
-			inventory.initInventory();
+			//inventory.setX((int)camera.getX() + 290);
+			//inventory.setY((int) camera.getY() + 124);
+			inventory.initInventory((int)camera.getX() + 290, (int) camera.getY() + 124);
 			inventory.isOpen = true;
 			inventoryIsOpen = true;
 			handler.setInventory(false);
 		}else if(handler.isInventory() && inventoryIsOpen){
 			inventoryIsOpen = false;
+			//inventory.copyItemSlots();
 			inventory.isOpen = false;
 			handler.setInventory(false);
 			
