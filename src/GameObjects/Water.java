@@ -7,6 +7,11 @@ import java.awt.image.BufferedImage;
 
 import Main.ID;
 
+/**
+ * This class is used to place water on each dark blue pixel (0,0,200) in the Layer_2.png file
+ * @see GameObject
+ */
+
 public class Water extends GameObject {
 	
     private BufferedImage water;
@@ -22,7 +27,7 @@ public class Water extends GameObject {
     }
 
     /**
-     * Used to place the bush.
+     * Used to place the water tile.
      * @param g Graphics
      * @see Graphics
      */

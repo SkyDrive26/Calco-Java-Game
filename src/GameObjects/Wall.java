@@ -34,6 +34,10 @@ public class Wall extends GameObject {
         g.drawImage(this.wall, x, y, null);
     }
 
+    /**
+     * Used to determine the borders of the wall's hitbox
+     * By default an object's bounds are 32*32
+     */
     public Rectangle getBounds() {
         return new Rectangle(x, y, 32, 32);
     }
