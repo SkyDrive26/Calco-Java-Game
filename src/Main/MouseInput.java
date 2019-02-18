@@ -18,10 +18,14 @@ public class MouseInput extends MouseAdapter {
 		this.game = game; 
 	}
 	
-	public void mousePressed (MouseEvent e) {
+	/*public void mousePressed (MouseEvent e) {
 		int mx = (int) (e.getX() + camera.getX());
 		int my = (int) (e.getY() + camera.getY());
-		System.out.println ("TEST HOER"+ mx + " , "+my);
+		handler.setMousePressed(true);
 		//return e;
+	}*/
+
+	public void mouseClicked(MouseEvent e) {
+		handler.setMousePressed(true, (int)(e.getX() + camera.getX()), (int)(e.getY() + camera.getY()));
 	}
 }

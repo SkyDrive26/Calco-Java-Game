@@ -58,7 +58,7 @@ public class Player extends GameObjects.GameObject {
 		this.inGameMenu = new InGameMenu(game, handler);
 		inventoryIsOpen = false;
 		inGameMenuIsOpen = false;
-		inventory = new Inventory (290, 124);
+		inventory = new Inventory (290, 124, handler);
 	}
 	
 
@@ -114,6 +114,7 @@ public class Player extends GameObjects.GameObject {
 			handler.setInventory(false);
 		}else if(handler.isInventory() && inventoryIsOpen){
 			inventoryIsOpen = false;
+			inventory.copyItemSlots();
 			inventory.isOpen = false;
 			handler.setInventory(false);
 			
