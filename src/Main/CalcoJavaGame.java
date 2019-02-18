@@ -15,7 +15,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private static final long serialVersionUID = 1L;
 	
 	private boolean isRunning = false;
-	private Thread thread;
+	public Thread thread;
 	public Menu mainFrame;
 	private Handler handler;
 	private Camera camera;
@@ -87,7 +87,8 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		long timer = System.currentTimeMillis();
 		int frames = 0;
 		audio = new Audio("SuperMario.wav");
-		audio.playSound();
+		Thread audioThread = new Thread(audio);
+		audioThread.start();
 		while(isRunning){
 			long now = System.nanoTime();
 			delta += (now - lastTime) / ns;
@@ -105,6 +106,11 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 			}
 		}
 		audio.stop();
+		try {
+			audioThread.join();
+		}catch(Exception e){
+			e.printStackTrace();
+		}
 		stop();
 	}
 	
@@ -164,9 +170,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		
 		///////////////////////////////
 		g.dispose();
-		
-		
-		
+
 		bs.show();
 	}
 	//loading the level
