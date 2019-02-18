@@ -18,12 +18,10 @@ public class Audio {
             public void run() {
                 try {
                     Clip clip = AudioSystem.getClip();
-                    System.out.println("/Wavs/" + fileName);
                     AudioInputStream inputStream = AudioSystem.getAudioInputStream(Menu.class.getResourceAsStream("/Wavs/" + fileName));
                     clip.open(inputStream);
                     clip.start();
                     while(!isRunning){
-                        System.out.println("HI");
                         clip.stop();
                         break;
                     }

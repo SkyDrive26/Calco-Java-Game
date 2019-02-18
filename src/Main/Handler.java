@@ -156,7 +156,6 @@ public class Handler {
 		this.mousePressed = pressed;
 		this.mouseX = x;
 		this.mouseY = y;
-		System.out.println ("TEST HOER");//+ mx + " , "+my);
 	}
 
 	public boolean isMousePressed(){

@@ -46,7 +46,5 @@ public class Camera {
 	public void setCameraBounds(float levelWidth, float levelHeight){
 		this.offsetMaxX = (levelWidth*32) - 1000;
 		this.offsetMaxY = (levelHeight*32) - 563;
-		System.out.println("levelWidth: "+levelWidth+" levelHeight: "+levelHeight);
-		System.out.println("offsetMaxX: "+offsetMaxX+" offsetMaxY: "+offsetMaxY);
 	}
 }
