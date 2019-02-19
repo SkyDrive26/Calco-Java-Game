@@ -84,8 +84,8 @@ public class Menu extends JFrame{
      * This method is used to load the menu into the window.
      */
     private void initMenu(){
-        panel = new JPanel();
-        panel.setBounds(0,0,1000,563);
+        panel = new JPanelWithBack("back.jpg");
+        panel.setBounds(0, 0, 1000, 563);
         panel.setLayout(new GridBagLayout());
         panel.setBackground(Color.decode("#303f9f"));
 
@@ -93,7 +93,7 @@ public class Menu extends JFrame{
          * GridBagConstraints is used for positioning sizing of the buttons.
          */
         GridBagConstraints constraints = new GridBagConstraints();
-        constraints.insets = new Insets(0,0,50,0);
+        constraints.insets = new Insets(0, 0, 50, 0);
         constraints.ipadx = 100;
         constraints.ipady = 20;
         constraints.fill = GridBagConstraints.HORIZONTAL;
@@ -110,12 +110,17 @@ public class Menu extends JFrame{
         btnOptions = createButton("Options", new JButton());
         btnOptions.setEnabled(false); // Disable button
         btnExit = createButton("Exit", new JButton());
-        btnExit.addActionListener(new ActionListener() {@Override public void actionPerformed(ActionEvent e) { System.exit(0); }});
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
         constraints.gridy = 0;
         panel.add(lblTitle, constraints);
 
-        constraints.insets = new Insets(0,0,5,0);
+        constraints.insets = new Insets(0, 140, 5, 140);
         constraints.gridy = 1;
         panel.add(btnNewGame, constraints);
 
@@ -156,6 +161,9 @@ public class Menu extends JFrame{
         game.start();
     }
 
+    /**
+     * This method is called when you press "Quit to Menu" in the in-game menu.
+     */
     public void returnFromGame(){
         game.setIsRunning(false);
         this.remove(gamePanel);
@@ -178,7 +186,7 @@ public class Menu extends JFrame{
         button.setText(title);
         button.setFocusPainted(false);
         button.setRolloverEnabled(false);
-        button.setBackground(Color.decode("#001970"));
+        button.setBackground(Color.decode("#8e24aa"));
         button.setForeground(Color.WHITE);
         return button;
     }
