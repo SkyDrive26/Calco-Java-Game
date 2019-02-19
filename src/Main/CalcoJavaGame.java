@@ -8,6 +8,8 @@ import GameObjects.Wall;
 import GameObjects.Bush;
 import GameObjects.Grass;
 import GameObjects.Sand;
+import Items.ItemObject;
+import Items.ItemPotato;
 import Player.Player;
 
 public class CalcoJavaGame extends Canvas implements Runnable {
@@ -212,8 +214,12 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				
 				else if(red == 0 && green == 0 && blue == 255)
 					handler.addObject(new Bush(xx*32, yy*32, ID.Bush, this.bush));
-					
-					
+				else if(red == 100 && green == 100 && blue == 0)
+					handler.addObject(new ItemObject(xx*32, yy*32, ID.Item, "Potato"));
+				else if(red == 100 && green == 100 && blue == 100)
+					handler.addObject(new ItemObject(xx*32, yy*32, ID.Item, "Flower"));
+				else if(red == 100 && green == 15 && blue == 50)
+					handler.addObject(new ItemObject(xx*32, yy*32, ID.Item, "Fish"));
 			}
 		}
 		camera.setCameraBounds(w, h);
@@ -229,10 +235,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				int red = (pixel >> 16) & 0xff;
 				int green = (pixel >> 8) & 0xff;
 				int blue = (pixel) &0xff;
-			
+
 				if(red == 255 && green == 0 && blue == 0)
 					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this, camera));
-				
 			}
 		}
 	}

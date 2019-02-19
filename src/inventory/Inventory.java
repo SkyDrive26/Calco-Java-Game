@@ -5,7 +5,10 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+import Items.Item;
+import Items.ItemFish;
 import Items.ItemFlower;
+import Items.ItemPotato;
 import Main.Handler;
 import Main.MouseInput;
 /*
@@ -22,7 +25,6 @@ public class Inventory {
 			height,
 			numCols = 6,
 			numRows = 4;
-
 
 	private CopyOnWriteArrayList<ItemSlot> itemSlots;
 	private ItemStack currSelectedSlot;
@@ -59,8 +61,13 @@ public class Inventory {
 		height = numRows * (ItemSlot.SLOTSIZE + 10) + 35;
 
 		//TODO: REMOVE THIS
-		itemSlots.get(0).addItem(new ItemFlower(), 3);
+		/*itemSlots.get(0).addItem(new ItemFlower(), 3);
 		itemSlots.get(1).addItem(new ItemFlower(), 10);
+		itemSlots.get(4).addItem(new ItemFish(), 5);
+		itemSlots.get(5).addItem(new ItemFish(), 30);
+		itemSlots.get(8).addItem(new ItemPotato(), 60);
+		itemSlots.get(9).addItem(new ItemPotato(), 80);*/
+
 	}
 
 	public void initInventory(int x, int y){
@@ -150,5 +157,14 @@ public class Inventory {
 
 	public void setY(int y){
 		this.y = y;
+	}
+
+	public void addItem(Item item){
+		for(ItemSlot is: itemSlots){
+			if(is.getItemStack() == null){
+				itemSlots.get(itemSlots.indexOf(is)).addItem(item, 1);
+				break;
+			}
+		}
 	}
 }

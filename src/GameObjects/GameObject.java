@@ -3,6 +3,7 @@ package GameObjects;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 
+import Items.Item;
 import Main.ID;
 
 public abstract class GameObject {
@@ -11,7 +12,17 @@ public abstract class GameObject {
 	 protected float velX = 0, velY = 0;
 	 protected ID id;
 	 protected boolean solid = false;
-	 
+	 protected boolean isItem = false;
+	 protected Item item;
+
+	 public GameObject(int x, int y, ID id, boolean isItem, Item item){
+	 	this.x = x;
+	 	this.y = y;
+	 	this.id = id;
+	 	this.isItem = isItem;
+	 	this.item = item;
+	 }
+
 	 public GameObject (int x, int y, ID id, boolean solid) {
 		 this.x = x;
 		 this.y = y;
@@ -76,5 +87,16 @@ public abstract class GameObject {
 	public void setSolid(boolean solid) {
 		this.solid = solid;
 	}
-	 
+
+	public boolean getIsItem(){
+		return isItem;
+	}
+
+	public void setItem(boolean isItem){
+		this.isItem = isItem;
+	}
+
+	public Item getItem(){
+		return item;
+	}
 }

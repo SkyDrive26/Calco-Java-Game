@@ -1,12 +1,10 @@
 package Player;
 
 import java.awt.*;
-import java.awt.Color;
 
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
-import java.lang.reflect.Array;
 
 import Main.*;
 import Menus.InGameMenu;
@@ -167,7 +165,7 @@ public class Player extends GameObjects.GameObject {
 	private void collision() {
 		for (int i = 0; i < this.handler.object.size(); ++i) {
 			GameObject tempObject = this.handler.object.get(i);
-			if (tempObject.getSolid() == true) {
+			if (tempObject.getSolid()) {
 				
 				/*
 				if (this.getBoundsUp().intersects(tempObject.getBounds()) && this.velY < 0.0F) {
@@ -190,7 +188,6 @@ public class Player extends GameObjects.GameObject {
 				if(getBoundsUp().intersects(tempObject.getBounds())) {
 					if(velY < 0) {
 						y += velY * -1;
-						System.out.println("ik loop boven ergens tegenaan maat");
 					}
 				}
 				if(getBoundsDown().intersects(tempObject.getBounds())) {
@@ -209,6 +206,25 @@ public class Player extends GameObjects.GameObject {
 					}
 				}
 				
+			}
+
+			if(tempObject.getIsItem()){
+				if(getBoundsUp().intersects(tempObject.getBounds())) {
+					this.handler.removeObject(tempObject);
+					this.inventory.addItem(tempObject.getItem());
+				}
+				if(getBoundsDown().intersects(tempObject.getBounds())) {
+					this.handler.removeObject(tempObject);
+					this.inventory.addItem(tempObject.getItem());
+				}
+				if(getBoundsLeft().intersects(tempObject.getBounds())) {
+					this.handler.removeObject(tempObject);
+					this.inventory.addItem(tempObject.getItem());
+				}
+				if(getBoundsRight().intersects(tempObject.getBounds())) {
+					this.handler.removeObject(tempObject);
+					this.inventory.addItem(tempObject.getItem());
+				}
 			}
 		}
 	}
