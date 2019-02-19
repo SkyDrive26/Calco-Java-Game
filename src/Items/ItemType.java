@@ -1,5 +1,10 @@
 package Items;
 
+/**
+ * @deprecated
+ */
 public enum ItemType {
-	FLOWER
+	FLOWER,
+	FISH,
+	POTATO
 }
