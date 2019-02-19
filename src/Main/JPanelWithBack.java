@@ -10,9 +10,8 @@ import java.io.IOException;
 public class JPanelWithBack extends JPanel {
     private BufferedImage backgroundImage;
 
-    public JPanelWithBack(String fileName) throws IOException{
-        System.out.println("/Pngs/"+fileName);
-        backgroundImage = new BufferedImageLoader().LoadImage("/Pngs/"+fileName);
+    public JPanelWithBack(String fileName){
+        backgroundImage = new BufferedImageLoader().LoadImage("/Pngs/" + fileName);
     }
 
     public void paintComponent(Graphics g){

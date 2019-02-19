@@ -2,22 +2,25 @@ package Menus;
 
 import Main.CalcoJavaGame;
 import Main.Handler;
+import Main.JPanelWithBack;
 import Player.Player;
 
 import javax.swing.*;
 import java.awt.*;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.io.IOException;
 
 /**
  * This method is used to popup the in-game menu.
  * @see javax.swing.JPanel
  */
-public class InGameMenu extends JPanel {
+public class InGameMenu extends JPanelWithBack {
     private CalcoJavaGame game;
     private Handler handler;
 
     public InGameMenu(CalcoJavaGame game, Handler handler){
+        super("inGameBack.jpg");
         this.game = game;
         this.handler = handler;
         this.setLayout(new GridBagLayout());
@@ -79,8 +82,9 @@ public class InGameMenu extends JPanel {
         button.setText(title);
         button.setFocusPainted(false);
         button.setRolloverEnabled(false);
-        button.setBackground(Color.decode("#001970"));
+        button.setBackground(Color.decode("#424242"));
         button.setForeground(Color.WHITE);
+        button.setBorder(BorderFactory.createLineBorder(Color.BLACK));
         return button;
     }
 

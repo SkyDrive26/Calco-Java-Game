@@ -84,60 +84,56 @@ public class Menu extends JFrame{
      * This method is used to load the menu into the window.
      */
     private void initMenu(){
-        try {
-            panel = new JPanelWithBack("back.jpg");
-            panel.setBounds(0, 0, 1000, 563);
-            panel.setLayout(new GridBagLayout());
-            panel.setBackground(Color.decode("#303f9f"));
+        panel = new JPanelWithBack("back.jpg");
+        panel.setBounds(0, 0, 1000, 563);
+        panel.setLayout(new GridBagLayout());
+        panel.setBackground(Color.decode("#303f9f"));
 
-            /**
-             * GridBagConstraints is used for positioning sizing of the buttons.
-             */
-            GridBagConstraints constraints = new GridBagConstraints();
-            constraints.insets = new Insets(0, 0, 50, 0);
-            constraints.ipadx = 100;
-            constraints.ipady = 20;
-            constraints.fill = GridBagConstraints.HORIZONTAL;
-            constraints.gridx = 0;
+        /**
+         * GridBagConstraints is used for positioning sizing of the buttons.
+         */
+        GridBagConstraints constraints = new GridBagConstraints();
+        constraints.insets = new Insets(0, 0, 50, 0);
+        constraints.ipadx = 100;
+        constraints.ipady = 20;
+        constraints.fill = GridBagConstraints.HORIZONTAL;
+        constraints.gridx = 0;
 
-            newGameAction.addChangeListener(changeListener);
+        newGameAction.addChangeListener(changeListener);
 
-            JLabel lblTitle = createLabel("Calco Java Game", new JLabel());
+        JLabel lblTitle = createLabel("Calco Java Game", new JLabel());
 
-            btnNewGame = createButton("New Game", new JButton());
-            btnNewGame.addActionListener(this.newGameAction);
-            btnLevelSelect = createButton("Select Level", new JButton());
-            btnLevelSelect.setEnabled(false); // Disable button
-            btnOptions = createButton("Options", new JButton());
-            btnOptions.setEnabled(false); // Disable button
-            btnExit = createButton("Exit", new JButton());
-            btnExit.addActionListener(new ActionListener() {
-                @Override
-                public void actionPerformed(ActionEvent e) {
-                    System.exit(0);
-                }
-            });
+        btnNewGame = createButton("New Game", new JButton());
+        btnNewGame.addActionListener(this.newGameAction);
+        btnLevelSelect = createButton("Select Level", new JButton());
+        btnLevelSelect.setEnabled(false); // Disable button
+        btnOptions = createButton("Options", new JButton());
+        btnOptions.setEnabled(false); // Disable button
+        btnExit = createButton("Exit", new JButton());
+        btnExit.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                System.exit(0);
+            }
+        });
 
-            constraints.gridy = 0;
-            panel.add(lblTitle, constraints);
+        constraints.gridy = 0;
+        panel.add(lblTitle, constraints);
 
-            constraints.insets = new Insets(0, 140, 5, 140);
-            constraints.gridy = 1;
-            panel.add(btnNewGame, constraints);
+        constraints.insets = new Insets(0, 140, 5, 140);
+        constraints.gridy = 1;
+        panel.add(btnNewGame, constraints);
 
-            constraints.gridy = 2;
-            panel.add(btnLevelSelect, constraints);
+        constraints.gridy = 2;
+        panel.add(btnLevelSelect, constraints);
 
-            constraints.gridy = 3;
-            panel.add(btnOptions, constraints);
+        constraints.gridy = 3;
+        panel.add(btnOptions, constraints);
 
-            constraints.gridy = 4;
-            panel.add(btnExit, constraints);
+        constraints.gridy = 4;
+        panel.add(btnExit, constraints);
 
-            this.add(panel);
-        }catch(IOException e){
-            e.printStackTrace();
-        }
+        this.add(panel);
     }
 
     /**
@@ -165,6 +161,9 @@ public class Menu extends JFrame{
         game.start();
     }
 
+    /**
+     * This method is called when you press "Quit to Menu" in the in-game menu.
+     */
     public void returnFromGame(){
         game.setIsRunning(false);
         this.remove(gamePanel);
@@ -187,7 +186,7 @@ public class Menu extends JFrame{
         button.setText(title);
         button.setFocusPainted(false);
         button.setRolloverEnabled(false);
-        button.setBackground(Color.decode("#001970"));
+        button.setBackground(Color.decode("#8e24aa"));
         button.setForeground(Color.WHITE);
         return button;
     }
