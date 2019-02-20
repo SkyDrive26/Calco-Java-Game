@@ -21,7 +21,7 @@ public class Sand extends GameObject {
     }
 
     /**
-     * Used to place the bush.
+     * Used to place the sand.
      * @param g Graphics
      * @see Graphics
      */

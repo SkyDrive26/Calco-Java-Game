@@ -8,7 +8,7 @@ import java.awt.image.BufferedImage;
 import Main.*;
 
 /**
- * This class is used to place the wall on each green line in the level
+ * This class is used to place the bush in the level
  * @see GameObject
  */
 public class Bush extends GameObject {

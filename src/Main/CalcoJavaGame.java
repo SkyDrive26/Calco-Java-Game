@@ -4,10 +4,7 @@ import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
-import GameObjects.Wall;
-import GameObjects.Bush;
-import GameObjects.Grass;
-import GameObjects.Sand;
+import GameObjects.*;
 import Items.ItemObject;
 import Items.ItemPotato;
 import Player.Player;
@@ -27,7 +24,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 
 	/* SpriteStuff */
 	private BufferedImage layerOne, layerTwo, layerThree,
-		ObjectSpriteSheetImage, wall, bush, sand, grass;
+		ObjectSpriteSheetImage, wall, bush, sand, grass, water;
 
 	private SpriteSheet objectSpriteSheet;
 
@@ -57,6 +54,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		bush = objectSpriteSheet.grabImage(2, 9, 32, 32);
 		grass = objectSpriteSheet.grabImage(3, 9, 32, 32);
 		sand = objectSpriteSheet.grabImage(2, 10, 32, 32);
+		water = objectSpriteSheet.grabImage(3, 10, 32, 32);
 
 		hpAnimation= new BufferedImage[] {objectSpriteSheet.grabImage(2, 8, 32, 32), objectSpriteSheet.grabImage(3, 8, 32, 32), objectSpriteSheet.grabImage(4, 8, 32, 32), objectSpriteSheet.grabImage(3, 8, 32, 32)};
 		hpHearts = new Animation(hpAnimation,10);
@@ -193,6 +191,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				
 				else if(red == 255 && green == 255 && blue == 0)
 					handler.addObject(new Sand(xx*32, yy*32, ID.Sand, this.sand));
+
+				else if(red == 0 && green == 0 && blue == 200)
+					handler.addObject(new Water(xx*32, yy*32, ID.Water, this.water));
 									
 			}
 		}

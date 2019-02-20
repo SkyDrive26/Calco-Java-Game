@@ -21,7 +21,7 @@ public class Grass extends GameObject {
     }
 
     /**
-     * Used to place the bush.
+     * Used to place the grass.
      * @param g Graphics
      * @see Graphics
      */
