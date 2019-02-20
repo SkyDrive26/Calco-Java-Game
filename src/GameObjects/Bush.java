@@ -1,6 +1,5 @@
 package GameObjects;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -8,7 +7,7 @@ import java.awt.image.BufferedImage;
 import Main.*;
 
 /**
- * This class is used to place the bush in the level
+ * This class is used to place a bush on each rgb(100,100,0) line in the level
  * @see GameObject
  */
 public class Bush extends GameObject {
@@ -34,6 +33,10 @@ public class Bush extends GameObject {
         g.drawImage(this.bush, x, y, null);
     }
 
+    /**
+     * Used to draw the hitbox of the bush.
+     * @return
+     */
     public Rectangle getBounds() {
         return new Rectangle(x, y, 32, 16);
     }
