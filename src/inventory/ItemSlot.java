@@ -68,24 +68,21 @@ public class ItemSlot {
 		this.itemStack = item;
 	}
 
+	/*public void isEmpty(){
+		if(itemStack == null){
+			System.out.println("NO ITEMSTACK");
+		}
+	}*/
+
 	/**
 	 * This method is used to add items to the itemslot.
 	 * @param item Item item
 	 * @param amount Amount of cdertain item
-	 * @return Boolean true/false
 	 * @see Item
 	 */
-	public boolean addItem(Item item, int amount) {
-		if (itemStack != null) {
-			if (item.getName().equals(itemStack.getItem().getName())) {
-				this.itemStack.setAmount(this.itemStack.getAmount()+amount);
-				return true;
-			} else {
-				return false;
-			}
-		} else {
-			this.itemStack = new ItemStack(item, amount);
-			return true;
+	public void addItem(Item item, int amount) {
+		if (item.getName().equals(itemStack.getItem().getName())) {
+			this.itemStack.setAmount(this.itemStack.getAmount()+amount);
 		}
 	}
 
