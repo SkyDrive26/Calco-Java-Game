@@ -1,6 +1,5 @@
 package GameObjects;
 
-import java.awt.Color;
 import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
@@ -8,7 +7,7 @@ import java.awt.image.BufferedImage;
 import Main.*;
 
 /**
- * This class is used to place the wall on each green line in the level
+ * This class is used to place the wall on each rgb(0,255,0) line in the level
  * @see GameObject
  */
 public class Wall extends GameObject {
@@ -34,6 +33,10 @@ public class Wall extends GameObject {
         g.drawImage(this.wall, x, y, null);
     }
 
+    /**
+     * Used to draw the hitbox of the wall.
+     * @return
+     */
     public Rectangle getBounds() {
         return new Rectangle(x, y, 32, 32);
     }

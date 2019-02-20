@@ -7,6 +7,10 @@ import java.awt.event.ActionListener;
 import java.util.List;
 import java.util.concurrent.CopyOnWriteArrayList;
 
+/**
+ * This class is used as an ActionListener for the NewGame-button in the main menu.
+ * @see ActionListener
+ */
 public class newGameAction implements ActionListener {
 
     /* Fields */
