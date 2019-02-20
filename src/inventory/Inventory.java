@@ -133,10 +133,18 @@ public class Inventory {
 								is.setItem(null);
 							}
 						} else {
+							/*
 							if (is.addItem(currSelectedSlot.getItem(), currSelectedSlot.getAmount())) {
 								itemSlots.get(itemSlots.indexOf(is)).addItem(currSelectedSlot.getItem(), currSelectedSlot.getAmount());
 							} else {
 								is.setItem(currSelectedSlot);
+							}*/
+							if(is.getItemStack() != null){
+								itemSlots.get(itemSlots.indexOf(is)).addItem(currSelectedSlot.getItem(), currSelectedSlot.getAmount());
+								System.out.println("ITEM STACK NOT NULL");
+							}else{
+								System.out.println("ITEM STACK NULL");
+								itemSlots.get(itemSlots.indexOf(is)).setItem(currSelectedSlot);
 							}
 							currSelectedSlot = null;
 						}
@@ -199,7 +207,7 @@ public class Inventory {
 	public void addItem(Item item){
 		for(ItemSlot is: itemSlots){
 			if(is.getItemStack() == null){
-				itemSlots.get(itemSlots.indexOf(is)).addItem(item, 1);
+				itemSlots.get(itemSlots.indexOf(is)).setItem(new ItemStack(item, 1));
 				break;
 			}
 		}
