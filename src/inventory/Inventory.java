@@ -9,6 +9,8 @@ import Items.Item;
 import Main.Handler;
 import Main.MouseInput;
 
+import static inventory.ItemSlot.SLOTSIZE;
+
 /**
  * Contains all the code for the initialization of the Inventory
  */
@@ -65,15 +67,15 @@ public class Inventory {
 				if (j == (numRows -1)) {
 					y += 35;
 				}
-				itemSlots.add(new ItemSlot (x + (i * (ItemSlot.SLOTSIZE + 10)),
-						y + (j * (ItemSlot.SLOTSIZE + 10)), null));
+				itemSlots.add(new ItemSlot (x + (i * (SLOTSIZE + 10)),
+						y + (j * (SLOTSIZE + 10)), null));
 				if (j == (numRows -1)) {
 					y -= 35;
 				}
 			}
 		}
-		width = numCols * (ItemSlot.SLOTSIZE + 10);
-		height = numRows * (ItemSlot.SLOTSIZE + 10) + 35;
+		width = numCols * (SLOTSIZE + 10);
+		height = numRows * (SLOTSIZE + 10) + 35;
 	}
 
 	/**
@@ -91,17 +93,17 @@ public class Inventory {
 
 		for(ItemSlot is: itemSlots){
 			if(currRow < numRows){
-				is.setX(x + (currCol * (ItemSlot.SLOTSIZE + 10)));
+				is.setX(x + (currCol * (SLOTSIZE + 10)));
 				if(currRow == numRows-1){
-					is.setY((y + 35) + (currRow * (ItemSlot.SLOTSIZE + 10)));
+					is.setY((y + 35) + (currRow * (SLOTSIZE + 10)));
 				} else {
-					is.setY(y + (currRow * (ItemSlot.SLOTSIZE + 10)));
+					is.setY(y + (currRow * (SLOTSIZE + 10)));
 				}
 			} else {
 				currCol++;
 				currRow = 0;
-				is.setX(x + (currCol * (ItemSlot.SLOTSIZE + 10)));
-				is.setY(y + (currRow * (ItemSlot.SLOTSIZE + 10)));
+				is.setX(x + (currCol * (SLOTSIZE + 10)));
+				is.setY(y + (currRow * (SLOTSIZE + 10)));
 			}
 			currRow++;
 		}
@@ -119,7 +121,7 @@ public class Inventory {
 			for(ItemSlot is: itemSlots) {
 				is.tick();
 
-				Rectangle temp2 = new Rectangle(is.getX(), is.getY(), ItemSlot.SLOTSIZE, ItemSlot.SLOTSIZE);
+				Rectangle temp2 = new Rectangle(is.getX(), is.getY(), SLOTSIZE, SLOTSIZE);
 
 				if (handler.isMousePressed() && !hasBeenPressed) {
 					temp = new Rectangle(handler.getMouseX(), handler.getMouseY(), 1, 1);
@@ -133,12 +135,13 @@ public class Inventory {
 								is.setItem(null);
 							}
 						} else {
-							if(is.getItemStack() != null){
+							if(is.getItemStack() != null && is.getItemStack().getItem().getName().equals(currSelectedSlot.getItem().getName())){
 								itemSlots.get(itemSlots.indexOf(is)).addItem(currSelectedSlot.getItem(), currSelectedSlot.getAmount());
-							}else{
+								currSelectedSlot = null;
+							}else if(is.getItemStack() == null){
 								itemSlots.get(itemSlots.indexOf(is)).setItem(currSelectedSlot);
+								currSelectedSlot = null;
 							}
-							currSelectedSlot = null;
 						}
 					}
 				}
@@ -167,10 +170,17 @@ public class Inventory {
 			}
 
 			if (currSelectedSlot != null) {
-				g.drawImage(currSelectedSlot.getItem().texture, MouseInput.MouseX,
-						MouseInput.MouseY, null);
-				g.drawString(Integer.toString(currSelectedSlot.getAmount()),
-						MouseInput.MouseX + 27, MouseInput.MouseY + 33);
+				int xx = this.x - 270;
+				int yy = this.y - 74;
+				g.setColor(new Color(153,153,153,210));
+				g.fillRect(xx, yy, SLOTSIZE, SLOTSIZE);
+
+				g.setColor(Color.BLACK);
+				g.drawRect(xx, yy, SLOTSIZE, SLOTSIZE);
+
+				g.drawImage(currSelectedSlot.getItem().texture,xx, yy, SLOTSIZE, SLOTSIZE, null );
+				g.setColor(Color.WHITE);
+				g.drawString(Integer.toString(currSelectedSlot.getAmount()), xx +SLOTSIZE - 20, yy + SLOTSIZE - 10);
 			}
 		}
 	}
