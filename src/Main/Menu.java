@@ -64,7 +64,7 @@ public class Menu extends JFrame{
      * mainFrame.
      */
     private void initMainFrame(){
-        //mainFrame = new JFrame("Menu - Calco Jave Game");
+        //mainFrame = new JFrame("Menu - Calco Java Game");
         this.setTitle("Menu - Calco Java Game:");
         this.setSize(1000,563);
         this.setResizable(false);

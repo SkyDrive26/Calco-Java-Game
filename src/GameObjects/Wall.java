@@ -34,7 +34,7 @@ public class Wall extends GameObject {
     }
 
     /**
-     * Used to draw the hitbox of the wall.
+     * Used to determine the borders of the wall's hitbox
      * @return
      */
     public Rectangle getBounds() {

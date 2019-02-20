@@ -8,5 +8,6 @@ public enum ID {
 	Bush(),
 	Sand(),
 	Grass(),
-	Item()
+	Water(),
+	Item();
 }
