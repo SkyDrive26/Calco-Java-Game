@@ -29,6 +29,7 @@ public class ItemSlot {
 		
 		if (itemStack != null) {
 			g.drawImage(itemStack.getItem().texture,x, y, SLOTSIZE, SLOTSIZE, null );
+			g.setColor(Color.WHITE);
 			g.drawString(Integer.toString(itemStack.getAmount()), x +SLOTSIZE - 20, y + SLOTSIZE - 10);
 		}
 	}
@@ -43,7 +44,7 @@ public class ItemSlot {
 	
 	public boolean addItem(Item item, int amount) {
 		if (itemStack != null) {
-			if (item.getItemType() == itemStack.getItem().getItemType()) {
+			if (item.getName().equals(itemStack.getItem().getName())) {
 				this.itemStack.setAmount(this.itemStack.getAmount()+amount);
 				return true;
 			} else {

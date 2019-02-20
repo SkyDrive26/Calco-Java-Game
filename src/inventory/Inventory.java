@@ -5,10 +5,10 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.util.concurrent.CopyOnWriteArrayList;
 
-import Items.ItemFlower;
+import Items.Item;
 import Main.Handler;
 import Main.MouseInput;
-/*
+/**
  * Contains all the code for the initialization of the Inventory
  */
 public class Inventory {
@@ -22,7 +22,6 @@ public class Inventory {
 			height,
 			numCols = 6,
 			numRows = 4;
-
 
 	private CopyOnWriteArrayList<ItemSlot> itemSlots;
 	private ItemStack currSelectedSlot;
@@ -57,12 +56,14 @@ public class Inventory {
 		}
 		width = numCols * (ItemSlot.SLOTSIZE + 10);
 		height = numRows * (ItemSlot.SLOTSIZE + 10) + 35;
-
-		//TODO: REMOVE THIS
-		itemSlots.get(0).addItem(new ItemFlower(), 3);
-		itemSlots.get(1).addItem(new ItemFlower(), 10);
 	}
 
+	/**
+	 * This method is used to change the x and y cords every time the inventory is opened.
+	 * This ensures that the inventory is always visible in the center of the screen.
+	 * @param x Integer x
+	 * @param y Integer y
+	 */
 	public void initInventory(int x, int y){
 		this.x = x;
 		this.y = y;
@@ -87,6 +88,10 @@ public class Inventory {
 		}
 	}
 
+	/**
+	 * The Tick method is used to check if the inventory is open and if so,
+	 * it allows the player to move stuff in it's inventory.
+	 */
 	public void tick() {
 		if(isOpen) {
 			Rectangle temp;
@@ -124,6 +129,11 @@ public class Inventory {
 		}
 	}
 
+	/**
+	 * This method is used to display the inventory.
+	 * @param g Graphics
+	 * @see Graphics
+	 */
 	public void render(Graphics g) {
 		if(isOpen){
 			g.setColor(Color.LIGHT_GRAY);
@@ -144,11 +154,32 @@ public class Inventory {
 		}
 	}
 
+	/**
+	 * Set the x cord of the inventory.
+	 * @param x Integer x
+	 */
 	public void setX(int x){
 		this.x = x;
 	}
 
+	/**
+	 * Set the Y cord of the inventory.
+	 * @param y Integer y
+	 */
 	public void setY(int y){
 		this.y = y;
+	}
+
+	/**
+	 * This method is used to load an item in the first available ItemSlot.
+	 * @param item Item that has to be loaded.
+	 */
+	public void addItem(Item item){
+		for(ItemSlot is: itemSlots){
+			if(is.getItemStack() == null){
+				itemSlots.get(itemSlots.indexOf(is)).addItem(item, 1);
+				break;
+			}
+		}
 	}
 }
