@@ -8,6 +8,7 @@ import java.util.concurrent.CopyOnWriteArrayList;
 import Items.Item;
 import Main.Handler;
 import Main.MouseInput;
+
 /**
  * Contains all the code for the initialization of the Inventory
  */
@@ -27,14 +28,31 @@ public class Inventory {
 	private ItemStack currSelectedSlot;
 	private Handler handler;
 
+	/**
+	 * This method sets the open-state of the inventory
+	 * @param b Boolean open/closed -> true/false
+	 */
 	public void setInventory (boolean b) {
 		this.isOpen = b;
 	}
 
+	/**
+	 * This method gets the open-state of the inventory
+	 * @return Boolean open/closed -> true/false
+	 */
 	public boolean getInventory () {
 		return this.isOpen;
 	}
 
+	/**
+	 * This constructor initializes the inventory by creating
+	 * the default inventory with all related positions and initial
+	 * objects.
+	 * @param x X cord
+	 * @param y Y cord
+	 * @param handler Handler handler
+	 * @see ItemSlot
+	 */
 	public Inventory(int x, int y, Handler handler) {
 		this.x = x;
 		this.y = y;
@@ -63,6 +81,7 @@ public class Inventory {
 	 * This ensures that the inventory is always visible in the center of the screen.
 	 * @param x Integer x
 	 * @param y Integer y
+	 * @see ItemSlot
 	 */
 	public void initInventory(int x, int y){
 		this.x = x;
@@ -90,7 +109,9 @@ public class Inventory {
 
 	/**
 	 * The Tick method is used to check if the inventory is open and if so,
-	 * it allows the player to move stuff in it's inventory.
+	 * it allows the player to move stuff in his/her inventory.
+	 * @see ItemSlot
+	 * @see Handler
 	 */
 	public void tick() {
 		if(isOpen) {
@@ -173,6 +194,7 @@ public class Inventory {
 	/**
 	 * This method is used to load an item in the first available ItemSlot.
 	 * @param item Item that has to be loaded.
+	 * @see ItemSlot
 	 */
 	public void addItem(Item item){
 		for(ItemSlot is: itemSlots){
