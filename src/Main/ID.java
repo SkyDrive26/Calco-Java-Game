@@ -9,5 +9,6 @@ public enum ID {
 	Sand(),
 	Grass(),
 	Water(),
-	Item();
-}
+	Item(),
+	Weapon(); 
+	}
