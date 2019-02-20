@@ -133,17 +133,9 @@ public class Inventory {
 								is.setItem(null);
 							}
 						} else {
-							/*
-							if (is.addItem(currSelectedSlot.getItem(), currSelectedSlot.getAmount())) {
-								itemSlots.get(itemSlots.indexOf(is)).addItem(currSelectedSlot.getItem(), currSelectedSlot.getAmount());
-							} else {
-								is.setItem(currSelectedSlot);
-							}*/
 							if(is.getItemStack() != null){
 								itemSlots.get(itemSlots.indexOf(is)).addItem(currSelectedSlot.getItem(), currSelectedSlot.getAmount());
-								System.out.println("ITEM STACK NOT NULL");
 							}else{
-								System.out.println("ITEM STACK NULL");
 								itemSlots.get(itemSlots.indexOf(is)).setItem(currSelectedSlot);
 							}
 							currSelectedSlot = null;
@@ -201,15 +193,29 @@ public class Inventory {
 
 	/**
 	 * This method is used to load an item in the first available ItemSlot.
+	 * This method also makes sure items stack on other items of their own kind.
 	 * @param item Item that has to be loaded.
 	 * @see ItemSlot
 	 */
 	public void addItem(Item item){
+		int i = 0;
+		int firstEmpty = -1;
+		boolean placed = false;
 		for(ItemSlot is: itemSlots){
-			if(is.getItemStack() == null){
-				itemSlots.get(itemSlots.indexOf(is)).setItem(new ItemStack(item, 1));
+			if(is.getItemStack() != null && is.getItemStack().getItem().getName().equals(item.getName())){
+				is.addItem(item, 1);
+				placed = true;
 				break;
+			} else if(is.getItemStack() == null){
+				if(firstEmpty == -1 || i < firstEmpty){
+					System.out.println(i);
+					firstEmpty = i;
+				}
 			}
+			i++;
+		}
+		if(!placed){
+			itemSlots.get(firstEmpty).setItem(new ItemStack(item, 1));
 		}
 	}
 }
