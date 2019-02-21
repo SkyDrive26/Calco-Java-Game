@@ -6,6 +6,7 @@ import java.awt.Rectangle;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import Items.Item;
+import Main.Audio;
 import Main.Handler;
 import Main.MouseInput;
 
@@ -29,6 +30,7 @@ public class Inventory {
 	private CopyOnWriteArrayList<ItemSlot> itemSlots;
 	private ItemStack currSelectedSlot;
 	private Handler handler;
+	private Audio audio;
 
 	/**
 	 * This method sets the open-state of the inventory
@@ -211,6 +213,11 @@ public class Inventory {
 		int i = 0;
 		int firstEmpty = -1;
 		boolean placed = false;
+
+		audio = new Audio("ItemPickup.wav");
+		Thread audioThread = new Thread(audio);
+		audioThread.start();
+
 		for(ItemSlot is: itemSlots){
 			if(is.getItemStack() != null && is.getItemStack().getItem().getName().equals(item.getName())){
 				is.addItem(item, 1);
@@ -223,6 +230,7 @@ public class Inventory {
 				}
 			}
 			i++;
+
 		}
 		if(!placed){
 			itemSlots.get(firstEmpty).setItem(new ItemStack(item, 1));
