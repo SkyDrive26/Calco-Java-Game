@@ -104,6 +104,7 @@ public class Player extends GameObjects.GameObject {
 
 		/* Open inventory when I is pressed and the inventory is not already open */
 		if(handler.isInventory() && !inventoryIsOpen && !inGameMenuIsOpen){
+			this.stopAllMovement();
 			inventory.initInventory((int)camera.getX() + 290, (int) camera.getY() + 124);
 			inventory.isOpen = true;
 			inventoryIsOpen = true;
@@ -241,7 +242,12 @@ public class Player extends GameObjects.GameObject {
 	public Rectangle getBoundsRight() {
 		return new Rectangle((x + 32), (y + 1), 3, 30);
 	}
-	
+
+	public void stopAllMovement(){
+		velX = 0;
+		velY = 0;
+	}
+
 	enum Direction{
 		LEFT, RIGHT, UP, DOWN;
 	}

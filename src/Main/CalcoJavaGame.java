@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import GameObjects.*;
 import Items.ItemObject;
 import Items.ItemPotato;
+import Weapons.WeaponObject;
 import Player.Player;
 
 public class CalcoJavaGame extends Canvas implements Runnable {
@@ -199,6 +200,11 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		}
 	}
 	
+	/** This Layer loads the different 'items'. For now the sword is added as well.
+	 * In a future build, this could be altered.
+	 * 
+	 * @param image
+	 */
 	private void loadLayerTwo(BufferedImage image){
 		int w = image.getWidth();
 		int h = image.getHeight();
@@ -221,6 +227,8 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 					handler.addObject(new ItemObject(xx*32, yy*32, ID.Item, "Flower"));
 				else if(red == 100 && green == 15 && blue == 50)
 					handler.addObject(new ItemObject(xx*32, yy*32, ID.Item, "Fish"));
+				else if(red == 250 && green == 112 && blue == 255)
+					handler.addObject(new WeaponObject(xx*32, yy*32, ID.Weapon, "Sword1"));
 			}
 		}
 		camera.setCameraBounds(w, h);
