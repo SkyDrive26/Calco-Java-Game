@@ -206,6 +206,7 @@ public class Inventory {
 	/**
 	 * This method is used to load an item in the first available ItemSlot.
 	 * This method also makes sure items stack on other items of their own kind.
+	 * When an itemPickup occurs, a sound will be played.
 	 * @param item Item that has to be loaded.
 	 * @see ItemSlot
 	 */
