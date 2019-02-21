@@ -5,6 +5,7 @@ import java.awt.Rectangle;
 
 import Items.Item;
 import Main.ID;
+import Weapons.Weapon;
 
 /**
  * This class is used as a parent class for all game objects.
@@ -17,7 +18,9 @@ public abstract class GameObject {
 	 protected ID id;
 	 protected boolean solid = false;
 	 protected boolean isItem = false;
+	 protected boolean isWeapon = false;
 	 protected Item item;
+	 protected Weapon weapon;
 
 	/**
 	 * This constructor is used by items on the map.
@@ -34,6 +37,23 @@ public abstract class GameObject {
 	 	this.isItem = isItem;
 	 	this.item = item;
 	 }
+	 
+	/**
+	 * This constructor is used by weapons on the map.
+	 * @param x X cord
+	 * @param y Y cord
+	 * @param id Weapon ID
+	 * @param isWeapon Tells if the object is a weapon.
+	 * @param weapon	The Weapon itself.
+	 */
+		 public GameObject(int x, int y, ID id, boolean isWeapon, Weapon weapon){
+		 	this.x = x;
+		 	this.y = y;
+		 	this.id = id;
+		 	this.isWeapon = isWeapon;
+		 	this.weapon = weapon;
+		 }
+	 
 
 	/**
 	 * This constructor is used to set up GameObjects with a solid hitbox.
