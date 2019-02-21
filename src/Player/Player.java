@@ -70,8 +70,8 @@ public class Player extends GameObjects.GameObject {
 			velY = -5;                        //Movement itself
 			animation = walkUp;            //What animation is needed
 			animation.start();            // The animation itself
+		    lastMovement= Direction.UP;
 		} else if (!handler.isDown() && !inventoryIsOpen) {
-      lastMovement= Direction.UP;
 			velY = 0;
 		}
 
@@ -79,8 +79,8 @@ public class Player extends GameObjects.GameObject {
 			velY = 5;
 			animation = walkDown;
 			animation.start();
-		} else if (!handler.isUp() && !inventoryIsOpen) {
 			lastMovement= Direction.DOWN;
+		} else if (!handler.isUp() && !inventoryIsOpen) {
 			velY = 0;
 		}
 
@@ -104,15 +104,13 @@ public class Player extends GameObjects.GameObject {
 
 		/* Open inventory when I is pressed and the inventory is not already open */
 		if(handler.isInventory() && !inventoryIsOpen && !inGameMenuIsOpen){
-			//inventory.setX((int)camera.getX() + 290);
-			//inventory.setY((int) camera.getY() + 124);
+			this.stopAllMovement();
 			inventory.initInventory((int)camera.getX() + 290, (int) camera.getY() + 124);
 			inventory.isOpen = true;
 			inventoryIsOpen = true;
 			handler.setInventory(false);
 		}else if(handler.isInventory() && inventoryIsOpen){
 			inventoryIsOpen = false;
-			//inventory.copyItemSlots();
 			inventory.isOpen = false;
 			handler.setInventory(false);
 			
@@ -244,7 +242,12 @@ public class Player extends GameObjects.GameObject {
 	public Rectangle getBoundsRight() {
 		return new Rectangle((x + 32), (y + 1), 3, 30);
 	}
-	
+
+	public void stopAllMovement(){
+		velX = 0;
+		velY = 0;
+	}
+
 	enum Direction{
 		LEFT, RIGHT, UP, DOWN;
 	}

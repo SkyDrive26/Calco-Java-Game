@@ -6,8 +6,11 @@ import java.awt.Rectangle;
 import java.util.concurrent.CopyOnWriteArrayList;
 
 import Items.Item;
+import Main.Audio;
 import Main.Handler;
 import Main.MouseInput;
+
+import static inventory.ItemSlot.SLOTSIZE;
 
 /**
  * Contains all the code for the initialization of the Inventory. test pieter
@@ -27,6 +30,7 @@ public class Inventory {
 	private CopyOnWriteArrayList<ItemSlot> itemSlots;
 	private ItemStack currSelectedSlot;
 	private Handler handler;
+	private Audio audio;
 
 	/**
 	 * This method sets the open-state of the inventory
@@ -65,15 +69,15 @@ public class Inventory {
 				if (j == (numRows -1)) {
 					y += 35;
 				}
-				itemSlots.add(new ItemSlot (x + (i * (ItemSlot.SLOTSIZE + 10)),
-						y + (j * (ItemSlot.SLOTSIZE + 10)), null));
+				itemSlots.add(new ItemSlot (x + (i * (SLOTSIZE + 10)),
+						y + (j * (SLOTSIZE + 10)), null));
 				if (j == (numRows -1)) {
 					y -= 35;
 				}
 			}
 		}
-		width = numCols * (ItemSlot.SLOTSIZE + 10);
-		height = numRows * (ItemSlot.SLOTSIZE + 10) + 35;
+		width = numCols * (SLOTSIZE + 10);
+		height = numRows * (SLOTSIZE + 10) + 35;
 	}
 
 	/**
@@ -91,17 +95,17 @@ public class Inventory {
 
 		for(ItemSlot is: itemSlots){
 			if(currRow < numRows){
-				is.setX(x + (currCol * (ItemSlot.SLOTSIZE + 10)));
+				is.setX(x + (currCol * (SLOTSIZE + 10)));
 				if(currRow == numRows-1){
-					is.setY((y + 35) + (currRow * (ItemSlot.SLOTSIZE + 10)));
+					is.setY((y + 35) + (currRow * (SLOTSIZE + 10)));
 				} else {
-					is.setY(y + (currRow * (ItemSlot.SLOTSIZE + 10)));
+					is.setY(y + (currRow * (SLOTSIZE + 10)));
 				}
 			} else {
 				currCol++;
 				currRow = 0;
-				is.setX(x + (currCol * (ItemSlot.SLOTSIZE + 10)));
-				is.setY(y + (currRow * (ItemSlot.SLOTSIZE + 10)));
+				is.setX(x + (currCol * (SLOTSIZE + 10)));
+				is.setY(y + (currRow * (SLOTSIZE + 10)));
 			}
 			currRow++;
 		}
@@ -119,7 +123,7 @@ public class Inventory {
 			for(ItemSlot is: itemSlots) {
 				is.tick();
 
-				Rectangle temp2 = new Rectangle(is.getX(), is.getY(), ItemSlot.SLOTSIZE, ItemSlot.SLOTSIZE);
+				Rectangle temp2 = new Rectangle(is.getX(), is.getY(), SLOTSIZE, SLOTSIZE);
 
 				if (handler.isMousePressed() && !hasBeenPressed) {
 					temp = new Rectangle(handler.getMouseX(), handler.getMouseY(), 1, 1);
@@ -133,20 +137,13 @@ public class Inventory {
 								is.setItem(null);
 							}
 						} else {
-							/*
-							if (is.addItem(currSelectedSlot.getItem(), currSelectedSlot.getAmount())) {
+							if(is.getItemStack() != null && is.getItemStack().getItem().getName().equals(currSelectedSlot.getItem().getName())){
 								itemSlots.get(itemSlots.indexOf(is)).addItem(currSelectedSlot.getItem(), currSelectedSlot.getAmount());
-							} else {
-								is.setItem(currSelectedSlot);
-							}*/
-							if(is.getItemStack() != null){
-								itemSlots.get(itemSlots.indexOf(is)).addItem(currSelectedSlot.getItem(), currSelectedSlot.getAmount());
-								System.out.println("ITEM STACK NOT NULL");
-							}else{
-								System.out.println("ITEM STACK NULL");
+								currSelectedSlot = null;
+							}else if(is.getItemStack() == null){
 								itemSlots.get(itemSlots.indexOf(is)).setItem(currSelectedSlot);
+								currSelectedSlot = null;
 							}
-							currSelectedSlot = null;
 						}
 					}
 				}
@@ -175,10 +172,17 @@ public class Inventory {
 			}
 
 			if (currSelectedSlot != null) {
-				g.drawImage(currSelectedSlot.getItem().texture, MouseInput.MouseX,
-						MouseInput.MouseY, null);
-				g.drawString(Integer.toString(currSelectedSlot.getAmount()),
-						MouseInput.MouseX + 27, MouseInput.MouseY + 33);
+				int xx = this.x - 270;
+				int yy = this.y - 74;
+				g.setColor(new Color(153,153,153,210));
+				g.fillRect(xx, yy, SLOTSIZE, SLOTSIZE);
+
+				g.setColor(Color.BLACK);
+				g.drawRect(xx, yy, SLOTSIZE, SLOTSIZE);
+
+				g.drawImage(currSelectedSlot.getItem().texture,xx, yy, SLOTSIZE, SLOTSIZE, null );
+				g.setColor(Color.WHITE);
+				g.drawString(Integer.toString(currSelectedSlot.getAmount()), xx +SLOTSIZE - 20, yy + SLOTSIZE - 10);
 			}
 		}
 	}
@@ -201,15 +205,36 @@ public class Inventory {
 
 	/**
 	 * This method is used to load an item in the first available ItemSlot.
+	 * This method also makes sure items stack on other items of their own kind.
+	 * When an itemPickup occurs, a sound will be played.
 	 * @param item Item that has to be loaded.
 	 * @see ItemSlot
 	 */
 	public void addItem(Item item){
+		int i = 0;
+		int firstEmpty = -1;
+		boolean placed = false;
+
+		audio = new Audio("ItemPickup.wav");
+		Thread audioThread = new Thread(audio);
+		audioThread.start();
+
 		for(ItemSlot is: itemSlots){
-			if(is.getItemStack() == null){
-				itemSlots.get(itemSlots.indexOf(is)).setItem(new ItemStack(item, 1));
+			if(is.getItemStack() != null && is.getItemStack().getItem().getName().equals(item.getName())){
+				is.addItem(item, 1);
+				placed = true;
 				break;
+			} else if(is.getItemStack() == null){
+				if(firstEmpty == -1 || i < firstEmpty){
+					System.out.println(i);
+					firstEmpty = i;
+				}
 			}
+			i++;
+
+		}
+		if(!placed){
+			itemSlots.get(firstEmpty).setItem(new ItemStack(item, 1));
 		}
 	}
 }
