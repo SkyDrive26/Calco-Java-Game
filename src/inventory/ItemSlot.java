@@ -77,7 +77,7 @@ public class ItemSlot {
 	/**
 	 * This method is used to add items to the itemslot.
 	 * @param item Item item
-	 * @param amount Amount of cdertain item
+	 * @param amount Amount of certain item
 	 * @see Item
 	 */
 	public void addItem(Item item, int amount) {
