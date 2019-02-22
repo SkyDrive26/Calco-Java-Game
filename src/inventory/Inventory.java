@@ -13,7 +13,7 @@ import Main.MouseInput;
 import static inventory.ItemSlot.SLOTSIZE;
 
 /**
- * Contains all the code for the initialization of the Inventory
+ * Contains all the code for the initialization of the Inventory. test pieter
  */
 public class Inventory {
 

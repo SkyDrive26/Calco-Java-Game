@@ -24,11 +24,11 @@ public class Player extends GameObjects.GameObject {
 	private boolean inGameMenuIsOpen;
 
 	//animation images
-	private BufferedImage[] walkingLeft = {Sprite.getSprite(0, 1), Sprite.getSprite(1, 1), Sprite.getSprite(2, 1), Sprite.getSprite(1, 1)};
-	private BufferedImage[] walkingRight = {Sprite.getSprite(0, 2), Sprite.getSprite(1, 2), Sprite.getSprite(2, 2), Sprite.getSprite(1, 2)};
-	private BufferedImage[] walkingUp = {Sprite.getSprite(0, 3), Sprite.getSprite(1, 3), Sprite.getSprite(2, 3), Sprite.getSprite(1, 3)};
-	private BufferedImage[] walkingDown = {Sprite.getSprite(0, 0), Sprite.getSprite(1, 0), Sprite.getSprite(2, 0), Sprite.getSprite(1, 0)};
-	private BufferedImage[] standing = {Sprite.getSprite(1, 0)};
+	private BufferedImage[] walkingLeft = {Sprite.getSprite(3, 1), Sprite.getSprite(4, 1), Sprite.getSprite(5, 1), Sprite.getSprite(4, 1)};
+	private BufferedImage[] walkingRight = {Sprite.getSprite(3, 2), Sprite.getSprite(4, 2), Sprite.getSprite(5, 2), Sprite.getSprite(4, 2)};
+	private BufferedImage[] walkingUp = {Sprite.getSprite(3, 3), Sprite.getSprite(4, 3), Sprite.getSprite(5, 3), Sprite.getSprite(4, 3)};
+	private BufferedImage[] walkingDown = {Sprite.getSprite(3, 0), Sprite.getSprite(4, 0), Sprite.getSprite(5, 0), Sprite.getSprite(4, 0)};
+	private BufferedImage[] standing = {Sprite.getSprite(4, 0)};
 
 
 	//animation states
