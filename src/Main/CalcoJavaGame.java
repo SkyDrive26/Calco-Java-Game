@@ -87,7 +87,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
-		audio = new Audio("Level1.wav");
+		audio = new Audio("JourneyToFantasy-NickSmeenk.wav");
 		Thread audioThread = new Thread(audio);
 		audioThread.start();
 		while(isRunning){
