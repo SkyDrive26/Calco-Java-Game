@@ -11,4 +11,5 @@ public enum ID {
 	Water(),
 	Item(),
 	Weapon(),
+	Bandit(),
 	}
