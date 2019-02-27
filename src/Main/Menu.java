@@ -73,7 +73,7 @@ public class Menu extends JFrame{
         initMenu();
         this.setVisible(true);
 
-        audio = new Audio("Tetris.wav");
+        audio = new Audio("Elvish-NickSmeenk.wav");
         audioThread = new Thread(audio);
         audioThread.start();
     }

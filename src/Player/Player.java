@@ -24,11 +24,11 @@ public class Player extends GameObjects.GameObject {
 	private boolean inGameMenuIsOpen;
 
 	//animation images
-	private BufferedImage[] walkingLeft = {Sprite.getSprite(0, 1), Sprite.getSprite(1, 1), Sprite.getSprite(2, 1), Sprite.getSprite(1, 1)};
-	private BufferedImage[] walkingRight = {Sprite.getSprite(0, 2), Sprite.getSprite(1, 2), Sprite.getSprite(2, 2), Sprite.getSprite(1, 2)};
-	private BufferedImage[] walkingUp = {Sprite.getSprite(0, 3), Sprite.getSprite(1, 3), Sprite.getSprite(2, 3), Sprite.getSprite(1, 3)};
-	private BufferedImage[] walkingDown = {Sprite.getSprite(0, 0), Sprite.getSprite(1, 0), Sprite.getSprite(2, 0), Sprite.getSprite(1, 0)};
-	private BufferedImage[] standing = {Sprite.getSprite(1, 0)};
+	private BufferedImage[] walkingLeft = {Sprite.getSprite(3, 1), Sprite.getSprite(4, 1), Sprite.getSprite(5, 1), Sprite.getSprite(4, 1)};
+	private BufferedImage[] walkingRight = {Sprite.getSprite(3, 2), Sprite.getSprite(4, 2), Sprite.getSprite(5, 2), Sprite.getSprite(4, 2)};
+	private BufferedImage[] walkingUp = {Sprite.getSprite(3, 3), Sprite.getSprite(4, 3), Sprite.getSprite(5, 3), Sprite.getSprite(4, 3)};
+	private BufferedImage[] walkingDown = {Sprite.getSprite(3, 0), Sprite.getSprite(4, 0), Sprite.getSprite(5, 0), Sprite.getSprite(4, 0)};
+	private BufferedImage[] standing = {Sprite.getSprite(4, 0)};
 
 
 	//animation states
@@ -104,6 +104,7 @@ public class Player extends GameObjects.GameObject {
 
 		/* Open inventory when I is pressed and the inventory is not already open */
 		if(handler.isInventory() && !inventoryIsOpen && !inGameMenuIsOpen){
+			this.stopAllMovement();
 			inventory.initInventory((int)camera.getX() + 290, (int) camera.getY() + 124);
 			inventory.isOpen = true;
 			inventoryIsOpen = true;
@@ -241,7 +242,12 @@ public class Player extends GameObjects.GameObject {
 	public Rectangle getBoundsRight() {
 		return new Rectangle((x + 32), (y + 1), 3, 30);
 	}
-	
+
+	public void stopAllMovement(){
+		velX = 0;
+		velY = 0;
+	}
+
 	enum Direction{
 		LEFT, RIGHT, UP, DOWN;
 	}

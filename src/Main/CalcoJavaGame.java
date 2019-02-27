@@ -7,6 +7,7 @@ import java.awt.image.BufferedImage;
 import GameObjects.*;
 import Items.ItemObject;
 import Items.ItemPotato;
+import NPCs.Bandit;
 import Weapons.WeaponObject;
 import Player.Player;
 
@@ -87,7 +88,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		double delta = 0;
 		long timer = System.currentTimeMillis();
 		int frames = 0;
-		audio = new Audio("SuperMario.wav");
+		audio = new Audio("JourneyToFantasy-NickSmeenk.wav");
 		Thread audioThread = new Thread(audio);
 		audioThread.start();
 		while(isRunning){
@@ -247,7 +248,10 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 
 				if(red == 255 && green == 0 && blue == 0)
 					handler.addObject(new Player(xx*32, yy*32, ID.Player, handler, this, camera));
+				else if(red == 0 && green == 255 && blue == 0)
+					handler.addObject(new Bandit(xx*32, yy*32, ID.Bandit));
 			}
+
 		}
 	}
 
