@@ -24,7 +24,7 @@ public class ItemSprite {
             case "Flower": return itemSpriteSheet.grabImage(1,1,32,32);
             case "Fish": return itemSpriteSheet.grabImage(1,2,32,32);
             case "Potato": return itemSpriteSheet.grabImage(1,3,32,32);
-            case "Sword": return itemSpriteSheet.grabImage()
+            case "Sword1": return itemSpriteSheet.grabImage(1,6,32,32);
             default: return null;
         }
     }

@@ -23,7 +23,7 @@ public class WeaponSprite {
 	     */
 	    public static BufferedImage getWeaponImage(String name){
 	        switch(name){
-	            case "Sword1": return weaponSpriteSheet.grabImage(1,1,32,32);
+	            case "Sword11": return weaponSpriteSheet.grabImage(1,1,32,32); //Sword 11 to make it different from sword 1 (item)
 	            default: return null;
 	        }
 	    }
