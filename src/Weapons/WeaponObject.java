@@ -29,7 +29,7 @@ public class WeaponObject extends GameObject {
 	    public WeaponObject(int x, int y, ID id, String weaponName){
 	        super(x, y, id, true, new Weapon(weaponName));
 	        this.weaponName = weaponName;
-	        isWeapon = true;
+	        isItem = true;
 	        this.weaponImage = WeaponSprite.getWeaponImage(weaponName);
 	    }
 

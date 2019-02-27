@@ -229,7 +229,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				else if(red == 100 && green == 15 && blue == 50)
 					handler.addObject(new ItemObject(xx*32, yy*32, ID.Item, "Fish"));
 				else if(red == 250 && green == 112 && blue == 255)
-					handler.addObject(new WeaponObject(xx*32, yy*32, ID.Weapon, "Sword1"));
+					handler.addObject(new ItemObject(xx*32, yy*32, ID.Item, "Sword1"));
 			}
 		}
 		camera.setCameraBounds(w, h);
