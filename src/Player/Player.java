@@ -158,6 +158,12 @@ public class Player extends GameObjects.GameObject {
 	public void render(Graphics g) {
 		g.drawImage(animation.getSprite(), x, y, null);
 		inventory.render(g);
+		//Onderstaande stuk code is om collisions te testen, om de 'hitbox' van de player in beeld te krijgen.
+		g.setColor(Color.orange);
+		g.fillRect(getBoundsUp().x, getBoundsUp().y, getBoundsUp().width, getBoundsUp().height);
+		g.fillRect(getBoundsDown().x, getBoundsDown().y, getBoundsDown().width, getBoundsDown().height);
+		g.fillRect(getBoundsLeft().x, getBoundsLeft().y, getBoundsLeft().width, getBoundsLeft().height);
+		g.fillRect(getBoundsRight().x, getBoundsRight().y, getBoundsRight().width, getBoundsRight().height);
 	}
 
 	private void collision() {
