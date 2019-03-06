@@ -20,8 +20,24 @@ public class Player extends GameObjects.GameObject {
 	Camera camera;
 	InGameMenu inGameMenu;
 
+	/**
+	 * This boolean is used to enable debug mode.
+	 * @param debug Used to enable debug mode.
+	 */
+	private boolean debug = false;
+
 	private boolean inventoryIsOpen;
 	private boolean inGameMenuIsOpen;
+
+	/**
+	 * Used to determine how far a player has moved into a wall as collision occurs.
+	 * @see #collision
+	 */
+	private float wallOvershoot;
+	/**
+	 * Used to set the player's speed. The player's velX and velY values are based on this value.
+	 */
+	private int speed = 5;
 
 	//animation images
 	private BufferedImage[] walkingLeft = {Sprite.getSprite(3, 1), Sprite.getSprite(4, 1), Sprite.getSprite(5, 1), Sprite.getSprite(4, 1)};
@@ -62,12 +78,12 @@ public class Player extends GameObjects.GameObject {
 
 
 	public void tick() {
-		this.collision();
 		x += velX;
 		y += velY;
+		this.collision();
 
 		if (handler.isUp() && !inventoryIsOpen) {
-			velY = -5;                        //Movement itself
+			velY = -speed;                        //Movement itself
 			animation = walkUp;            //What animation is needed
 			animation.start();            // The animation itself
 		    lastMovement= Direction.UP;
@@ -76,7 +92,7 @@ public class Player extends GameObjects.GameObject {
 		}
 
 		if (handler.isDown() && !inventoryIsOpen) {
-			velY = 5;
+			velY = speed;
 			animation = walkDown;
 			animation.start();
 			lastMovement= Direction.DOWN;
@@ -85,7 +101,7 @@ public class Player extends GameObjects.GameObject {
 		}
 
 		if (handler.isRight() && !inventoryIsOpen) {
-			velX = 5;
+			velX = speed;
 			animation = walkRight;
 			lastMovement= Direction.RIGHT;
 			animation.start();
@@ -94,7 +110,7 @@ public class Player extends GameObjects.GameObject {
 		}
 
 		if (handler.isLeft() && !inventoryIsOpen) {
-			velX = -5;
+			velX = -speed;
 			animation = walkLeft;
 			lastMovement= Direction.LEFT;
 			animation.start();
@@ -158,74 +174,59 @@ public class Player extends GameObjects.GameObject {
 	public void render(Graphics g) {
 		g.drawImage(animation.getSprite(), x, y, null);
 		inventory.render(g);
-		//Onderstaande stuk code is om collisions te testen, om de 'hitbox' van de player in beeld te krijgen.
-		g.setColor(Color.orange);
-		g.fillRect(getBoundsUp().x, getBoundsUp().y, getBoundsUp().width, getBoundsUp().height);
-		g.fillRect(getBoundsDown().x, getBoundsDown().y, getBoundsDown().width, getBoundsDown().height);
-		g.fillRect(getBoundsLeft().x, getBoundsLeft().y, getBoundsLeft().width, getBoundsLeft().height);
-		g.fillRect(getBoundsRight().x, getBoundsRight().y, getBoundsRight().width, getBoundsRight().height);
+		/**
+		 * If debug mode is enabled, underlying code will draw the 4 hitboxes for the player character; up, down, left and right.
+		 * @see debug
+		 */
+		if (debug) {
+			g.setColor(Color.orange);
+			g.fillRect(getBoundsUp().x, getBoundsUp().y, getBoundsUp().width, getBoundsUp().height);
+			g.fillRect(getBoundsDown().x, getBoundsDown().y, getBoundsDown().width, getBoundsDown().height);
+			g.fillRect(getBoundsLeft().x, getBoundsLeft().y, getBoundsLeft().width, getBoundsLeft().height);
+			g.fillRect(getBoundsRight().x, getBoundsRight().y, getBoundsRight().width, getBoundsRight().height);
+		}
 	}
 
+	/**
+	 * Method used to place the player at the edge of the object collided with.
+	 * @See wallOvershoot
+	 */
 	private void collision() {
 		for (int i = 0; i < this.handler.object.size(); ++i) {
 			GameObject tempObject = this.handler.object.get(i);
 			if (tempObject.getSolid()) {
-				
-				/*
-				if (this.getBoundsUp().intersects(tempObject.getBounds()) && this.velY < 0.0F) {
-					this.y = (int) ((float) this.y + this.velY * -1.0F);
-				}
 
-				if (this.getBoundsDown().intersects(tempObject.getBounds()) && this.velY > 0.0F) {
-					this.y = (int) ((float) this.y + this.velY * -1.0F);
-				}
-
-				if (this.getBoundsLeft().intersects(tempObject.getBounds()) && this.velX < 0.0F) {
-					this.x = (int) ((float) this.x + this.velX * -1.0F);
-				}
-
-				if (this.getBoundsRight().intersects(tempObject.getBounds()) && this.velX > 0.0F) {
-					this.x = (int) ((float) this.x + this.velX * -1.0F);
-				}
-				*/
-				
 				if(getBoundsUp().intersects(tempObject.getBounds())) {
 					if(velY < 0) {
-						y += velY * -1;
+						wallOvershoot = (int) Math.abs((getBoundsUp().y - (tempObject.getY() + tempObject.getBounds().getHeight())));
+						y += wallOvershoot;
 					}
 				}
 				if(getBoundsDown().intersects(tempObject.getBounds())) {
 					if(velY > 0) {
-						y += velY * -1;
+						wallOvershoot = (int) Math.abs(((getBoundsDown().y + getBoundsDown().getHeight()) - tempObject.getY()));
+						y -= wallOvershoot;
 					}
 				}
 				if(getBoundsLeft().intersects(tempObject.getBounds())) {
 					if(velX < 0) {
-						x += velX * -1;
+						wallOvershoot = (int) Math.abs((getBoundsLeft().x - (tempObject.getX() + tempObject.getBounds().getWidth())));
+						x += wallOvershoot;
 					}
 				}
 				if(getBoundsRight().intersects(tempObject.getBounds())) {
 					if(velX > 0) {
-						x += velX * -1;
+						wallOvershoot = (int) Math.abs(((getBoundsRight().x + getBoundsRight().getWidth()) - tempObject.getX()));
+						x -= wallOvershoot;
 					}
 				}
 				
 			}
 
+			//Aangepast dat als de speler een item aanraakt, deze opgepakt wordt.
+			//Eerder controleerde hij bij getBoundsUp,Down,Left en Right
 			if(tempObject.getIsItem()){
-				if(getBoundsUp().intersects(tempObject.getBounds())) {
-					this.handler.removeObject(tempObject);
-					this.inventory.addItem(tempObject.getItem());
-				}
-				if(getBoundsDown().intersects(tempObject.getBounds())) {
-					this.handler.removeObject(tempObject);
-					this.inventory.addItem(tempObject.getItem());
-				}
-				if(getBoundsLeft().intersects(tempObject.getBounds())) {
-					this.handler.removeObject(tempObject);
-					this.inventory.addItem(tempObject.getItem());
-				}
-				if(getBoundsRight().intersects(tempObject.getBounds())) {
+				if(getBounds().intersects(tempObject.getBounds())) {
 					this.handler.removeObject(tempObject);
 					this.inventory.addItem(tempObject.getItem());
 				}
@@ -233,21 +234,15 @@ public class Player extends GameObjects.GameObject {
 		}
 	}
 
-	public Rectangle getBounds() {
-		return new Rectangle(x, y, 32, 32);
-	}
-	public Rectangle getBoundsUp() {
-		return new Rectangle((x + 2), (y -3), 28, 3);
-	}
-	public Rectangle getBoundsDown() {
-		return new Rectangle((x + 2), (y + 32), 28, 3);
-	}
-	public Rectangle getBoundsLeft() {
-		return new Rectangle((x - 3), (y + 1), 3, 30);
-	}
-	public Rectangle getBoundsRight() {
-		return new Rectangle((x + 32), (y + 1), 3, 30);
-	}
+	/**
+	 * Determines how large the player's hitbox is
+	 * @return A rectangle which is the size of the player's hitbox, drawn from origin point x,y
+	 */
+	public Rectangle getBounds() {	return new Rectangle(x, y, 32, 32);	}
+	public Rectangle getBoundsUp() { return new Rectangle((x + ((int)(Math.abs(getVelX())))), (y), (32-Math.abs((int)getVelX()*2)), 1);	}
+	public Rectangle getBoundsDown() { return new Rectangle((x + ((int)(Math.abs((getVelX()))))), (y + 31), (32-Math.abs((int)getVelX()*2)), 1);	}
+	public Rectangle getBoundsLeft() {	return new Rectangle((x), (y + ((int)(Math.abs(getVelY())))), 1, (32-Math.abs((int)getVelY()*2))); }
+	public Rectangle getBoundsRight() { return new Rectangle((x + 31), (y + ((int)(Math.abs(getVelY())))), 1, (32-Math.abs((int)getVelY()*2)));	}
 
 	public void stopAllMovement(){
 		velX = 0;

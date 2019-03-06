@@ -14,7 +14,12 @@ import Weapons.Weapon;
 public abstract class GameObject {
 
 	 protected int x, y;
-	 protected float velX = 0, velY = 0;
+	/**
+	 * Used to determine horizontal and vertical movement
+	 * @param velX Standard velocity on X-axis for any game object
+	 * @param velY Standard velocity on Y-axis for any game object
+	 */
+	protected float velX = 0, velY = 0;
 	 protected ID id;
 	 protected boolean solid = false;
 	 protected boolean isItem = false;
