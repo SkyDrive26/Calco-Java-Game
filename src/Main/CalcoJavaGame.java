@@ -26,7 +26,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 
 	/* SpriteStuff */
 	private BufferedImage layerOne, layerTwo, layerThree,
-		ObjectSpriteSheetImage, wall, bush, sand, grass, water;
+		ObjectSpriteSheetImage, wall, bush, sand, grass, water, woodFlooring;
 
 	private SpriteSheet objectSpriteSheet;
 
@@ -57,6 +57,7 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		grass = objectSpriteSheet.grabImage(3, 9, 32, 32);
 		sand = objectSpriteSheet.grabImage(2, 10, 32, 32);
 		water = objectSpriteSheet.grabImage(3, 10, 32, 32);
+		woodFlooring = objectSpriteSheet.grabImage(4, 9, 32, 32);
 
 		hpAnimation= new BufferedImage[] {objectSpriteSheet.grabImage(2, 8, 32, 32), objectSpriteSheet.grabImage(3, 8, 32, 32), objectSpriteSheet.grabImage(4, 8, 32, 32), objectSpriteSheet.grabImage(3, 8, 32, 32)};
 		hpHearts = new Animation(hpAnimation,10);
@@ -196,6 +197,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 
 				else if(red == 0 && green == 0 && blue == 200)
 					handler.addObject(new Water(xx*32, yy*32, ID.Water, this.water));
+
+				else if(red == 255 && green == 100 && blue == 0)
+					handler.addObject(new WoodFlooring(xx*32, yy*32, ID.WoodFlooring, this.woodFlooring));
 									
 			}
 		}

@@ -12,4 +12,5 @@ public enum ID {
 	Item(),
 	Weapon(),
 	Bandit(),
+	WoodFlooring(),
 	}
