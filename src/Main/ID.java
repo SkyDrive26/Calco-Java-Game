@@ -13,4 +13,5 @@ public enum ID {
 	Weapon(),
 	Bandit(),
 	WoodFlooring(),
+	LevelTransitioner(),
 	}

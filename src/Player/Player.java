@@ -6,6 +6,7 @@ import java.awt.Graphics;
 import java.awt.Rectangle;
 import java.awt.image.BufferedImage;
 
+import GameObjects.LevelTransitioner;
 import Main.*;
 import Menus.InGameMenu;
 import inventory.Inventory;
@@ -231,6 +232,23 @@ public class Player extends GameObjects.GameObject {
 					this.inventory.addItem(tempObject.getItem());
 				}
 			}
+
+			if(tempObject.getId() == ID.LevelTransitioner){
+				if(getBounds().intersects(tempObject.getBounds())){
+					/*Pak de X of Y coordinaat van de speler zodat hij in het nieuwe level op de juiste plek binnen komt
+						Als speler links of rechts beeld uit loopt:
+							y = y
+							x = andere kant van scherm (0 of 2016)
+						Als speler boven of onder beeld uit loopt:
+							y = andere kant van scherm (0 of 2016)
+							x = x
+
+					Laad alle lagen opnieuw in, layer1, layer2 en layer3				*/
+					game.levelTransition();
+					System.out.println("BOE");
+				}
+			}
+
 		}
 	}
 

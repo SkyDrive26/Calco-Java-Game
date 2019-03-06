@@ -24,6 +24,14 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	public static Font myFont;
 	private Audio audio;
 
+	private String layerOnePath = "/Pngs/Layer_1.png";
+	private String layerTwoPath = "/Pngs/Layer_2.png";
+	private String layerThreePath = "/Pngs/Layer_3.png";
+
+//	private String layerOnePath = "/Pngs/Level_02_Layer_1.png";
+//	private String layerTwoPath = "/Pngs/Level_02_Layer_2.png";
+//	private String layerThreePath = "/Pngs/Level_02_Layer_3.png";
+
 	/* SpriteStuff */
 	private BufferedImage layerOne, layerTwo, layerThree,
 		ObjectSpriteSheetImage, wall, bush, sand, grass, water, woodFlooring;
@@ -46,9 +54,9 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 				
 		BufferedImageLoader loader = new BufferedImageLoader();
     
-		layerOne = loader.LoadImage("/Pngs/Layer_1.png");
-		layerTwo = loader.LoadImage("/Pngs/Layer_2.png");
-		layerThree = loader.LoadImage("/Pngs/Layer_3.png");
+		layerOne = loader.LoadImage(layerOnePath);
+		layerTwo = loader.LoadImage(layerTwoPath);
+		layerThree = loader.LoadImage(layerThreePath);
 		ObjectSpriteSheetImage = loader.LoadImage("/Pngs/Sprite_Sheet_Objects.png");
 
 		objectSpriteSheet = new SpriteSheet(ObjectSpriteSheetImage);
@@ -234,6 +242,8 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 					handler.addObject(new ItemObject(xx*32, yy*32, ID.Item, "Fish"));
 				else if(red == 250 && green == 112 && blue == 255)
 					handler.addObject(new ItemObject(xx*32, yy*32, ID.Item, "Sword1"));
+				else if(red == 0 && green == 255 && blue == 255)
+					handler.addObject(new LevelTransitioner(xx*32, yy*32, ID.LevelTransitioner, 'U'));
 			}
 		}
 		camera.setCameraBounds(w, h);
@@ -257,6 +267,44 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 			}
 
 		}
+	}
+
+	private void unLoadLayers(){
+		for (int i = 0; i < handler.object.size(); i++) {
+			GameObject tempObject = this.handler.object.get(i);
+			handler.removeObject(tempObject);
+		}
+	}
+
+	public void levelTransition(){
+		layerOnePath = "/Pngs/Level_02_Layer_1.png";
+		layerTwoPath = "/Pngs/Level_02_Layer_2.png";
+		layerThreePath = "/Pngs/Level_02_Layer_3.png";
+
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+		unLoadLayers();
+
+		BufferedImageLoader loader = new BufferedImageLoader();
+
+		layerOne = loader.LoadImage(layerOnePath);
+		layerTwo = loader.LoadImage(layerTwoPath);
+		layerThree = loader.LoadImage(layerThreePath);
+
+		loadLayerOne(layerOne);
+		loadLayerTwo(layerTwo);
+		loadLayerThree(layerThree);
 	}
 
 	public void setIsRunning(boolean isRunning){
