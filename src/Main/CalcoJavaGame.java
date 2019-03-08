@@ -24,13 +24,12 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	public static Font myFont;
 	private Audio audio;
 
-	private String layerOnePath = "/Pngs/Layer_1.png";
-	private String layerTwoPath = "/Pngs/Layer_2.png";
-	private String layerThreePath = "/Pngs/Layer_3.png";
+	private String layerOnePath = "/Pngs/8_1_Layer_1.png";
+	private String layerTwoPath = "/Pngs/8_1_Layer_2.png";
+	private String layerThreePath = "/Pngs/8_1_Layer_3.png";
 
-//	private String layerOnePath = "/Pngs/Level_02_Layer_1.png";
-//	private String layerTwoPath = "/Pngs/Level_02_Layer_2.png";
-//	private String layerThreePath = "/Pngs/Level_02_Layer_3.png";
+	public int gridX = 8;
+	public int gridY = 1;
 
 	/* SpriteStuff */
 	private BufferedImage layerOne, layerTwo, layerThree,
@@ -272,15 +271,13 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	private void unLoadLayers(){
 		for (int i = 0; i < handler.object.size(); i++) {
 			GameObject tempObject = this.handler.object.get(i);
-			handler.removeObject(tempObject);
+			if (tempObject.getId() != ID.Player) {
+				handler.removeObject(tempObject);
+			}
 		}
 	}
 
 	public void levelTransition(){
-		layerOnePath = "/Pngs/Level_02_Layer_1.png";
-		layerTwoPath = "/Pngs/Level_02_Layer_2.png";
-		layerThreePath = "/Pngs/Level_02_Layer_3.png";
-
 		unLoadLayers();
 		unLoadLayers();
 		unLoadLayers();
@@ -305,6 +302,15 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 		loadLayerOne(layerOne);
 		loadLayerTwo(layerTwo);
 		loadLayerThree(layerThree);
+	}
+
+	public void setLayerPaths(int gridX, int gridY){
+		layerOnePath = "/Pngs/" + gridX + "_" + gridY + "_Layer_1.png";
+		layerTwoPath = "/Pngs/" + gridX + "_" + gridY + "_Layer_2.png";
+		layerThreePath = "/Pngs/" + gridX + "_" + gridY + "_Layer_3.png";
+		System.out.println(layerOnePath);
+		System.out.println(layerTwoPath);
+		System.out.println(layerThreePath);
 	}
 
 	public void setIsRunning(boolean isRunning){

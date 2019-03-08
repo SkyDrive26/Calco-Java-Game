@@ -244,6 +244,35 @@ public class Player extends GameObjects.GameObject {
 							x = x
 
 					Laad alle lagen opnieuw in, layer1, layer2 en layer3				*/
+					if(getBoundsUp().intersects(tempObject.getBounds())) {
+						if(velY < 0) {
+							game.gridY += 1;
+							y = 62*32;
+						}
+					}
+
+					if(getBoundsDown().intersects(tempObject.getBounds())) {
+						if(velY > 0) {
+							game.gridY -= 1;
+							y = 1 * 32;
+						}
+					}
+
+					if(getBoundsLeft().intersects(tempObject.getBounds())) {
+						if(velX < 0) {
+							game.gridX -= 1;
+							x = 62*32;
+						}
+					}
+
+					if(getBoundsRight().intersects(tempObject.getBounds())) {
+						if(velX > 0) {
+							game.gridX += 1;
+							x = 1 * 32;
+						}
+					}
+
+					game.setLayerPaths(game.gridX, game.gridY);
 					game.levelTransition();
 					System.out.println("BOE");
 				}
