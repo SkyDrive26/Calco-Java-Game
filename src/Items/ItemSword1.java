@@ -1,10 +1,10 @@
 package Items;
 
-public class ItemSword1 {
+import Weapons.Weapon;
 
-	public ItemSword1(){
+public class ItemSword1 extends Weapon {
+
+    public ItemSword1() {
         super("Sword1");
     }
 }
-
-
