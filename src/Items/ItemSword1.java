@@ -1,10 +1,10 @@
-package Items;
-
-public class ItemSword1 {
-
-	public ItemSword1(){
-        super("Sword1");
-    }
-}
-
-
+//package Items;
+//
+//public class ItemSword1 {
+//
+//	public ItemSword1(){
+//        super("Sword1");
+//    }
+//}
+//
+//
