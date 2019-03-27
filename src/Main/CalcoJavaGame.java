@@ -1,17 +1,16 @@
 package Main;
 
+import GameObjects.*;
+import Items.ItemObject;
+import NPCs.Bandit;
+import Player.Player;
+
 import java.awt.*;
 import java.awt.image.BufferStrategy;
 import java.awt.image.BufferedImage;
 
-import GameObjects.*;
-import Items.ItemObject;
-import Items.ItemPotato;
-import NPCs.Bandit;
-import Weapons.WeaponObject;
-import Player.Player;
-
 public class CalcoJavaGame extends Canvas implements Runnable {
+
 	
 	private static final long serialVersionUID = 1L;
 	
@@ -316,4 +315,5 @@ public class CalcoJavaGame extends Canvas implements Runnable {
 	public void setIsRunning(boolean isRunning){
 		this.isRunning = isRunning;
 	}
+
 }

@@ -1,10 +1,9 @@
 package Items;
 
-public class ItemSword1 {
+import Weapons.Weapon;
 
 	public ItemSword1(){
         //super("Sword1");
+
     }
 }
-
-
